@@ -1,0 +1,43 @@
+# Licensed under the Apache License v2.0 with LLVM Exceptions.
+# See https://llvm.org/LICENSE.txt for license information.
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+
+cmake_minimum_required(VERSION 3.13.4)
+
+#-------------------------------------------------------------------------------
+# Project configuration
+#-------------------------------------------------------------------------------
+
+project(iree-bare-metal-arm VERSION 1.0 LANGUAGES C)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# Extend module path to allow submodules to find AddMLIR
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_BINARY_DIR}/lib/cmake/mlir")
+
+# IREE-specific settings
+set(IREE_BUILD_COMPILER OFF)
+set(IREE_ENABLE_MLIR OFF)
+set(IREE_BUILD_SAMPLES OFF)
+set(IREE_BUILD_EMBEDDING_SAMPLES ON)
+set(IREE_ENABLE_THREADING OFF)
+set(IREE_BUILD_TESTS OFF)
+set(IREE_BUILD_BINDINGS_TFLITE OFF)
+
+# IREE-specific definitions
+add_definitions(-DIREE_PLATFORM_GENERIC)
+add_definitions(-DIREE_SYNCHRONIZATION_DISABLE_UNSAFE=1)
+add_definitions(-DIREE_STATUS_FEATURES=0)
+add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
+
+#-------------------------------------------------------------------------------
+# Third-party dependencies
+#-------------------------------------------------------------------------------
+
+add_subdirectory(third_party/iree EXCLUDE_FROM_ALL)
+
+#-------------------------------------------------------------------------------
+# Top-level components
+#-------------------------------------------------------------------------------
+
+add_subdirectory(samples)
