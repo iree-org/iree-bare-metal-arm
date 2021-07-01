@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 add_executable(simple_embedding "")
+
 target_sources(simple_embedding
   PRIVATE
     simple_embedding.c
@@ -21,4 +22,5 @@ target_link_libraries(simple_embedding
   iree::modules::hal
   iree::vm
   iree::vm::bytecode_module
+  stm32f4
 )
