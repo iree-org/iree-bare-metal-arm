@@ -72,3 +72,33 @@ cmake -GNinja \
       ..
 cmake --build . --target simple_embedding
 ```
+
+### Test with Renode
+
+You can use [Renode](https://renode.io/) to execute the created binary.
+
+```shell
+wget https://github.com/renode/renode/releases/download/v1.12.0/renode-1.12.0.linux-portable.tar.gz
+tar -xvzf renode-1.12.0.linux-portable.tar.gz
+```
+Execution is done via the interactive Renode shell (for headless execution see [here](https://github.com/renode/renode/issues/138)):
+
+```shell
+cd renode_1.12.0_portable
+./renode
+```
+Inside the shell you need to execute the following statements:
+```shell
+(monitor) include @scripts/single-node/stm32f4_discovery.resc
+(STM32F4_Discovery) sysbus LoadELF @${PATH_TO_BINARY}
+(STM32F4_Discovery) showAnalyzer sysbus.uart2
+(STM32F4_Discovery) start
+```
+You should be able to see the output of the executable in the analyzer window for uart2.
+
+This example also comes with a robot test file:
+
+```shell
+cd renode_1.12.0_portable
+test.sh --variable ELF:${PATH_TO_BINARY} ${PATH_TO_REPOSITORY_ROOT}/tests/simple_embedding.robot
+```
