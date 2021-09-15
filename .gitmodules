@@ -4,3 +4,6 @@
 [submodule "third_party/libopencm3"]
 	path = third_party/libopencm3
 	url = https://github.com/libopencm3/libopencm3.git
+[submodule "third_party/cmsis_device_f4"]
+	path = third_party/cmsis_device_f4
+	url = https://github.com/STMicroelectronics/cmsis_device_f4.git
