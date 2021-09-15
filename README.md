@@ -54,18 +54,32 @@ For further information, see the [Getting started](https://google.github.io/iree
 
 #### Target Build
 
+One can choose to either build the sample with libopencm3 or with CMSIS by either setting `BUILD_WITH_LIBOPENCM3` or `BUILD_WITH_CMSIS` to `ON`.
+Depending on whether you build with libopencm3 or CMSIS, you need to pass the correct linker flags via `CUSTOM_ARM_LINKER_FLAGS`
+and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
+
 ```shell
 mkdir build
 cd build
 
 # export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
+
+# To build with CMSIS
+# export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
+# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407.ld`"
+
+# To build with libopencm3
+# export CUSTOM_ARM_LINKER_FLAGS="-nostartfiles"
 # export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4-discovery.ld`"
 
 cmake -GNinja \
+#     -DBUILD_WITH_CMSIS=ON \
+#     -DBUILD_WITH_LIBOPENCM3=ON \
       -DCMAKE_TOOLCHAIN_FILE="build_tools/cmake/arm.toolchain.cmake" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="armv7e-m" \
       -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
+      -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
       ..
 cmake --build . --target simple_embedding
