@@ -1,5 +1,5 @@
 /******************************************************************************
- * @file     gcc_arm.ld
+ * @file     stm32f407.ld
  * @brief    GNU Linker Script for Cortex-M based device
  * @version  V2.2.0
  * @date     20. January 2021
@@ -32,8 +32,8 @@
     <o1> Flash Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__ROM_BASE = 0x00000000;
-__ROM_SIZE = 0x00040000;
+__ROM_BASE = 0x08000000;
+__ROM_SIZE = 1024K;
 
 /*--------------------- Embedded RAM Configuration ----------------------------
   <h> RAM Configuration
@@ -42,7 +42,7 @@ __ROM_SIZE = 0x00040000;
   </h>
  -----------------------------------------------------------------------------*/
 __RAM_BASE = 0x20000000;
-__RAM_SIZE = 0x00020000;
+__RAM_SIZE = 128K;
 
 /*--------------------- Stack / Heap Configuration ----------------------------
   <h> Stack / Heap Configuration
@@ -51,7 +51,7 @@ __RAM_SIZE = 0x00020000;
   </h>
   -----------------------------------------------------------------------------*/
 __STACK_SIZE = 0x00000400;
-__HEAP_SIZE  = 0x00000C00;
+__HEAP_SIZE  = 512;
 
 /*
  *-------------------- <<< end of configuration section >>> -------------------
@@ -104,6 +104,14 @@ ENTRY(Reset_Handler)
 
 SECTIONS
 {
+  /* Interrupt Vector Table */
+  .isr_vector :
+  {
+    . = ALIGN(4);
+    KEEP(*(.isr_vector)) /* Startup code */
+    . = ALIGN(4);
+  } > FLASH
+
   .text :
   {
     KEEP(*(.vectors))
@@ -134,7 +142,7 @@ SECTIONS
   /*
    * SG veneers:
    * All SG veneers are placed in the special output section .gnu.sgstubs. Its start address
-   * must be set, either with the command line option ‘--section-start’ or in a linker script,
+   * must be set, either with the command line option ï¿½--section-startï¿½ or in a linker script,
    * to indicate where to place these veneers in memory.
    */
 /*
@@ -313,4 +321,12 @@ SECTIONS
 
   /* Check if data + heap + stack exceeds RAM limit */
   ASSERT(__StackLimit >= __HeapLimit, "region RAM overflowed with stack")
+
+  /* Provide symbols under different names */
+  PROVIDE(_sdata = __data_start__);
+  PROVIDE(_edata = __data_end__);
+  PROVIDE(_sbss = __bss_start__);
+  PROVIDE(_ebss = __bss_end__);
+  PROVIDE(_estack = __StackTop);
+  PROVIDE(_sidata = LOADADDR(.data));
 }
