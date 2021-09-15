@@ -8,7 +8,7 @@ cmake_minimum_required(VERSION 3.13.4)
 # Project configuration
 #-------------------------------------------------------------------------------
 
-project(iree-bare-metal-arm VERSION 1.0 LANGUAGES C)
+project(iree-bare-metal-arm VERSION 1.0 LANGUAGES C ASM)
 
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -34,6 +34,7 @@ add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
 # Third-party dependencies
 #-------------------------------------------------------------------------------
 
+add_subdirectory(build_tools/third_party/cmsis_device_f4 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/libopencm3 EXCLUDE_FROM_ALL)
 add_subdirectory(third_party/iree EXCLUDE_FROM_ALL)
 
