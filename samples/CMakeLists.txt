@@ -4,6 +4,16 @@
 
 add_executable(simple_embedding "")
 
+if(BUILD_WITH_CMSIS)
+  target_compile_definitions(simple_embedding PRIVATE -DBUILD_WITH_CMSIS)
+  set(CONDITIONAL_DEP cmsis_device_f4)
+endif()
+
+if(BUILD_WITH_LIBOPENCM3)
+  target_compile_definitions(simple_embedding PRIVATE -DBUILD_WITH_LIBOPENCM3)
+  set(CONDITIONAL_DEP stm32f4)
+endif()
+
 target_sources(simple_embedding
   PRIVATE
     simple_embedding.c
@@ -22,5 +32,5 @@ target_link_libraries(simple_embedding
   iree::modules::hal
   iree::vm
   iree::vm::bytecode_module
-  stm32f4
+  ${CONDITIONAL_DEP}
 )
