@@ -17,7 +17,7 @@ endif()
 target_sources(simple_embedding
   PRIVATE
     simple_embedding.c
-    ${iree_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
+    ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
 )
 
 set_target_properties(simple_embedding PROPERTIES OUTPUT_NAME simple_embedding)
