@@ -4,7 +4,7 @@
 This project is not intended for everyday use and made available without any support.
 However, we welcome any kind of feedback via the issue tracker or if appropriate via IREE's [communication channels](https://github.com/google/iree#communication-channels), e.g. via the Discord server.
 
-This projects demonstrates how to build [IREE](https://github.com/google/iree) with the [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm) for bare-metal Arm targets using the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3).
+This projects demonstrates how to build [IREE](https://github.com/google/iree) with the [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
 ## Getting Started
 
 ### Prerequisites
@@ -62,7 +62,8 @@ and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
 mkdir build
 cd build
 
-# export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
+# Set the path to the GNU Arm Embedded Toolchain, e.g.
+# export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10-2020-q4-major"
 
 # To build with CMSIS
 # export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
@@ -71,6 +72,9 @@ cd build
 # To build with libopencm3
 # export CUSTOM_ARM_LINKER_FLAGS="-nostartfiles"
 # export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4-discovery.ld`"
+
+
+# export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
 
 cmake -GNinja \
 #     -DBUILD_WITH_CMSIS=ON \
