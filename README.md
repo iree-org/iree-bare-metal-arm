@@ -87,7 +87,7 @@ cmake -GNinja \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
       ..
-cmake --build . --target simple_embedding
+cmake --build . --target sample_vmvx_sync
 ```
 
 ### Test with Renode
