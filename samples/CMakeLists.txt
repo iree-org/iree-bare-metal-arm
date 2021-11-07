@@ -2,27 +2,27 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-add_executable(simple_embedding "")
+add_executable(sample_vmvx_sync "")
 
 if(BUILD_WITH_CMSIS)
-  target_compile_definitions(simple_embedding PRIVATE -DBUILD_WITH_CMSIS)
+  target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
   set(CONDITIONAL_DEP cmsis_device_f4)
 endif()
 
 if(BUILD_WITH_LIBOPENCM3)
-  target_compile_definitions(simple_embedding PRIVATE -DBUILD_WITH_LIBOPENCM3)
+  target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
-target_sources(simple_embedding
+target_sources(sample_vmvx_sync
   PRIVATE
     simple_embedding.c
     ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
 )
 
-set_target_properties(simple_embedding PROPERTIES OUTPUT_NAME simple_embedding)
+set_target_properties(sample_vmvx_sync PROPERTIES OUTPUT_NAME sample_vmvx_sync)
 
-target_link_libraries(simple_embedding
+target_link_libraries(sample_vmvx_sync
   iree::samples::simple_embedding::simple_embedding_test_bytecode_module_vmvx_c
   iree::base
   iree::hal
