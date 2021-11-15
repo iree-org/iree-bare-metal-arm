@@ -1,0 +1,13 @@
+using "platforms/boards/stm32f4_discovery.repl"
+using "platforms/boards/stm32f4_discovery-additional_gpios.repl"
+using "platforms/boards/stm32f4_discovery-bb.repl"
+
+// This makes use of the unused 512 MB block starting at 0xC000 0000,
+// see https://www.st.com/resource/en/datasheet/stm32f405rg.pdf,
+// to create bigger memory blocks.
+
+flash: @ sysbus 0xC0000000
+    size: 0x10000000
+
+sram: @ sysbus 0xD0000000
+    size: 0x10000000
