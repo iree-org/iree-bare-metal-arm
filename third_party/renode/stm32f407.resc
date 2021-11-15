@@ -4,7 +4,7 @@
 using sysbus
 $name?="STM32F407"
 mach create $name
-machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
+machine LoadPlatformDescription $ORIGIN/stm32f407.repl
 
 cpu PerformanceInMips 125
 
@@ -30,4 +30,3 @@ macro reset
 """
 
 runMacro $reset
-
