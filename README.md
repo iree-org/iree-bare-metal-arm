@@ -67,11 +67,11 @@ cd build
 
 # To build with CMSIS
 # export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
-# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407.ld`"
+# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4/stm32f407-cmsis-base.ld`"
 
 # To build with libopencm3
 # export CUSTOM_ARM_LINKER_FLAGS="-nostartfiles"
-# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4-discovery.ld`"
+# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4/stm32f4-discovery-libopencm3-base.ld`"
 
 
 # export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
@@ -90,6 +90,7 @@ cmake -GNinja \
 cmake --build . --target sample_vmvx_sync
 ```
 
+
 ### Test with Renode
 
 You can use [Renode](https://renode.io/) to execute the created binary.
@@ -102,13 +103,10 @@ Execution is done via the interactive Renode shell (for headless execution see [
 
 ```shell
 cd renode_1.12.0_portable
-./renode
+./renode ${PATH_TO_REPOSITORY_ROOT}/renode/stm32f4-base.resc
 ```
-Inside the shell you need to execute the following statements:
+Inside the shell you need to start the execution:
 ```shell
-(monitor) include @scripts/single-node/stm32f4_discovery.resc
-(STM32F4_Discovery) sysbus LoadELF @${PATH_TO_BINARY}
-(STM32F4_Discovery) showAnalyzer sysbus.uart2
 (STM32F4_Discovery) start
 ```
 You should be able to see the output of the executable in the analyzer window for uart2.
@@ -119,3 +117,11 @@ This example also comes with a robot test file:
 cd renode_1.12.0_portable
 test.sh --variable ELF:${PATH_TO_BINARY} ${PATH_TO_REPOSITORY_ROOT}/tests/simple_embedding.robot
 ```
+
+### Custom memory configuration
+Additionally a custom memory configuration exists for the STM32F4 board.
+This configuration increases the size of the ROM and RAM to 256M each.
+
+To use this custom memory configuration the target needs to be built with the appropriate linker script that accomodate the extended memory.
+The build process is largely the same as before, only the linker scripts specified in ${PATH_TO_LINKER_SCRIPT} have to be amended.
+The linker scripts with the custom memory configuration can be found in `build_tools/stm32f4` ending in *\*-custom.ld*.

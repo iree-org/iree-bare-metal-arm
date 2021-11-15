@@ -1,0 +1,11 @@
+
+using "platforms/boards/stm32f4_discovery.repl"
+using "platforms/boards/stm32f4_discovery-additional_gpios.repl"
+using "platforms/boards/stm32f4_discovery-bb.repl"
+
+flash: @ sysbus 0xC0000000
+    size: 0x10000000
+
+sram: @ sysbus 0xD0000000
+    size: 0x10000000
+    
