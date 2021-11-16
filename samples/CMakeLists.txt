@@ -42,15 +42,15 @@ target_link_libraries(sample_vmvx_sync
   ${CONDITIONAL_DEP}
 )
 
-target_sources(sample_embedded_sync
-  PRIVATE
-    simple_embedding.c
-    ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_embedded_sync.c
-)
-
 #-------------------------------------------------------------------------------
 # DYLIB sample
 #-------------------------------------------------------------------------------
+
+target_sources(sample_embedded_sync
+  PRIVATE
+    simple_embedding.c
+    device_embedded_sync.c
+)
 
 set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
 
@@ -92,6 +92,11 @@ target_sources(simple_embedding_test_bytecode_module_dylib
   PRIVATE
     simple_embedding_test_module_dylib_arm_32.c
     simple_embedding_test_module_dylib_arm_32.h
+)
+
+target_include_directories(sample_embedded_sync
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 target_link_libraries(sample_embedded_sync
