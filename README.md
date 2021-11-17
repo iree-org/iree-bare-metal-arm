@@ -106,9 +106,8 @@ cd renode_1.12.0_portable
 ```
 Inside the shell you need to execute the following statements:
 ```shell
-(monitor) include @scripts/single-node/stm32f4_discovery.resc
+(monitor) include ${PATH_TO_REPOSITORY_ROOT}/third_party/renode/stm32f407.resc
 (STM32F4_Discovery) sysbus LoadELF @${PATH_TO_BINARY}
-(STM32F4_Discovery) showAnalyzer sysbus.uart2
 (STM32F4_Discovery) start
 ```
 You should be able to see the output of the executable in the analyzer window for uart2.
