@@ -4,16 +4,19 @@
 
 add_executable(sample_vmvx_sync "")
 add_executable(sample_embedded_sync "")
+add_executable(elf_module_test_bare_metal "")
 
 if(BUILD_WITH_CMSIS)
   target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_CMSIS)
+  target_compile_definitions(elf_module_test_bare_metal PRIVATE -DBUILD_WITH_CMSIS)
   set(CONDITIONAL_DEP cmsis_device_f4)
 endif()
 
 if(BUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
+  target_compile_definitions(elf_module_test_bare_metal PRIVATE -DBUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
@@ -104,5 +107,19 @@ target_link_libraries(sample_embedded_sync
   iree::modules::hal
   iree::vm
   iree::vm::bytecode_module
+  ${CONDITIONAL_DEP}
+)
+
+target_sources(elf_module_test_bare_metal
+  PRIVATE
+    elf_module_test_main.c
+)
+
+target_link_libraries(elf_module_test_bare_metal
+  iree::base
+  iree::base::core_headers
+  iree::hal::local::elf::elf_module
+  iree::hal::local::elf::testdata::simple_mul_dispatch
+  iree::hal::local::executable_library
   ${CONDITIONAL_DEP}
 )
