@@ -40,7 +40,7 @@ cd build-iree-host
 cmake -GNinja \
       -DCMAKE_C_COMPILER=clang \
       -DCMAKE_CXX_COMPILER=clang++ \
-      -DIREE_HAL_DRIVERS_TO_BUILD="VMVX_Sync" \
+      -DIREE_HAL_DRIVERS_TO_BUILD="VMVX_Sync;DYLIB_Sync" \
       -DIREE_TARGET_BACKENDS_TO_BUILD="VMVX;DYLIB-LLVM-AOT" \
       -DIREE_BUILD_SAMPLES=OFF \
       -DIREE_BUILD_TESTS=OFF \
@@ -82,7 +82,7 @@ cmake -GNinja \
       -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="armv7e-m" \
-      -DIREE_HAL_DRIVERS_TO_BUILD="VMVX_Sync" \
+      -DIREE_HAL_DRIVERS_TO_BUILD="VMVX_Sync;DYLIB_Sync" \
       -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
