@@ -7,18 +7,27 @@
 // A example of static library loading in IREE. See the README.md for more info.
 // Note: this demo requires artifacts from iree-translate before it will run.
 
+#include <errno.h>
+#ifdef BUILD_WITH_CMSIS
+#include <stm32f4xx.h>
+#endif
+#ifdef BUILD_WITH_LIBOPENCM3
+#include <libopencm3/stm32/gpio.h>
+#include <libopencm3/stm32/rcc.h>
+#include <libopencm3/stm32/usart.h>
+#endif
 #include <stdio.h>
+#include <unistd.h>
 
 #include "iree/hal/local/loaders/static_library_loader.h"
 #include "iree/hal/local/sync_device.h"
 #include "iree/modules/hal/module.h"
 #include "iree/runtime/api.h"
-#include "iree/samples/static_library/simple_mul_c.h"
-#include "iree/task/api.h"
 #include "iree/vm/bytecode_module.h"
+#include "simple_mul_c.h"
 
 // Compiled static library module here to avoid IO:
-#include "iree/samples/static_library/simple_mul.h"
+#include "simple_mul.h"
 
 // A function to create the HAL device from the different backend targets.
 // The HAL device is returned based on the implementation, and it must be
@@ -202,13 +211,135 @@ iree_status_t Run() {
   return status;
 }
 
-int main() {
+#ifdef BUILD_WITH_CMSIS
+static void clock_setup(void) {
+  /* Enable clock for GPIOA */
+  // RCC->AHB1ENR |= (1<<0);
+  RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+
+  /* Enable clock for USART2 */
+  // RCC->APB1ENR |= (1<<17);
+  RCC->APB1ENR |= RCC_APB1ENR_USART2EN;
+}
+
+static void gpio_setup(void) {
+  /* Configure alternate function mode for GPIOA */
+  // GPIOA->MODER |= (2<<4);
+  GPIOA->MODER |= GPIO_MODER_MODER2_1;
+
+  /* Configure speed for GPIOA on pin 2 */
+  // GPIOA->OSPEEDR |= (3<<4);
+  GPIOA->OSPEEDR |= GPIO_OSPEEDR_OSPEED2_0 | GPIO_OSPEEDR_OSPEED2_1;
+
+  /* Configure alternate function mode for GPIOA on pin 2 */
+  // GPIOA->AFR[0] |= (7<<8);
+  GPIOA->AFR[0] |= GPIO_AFRL_AFSEL2_0 | GPIO_AFRL_AFSEL2_1 | GPIO_AFRL_AFSEL2_2;
+}
+
+static void usart_setup(void) {
+  /* Enable USART2 */
+  // USART2->CR1 |= (1<<13);
+  USART2->CR1 |= USART_CR1_UE;
+
+  /* Configure word length to 8bit for USART2 */
+  // USART2->CR1 &= ~(1<<12);
+  USART2->CR1 &= ~USART_CR1_M;
+
+  /* Configure baud rate 115200 for USART2 */
+  /* Computation taken over from libopencm3 */
+  USART2->BRR = (SystemCoreClock + 115200 / 2) / 115200;
+
+  /* Enable transmitting for USART2 */
+  // USART2->CR1 |= (1<<3);
+  USART2->CR1 |= USART_CR1_TE;
+}
+
+void usart2_send_blocking(uint8_t c) {
+  USART2->DR = c;
+  // while(!(USART2->SR & (1 << 6)));
+  while (!(USART2->SR & USART_SR_TC))
+    ;
+}
+#endif
+
+#ifdef BUILD_WITH_LIBOPENCM3
+static void clock_setup(void) {
+  /* Enable GPIOD clock for LED & USARTs. */
+  rcc_periph_clock_enable(RCC_GPIOD);
+  rcc_periph_clock_enable(RCC_GPIOA);
+
+  /* Enable clocks for USART2. */
+  rcc_periph_clock_enable(RCC_USART2);
+}
+
+static void usart_setup(void) {
+  /* Setup USART2 parameters. */
+  usart_set_baudrate(USART2, 115200);
+  usart_set_databits(USART2, 8);
+  usart_set_stopbits(USART2, USART_STOPBITS_1);
+  usart_set_mode(USART2, USART_MODE_TX);
+  usart_set_parity(USART2, USART_PARITY_NONE);
+  usart_set_flow_control(USART2, USART_FLOWCONTROL_NONE);
+
+  /* Finally enable the USART. */
+  usart_enable(USART2);
+}
+
+static void gpio_setup(void) {
+  /* Setup GPIO pin GPIO12 on GPIO port D for LED. */
+  gpio_mode_setup(GPIOD, GPIO_MODE_OUTPUT, GPIO_PUPD_NONE, GPIO12);
+
+  /* Setup GPIO pins for USART2 transmit. */
+  gpio_mode_setup(GPIOA, GPIO_MODE_AF, GPIO_PUPD_NONE, GPIO2);
+
+  /* Setup USART2 TX pin as alternate function. */
+  gpio_set_af(GPIOA, GPIO_AF7, GPIO2);
+}
+#endif
+
+int _write(int file, char* ptr, int len) {
+  int i;
+
+  if (file == STDOUT_FILENO || file == STDERR_FILENO) {
+    for (i = 0; i < len; i++) {
+      if (ptr[i] == '\n') {
+#ifdef BUILD_WITH_CMSIS
+        usart2_send_blocking('\r');
+#endif
+#ifdef BUILD_WITH_LIBOPENCM3
+        usart_send_blocking(USART2, '\r');
+#endif
+      }
+#ifdef BUILD_WITH_CMSIS
+      usart2_send_blocking(ptr[i]);
+#endif
+#ifdef BUILD_WITH_LIBOPENCM3
+      usart_send_blocking(USART2, ptr[i]);
+#endif
+    }
+    return i;
+  }
+  errno = EIO;
+  return -1;
+}
+
+int main(void) {
+  clock_setup();
+  gpio_setup();
+  usart_setup();
+
   const iree_status_t result = Run();
   if (!iree_status_is_ok(result)) {
     iree_status_fprint(stderr, result);
     iree_status_free(result);
     return -1;
+  } else {
+    printf("Execution succesfull!\n");
   }
   printf("static_library_run passed\n");
+
+  while (1) {
+  }
+
   return 0;
 }
