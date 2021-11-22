@@ -19,3 +19,6 @@ target_include_directories(cmsis_device_f4
 )
 
 target_compile_definitions(cmsis_device_f4 PUBLIC -DSTM32F407xx)
+
+# Allow ld to find generic linker script
+target_link_directories(cmsis_device_f4 INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")

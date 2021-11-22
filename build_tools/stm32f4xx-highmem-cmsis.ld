@@ -1,5 +1,5 @@
 /******************************************************************************
- * @file     stm32f407-cmsis.ld
+ * @file     stm32f4xx-highmem-cmsis.ld
  * @brief    GNU Linker Script for Cortex-M based device
  * @version  V2.2.0
  * @date     20. January 2021
@@ -32,8 +32,8 @@
     <o1> Flash Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
   -----------------------------------------------------------------------------*/
-__ROM_BASE = 0x08000000;
-__ROM_SIZE = 1024K;
+__ROM_BASE = 0xC0000000;
+__ROM_SIZE = 256M;
 
 /*--------------------- Embedded RAM Configuration ----------------------------
   <h> RAM Configuration
@@ -41,8 +41,8 @@ __ROM_SIZE = 1024K;
     <o1> RAM Size (in Bytes) <0x0-0xFFFFFFFF:8>
   </h>
  -----------------------------------------------------------------------------*/
-__RAM_BASE = 0x20000000;
-__RAM_SIZE = 128K;
+__RAM_BASE = 0xD0000000;
+__RAM_SIZE = 256M;
 
 /*--------------------- Stack / Heap Configuration ----------------------------
   <h> Stack / Heap Configuration
