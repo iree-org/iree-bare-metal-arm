@@ -16,7 +16,7 @@ endif()
 if(BUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
-  target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_CMSIS)
+  target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
