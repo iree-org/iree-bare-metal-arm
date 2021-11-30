@@ -23,12 +23,12 @@ endif()
 set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
 
 #-------------------------------------------------------------------------------
-# VMVX sample
+# VMVX sample, float
 #-------------------------------------------------------------------------------
 
 target_sources(sample_vmvx_sync
   PRIVATE
-    simple_embedding.c
+    simple_embedding_float.c
     ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
 )
 
@@ -48,12 +48,12 @@ target_link_libraries(sample_vmvx_sync
 )
 
 #-------------------------------------------------------------------------------
-# DYLIB sample
+# DYLIB sample, int32
 #-------------------------------------------------------------------------------
 
 target_sources(sample_embedded_sync
   PRIVATE
-    simple_embedding.c
+    simple_embedding_int.c
     device_embedded_sync.c
 )
 
@@ -66,7 +66,7 @@ list(APPEND _TRANSLATE_ARGS "-iree-llvm-target-float-abi=hard")
 list(APPEND _TRANSLATE_ARGS "-iree-llvm-debug-symbols=false")
 list(APPEND _TRANSLATE_ARGS "-iree-vm-bytecode-module-strip-source-map=true")
 list(APPEND _TRANSLATE_ARGS "-iree-vm-emit-polyglot-zip=false")
-list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/iree/samples/simple_embedding/simple_embedding_test.mlir")
+list(APPEND _TRANSLATE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/simple_embedding_int_test.mlir")
 list(APPEND _TRANSLATE_ARGS "-o")
 list(APPEND _TRANSLATE_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
 
