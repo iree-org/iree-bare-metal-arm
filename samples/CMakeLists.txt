@@ -5,11 +5,13 @@
 add_executable(sample_vmvx_sync "")
 add_executable(sample_embedded_sync "")
 add_executable(sample_static_library "")
+add_executable(sample_static_library_c "")
 
 if(BUILD_WITH_CMSIS)
   target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_CMSIS)
   target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_CMSIS)
+  target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_CMSIS)
   set(CONDITIONAL_DEP cmsis_device_f4)
 endif()
 
@@ -17,6 +19,7 @@ if(BUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_LIBOPENCM3)
+  target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
@@ -122,6 +125,7 @@ target_link_libraries(sample_embedded_sync
 target_sources(sample_static_library
   PRIVATE
     static_library_demo.c
+    create_bytecode_module.c
 )
 
 set(_TRANSLATE_ARGS)
@@ -188,5 +192,64 @@ target_link_libraries(sample_static_library
   iree::hal::local::loaders::static_library_loader
   iree::hal::local::sync_driver
   simple_mul
+  ${CONDITIONAL_DEP}
+)
+
+#-------------------------------------------------------------------------------
+# Static library sample, EmitC
+#-------------------------------------------------------------------------------
+
+set(_TRANSLATE_ARGS)
+list(APPEND _TRANSLATE_ARGS "-iree-mlir-to-vm-c-module")
+list(APPEND _TRANSLATE_ARGS "-iree-hal-target-backends=dylib-llvm-aot")
+list(APPEND _TRANSLATE_ARGS "-iree-llvm-target-triple=armv7em-pc-linux-elf")
+list(APPEND _TRANSLATE_ARGS "-iree-llvm-target-float-abi=hard")
+list(APPEND _TRANSLATE_ARGS "-iree-llvm-link-embedded=false")
+list(APPEND _TRANSLATE_ARGS "-iree-llvm-link-static")
+list(APPEND _TRANSLATE_ARGS "-iree-llvm-static-library-output-path=simple_mul_c_module.o")
+list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/iree/samples/static_library/simple_mul.mlir")
+list(APPEND _TRANSLATE_ARGS "-o")
+list(APPEND _TRANSLATE_ARGS "simple_mul_emitc.h")
+
+add_custom_command(
+  OUTPUT
+    ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.h
+    ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.o
+    ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_emitc.h
+  COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
+)
+
+add_library(simple_mul_c_module
+  STATIC
+  ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.o)
+
+target_sources(simple_mul_c_module
+  PRIVATE
+    simple_mul_c_module.h
+    simple_mul_emitc.h
+)
+
+SET_TARGET_PROPERTIES(
+  simple_mul_c_module
+  PROPERTIES
+  LINKER_LANGUAGE C)
+
+target_sources(sample_static_library_c
+  PRIVATE
+    static_library_demo.c
+    create_c_module.c
+)
+
+target_include_directories(sample_static_library_c
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+target_link_libraries(sample_static_library_c
+  simple_mul_c_module
+  iree::runtime
+  iree::hal::local::loaders::static_library_loader
+  iree::hal::local::sync_driver
+  iree::vm::shims_emitc
   ${CONDITIONAL_DEP}
 )
