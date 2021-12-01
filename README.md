@@ -89,6 +89,8 @@ cmake -GNinja \
       ..
 cmake --build . --target sample_vmvx_sync
 ```
+> Note:<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;You can use the [`build_tools/configure_stm32f4.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/configure_stm32f4.sh) shell script to configure the build.
 
 ### Test with Renode
 
@@ -107,8 +109,8 @@ cd renode_1.12.0_portable
 Inside the shell you need to execute the following statements:
 ```shell
 (monitor) include ${PATH_TO_REPOSITORY_ROOT}/third_party/renode/stm32f407.resc
-(STM32F4_Discovery) sysbus LoadELF @${PATH_TO_BINARY}
-(STM32F4_Discovery) start
+(STM32F407) sysbus LoadELF @${PATH_TO_BINARY}
+(STM32F407) start
 ```
 You should be able to see the output of the executable in the analyzer window for uart2.
 
