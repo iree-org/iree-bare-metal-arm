@@ -58,7 +58,7 @@ case $2 in
 esac
 
 # Set the path to the GNU Arm Embedded Toolchain
-export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10-2020-q4-major"
+export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10.3-2021.10"
 
 # Set the path to the IREE host binary
 export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"

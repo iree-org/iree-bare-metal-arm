@@ -63,7 +63,7 @@ mkdir build
 cd build
 
 # Set the path to the GNU Arm Embedded Toolchain, e.g.
-# export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10-2020-q4-major"
+# export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10.3-2021.10"
 
 # To build with CMSIS
 # export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
