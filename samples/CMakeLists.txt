@@ -2,13 +2,11 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-add_executable(sample_vmvx_sync "")
 add_executable(sample_embedded_sync "")
 add_executable(sample_static_library "")
 add_executable(sample_static_library_c "")
 
 if(BUILD_WITH_CMSIS)
-  target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_CMSIS)
   target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_CMSIS)
   target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_CMSIS)
@@ -16,7 +14,6 @@ if(BUILD_WITH_CMSIS)
 endif()
 
 if(BUILD_WITH_LIBOPENCM3)
-  target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_LIBOPENCM3)
@@ -29,26 +26,40 @@ set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
 # VMVX sample, float
 #-------------------------------------------------------------------------------
 
-target_sources(sample_vmvx_sync
-  PRIVATE
-    simple_embedding_float.c
-    ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
-)
+if(IREE_HAL_DRIVER_VMVX)
 
-set_target_properties(sample_vmvx_sync PROPERTIES OUTPUT_NAME sample_vmvx_sync)
+  add_executable(sample_vmvx_sync "")
 
-target_link_libraries(sample_vmvx_sync
-  iree::samples::simple_embedding::simple_embedding_test_bytecode_module_vmvx_c
-  iree::base
-  iree::hal
-  iree::hal::local
-  iree::hal::local::loaders::vmvx_module_loader
-  iree::hal::local::sync_driver
-  iree::modules::hal
-  iree::vm
-  iree::vm::bytecode_module
-  ${CONDITIONAL_DEP}
-)
+  if(BUILD_WITH_CMSIS)
+    target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
+  endif()
+
+  if(BUILD_WITH_LIBOPENCM3)
+    target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
+  endif()
+
+  target_sources(sample_vmvx_sync
+    PRIVATE
+      simple_embedding_float.c
+      ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
+  )
+
+  set_target_properties(sample_vmvx_sync PROPERTIES OUTPUT_NAME sample_vmvx_sync)
+
+  target_link_libraries(sample_vmvx_sync
+    iree::samples::simple_embedding::simple_embedding_test_bytecode_module_vmvx_c
+    iree::base
+    iree::hal
+    iree::hal::local
+    iree::hal::local::loaders::vmvx_module_loader
+    iree::hal::local::sync_driver
+    iree::modules::hal
+    iree::vm
+    iree::vm::bytecode_module
+    ${CONDITIONAL_DEP}
+  )
+
+endif()
 
 #-------------------------------------------------------------------------------
 # DYLIB sample, int32
