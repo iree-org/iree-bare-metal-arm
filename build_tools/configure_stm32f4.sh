@@ -18,11 +18,13 @@ case $1 in
   cmsis)
     echo "Building with CMSIS"
     export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
+    export BUILD_WITH="CMSIS"
     ;;
 
   libopencm3)
     echo "Building with libopencm3"
     export CUSTOM_ARM_LINKER_FLAGS="-nostartfiles"
+    export BUILD_WITH="LIBOPENCM3"
     ;;
 
   *)
@@ -76,7 +78,7 @@ fi
 
 # Configure project
 cmake -GNinja \
-      -DBUILD_WITH_CMSIS=ON \
+      -DBUILD_WITH_${BUILD_WITH}=ON \
       -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="armv7e-m" \
