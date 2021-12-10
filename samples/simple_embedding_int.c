@@ -223,6 +223,20 @@ void usart2_send_blocking(uint8_t c) {
 }
 #endif
 
+#ifdef BUILD_WITH_CRT0
+static void clock_setup(void) { /* Not implemented */
+}
+
+static void gpio_setup(void) { /* Not implemented */
+}
+
+static void usart_setup(void) { /* Not implemented */
+}
+
+void usart2_send_blocking(uint8_t c) { /* Not implemented */
+}
+#endif
+
 #ifdef BUILD_WITH_LIBOPENCM3
 static void clock_setup(void) {
   /* Enable GPIOD clock for LED & USARTs. */
@@ -264,14 +278,14 @@ int _write(int file, char* ptr, int len) {
   if (file == STDOUT_FILENO || file == STDERR_FILENO) {
     for (i = 0; i < len; i++) {
       if (ptr[i] == '\n') {
-#ifdef BUILD_WITH_CMSIS
+#if defined BUILD_WITH_CMSIS || defined BUILD_WITH_CRT0
         usart2_send_blocking('\r');
 #endif
 #ifdef BUILD_WITH_LIBOPENCM3
         usart_send_blocking(USART2, '\r');
 #endif
       }
-#ifdef BUILD_WITH_CMSIS
+#if defined BUILD_WITH_CMSIS || defined BUILD_WITH_CRT0
       usart2_send_blocking(ptr[i]);
 #endif
 #ifdef BUILD_WITH_LIBOPENCM3

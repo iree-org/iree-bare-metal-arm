@@ -20,6 +20,12 @@ case $1 in
     export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
     export BUILD_WITH="CMSIS"
     ;;
+  
+  crt0)
+    echo "Building with crt0.s"
+    export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
+    export BUILD_WITH="CRT0"
+    ;;
 
   libopencm3)
     echo "Building with libopencm3"
@@ -28,7 +34,7 @@ case $1 in
     ;;
 
   *)
-    echo "Unknown lib. Use 'cmsis' or 'libopencm3"
+    echo "Unknown lib. Use 'cmsis', 'crt0' or 'libopencm3"
     exit 1
     ;;
 esac
@@ -37,7 +43,7 @@ esac
 case $2 in
   stm32f407)
     echo "Building for STM32F407"
-    if [ "$1" == "cmsis" ]; then
+    if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-cmsis.ld`"
     else
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-libopencm3.ld`"
@@ -46,7 +52,7 @@ case $2 in
 
   stm32f4xx)
     echo "Building for STM32F4xx, high memory"
-    if [ "$1" == "cmsis" ]; then
+    if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xx-highmem-cmsis.ld`"
     else
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xx-highmem-libopencm3.ld`"

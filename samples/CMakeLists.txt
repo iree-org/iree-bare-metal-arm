@@ -13,6 +13,13 @@ if(BUILD_WITH_CMSIS)
   set(CONDITIONAL_DEP cmsis_device_f4)
 endif()
 
+if(BUILD_WITH_CRT0)
+  target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_CRT0)
+  target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_CRT0)
+  target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_CRT0)
+  set(CONDITIONAL_DEP custom_crt0)
+endif()
+
 if(BUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
   target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_LIBOPENCM3)
@@ -32,6 +39,10 @@ if(IREE_HAL_DRIVER_VMVX)
 
   if(BUILD_WITH_CMSIS)
     target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
+  endif()
+
+  if(BUILD_WITH_CRT0)
+    target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CRT0)
   endif()
 
   if(BUILD_WITH_LIBOPENCM3)
