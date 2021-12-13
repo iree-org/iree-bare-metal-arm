@@ -13,14 +13,19 @@ project(iree-bare-metal-arm VERSION 1.0 LANGUAGES C ASM)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(BUILD_WITH_CMSIS "Builds the sample with CMSIS" OFF)
+option(BUILD_WITH_CRT0 "Builds the sample with crt0.s" OFF)
 option(BUILD_WITH_LIBOPENCM3 "Builds the sample with libopencm3" OFF)
 
-if(BUILD_WITH_CMSIS AND BUILD_WITH_LIBOPENCM3)
-  message(FATAL_ERROR "libopencm3 and CMSIS cannot be used at the same time")
+if(
+  (BUILD_WITH_CMSIS AND BUILD_WITH_CRT0) OR
+  (BUILD_WITH_CMSIS AND BUILD_WITH_LIBOPENCM3) OR
+  (BUILD_WITH_CRT0 AND BUILD_WITH_LIBOPENCM3)
+)
+  message(FATAL_ERROR "Only one of CMSIS, crt0.s or libopencm3 can be used at the same time")
 endif()
 
-if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_LIBOPENCM3)
-  message(FATAL_ERROR "Either set BUILD_WITH_CMSIS or BUILD_WITH_LIBOPENCM3 to ON")
+if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_CRT0 AND NOT BUILD_WITH_LIBOPENCM3)
+  message(FATAL_ERROR "Either set BUILD_WITH_CMSIS, BUILD_WITH_CRT0 or BUILD_WITH_LIBOPENCM3 to ON")
 endif()
 
 # Extend module path to allow submodules to find AddMLIR
@@ -46,6 +51,7 @@ add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
 #-------------------------------------------------------------------------------
 
 add_subdirectory(build_tools/third_party/cmsis_device_f4 EXCLUDE_FROM_ALL)
+add_subdirectory(build_tools/third_party/custom_crt0 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/libopencm3 EXCLUDE_FROM_ALL)
 add_subdirectory(third_party/iree EXCLUDE_FROM_ALL)
 
