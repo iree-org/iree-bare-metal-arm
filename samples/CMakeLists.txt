@@ -33,7 +33,7 @@ set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
 # VMVX sample, float
 #-------------------------------------------------------------------------------
 
-if(IREE_HAL_DRIVER_VMVX)
+if(IREE_HAL_DRIVER_VMVX_SYNC)
 
   add_executable(sample_vmvx_sync "")
 
