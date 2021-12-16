@@ -31,7 +31,13 @@ cd ../../
 
 #### Host Build
 
-You will need an installation of IREE on your host machine. The lines below can be used to build IREE from the already cloned submodule:
+You will need an installation of IREE on your host machine.
+One option is to build IREE on your host machine.
+Another option is to install a snapshot build and to compile some additional tools.
+
+##### Option A: Build IREE
+
+The lines below can be used to build IREE from the already cloned submodule:
 
 ```shell
 mkdir build-iree-host
@@ -51,6 +57,39 @@ cd ..
 ```
 
 For further information, see the [Getting started](https://google.github.io/iree/building-from-source/getting-started/) guide.
+
+##### Option B: Install a Snapshot
+
+The snapshot can be installed via the following commands:
+
+```shell
+python3 -m venv venv-iree-snapshot
+source venv-iree-snapshot/bin/activate
+pip3 install -r requirements.txt
+```
+
+For further information, see the [TensorFlow Integration](https://google.github.io/iree/ml-frameworks/tensorflow/) or[TensorFlow Lite Integration](https://google.github.io/iree/ml-frameworks/tensorflow-lite/) guide.
+The next lines can be used to build the missing tools from the already cloned submodule:
+
+```shell
+mkdir build-iree-host-tools
+mkdir -p build-iree-host-install/bin
+cd build-iree-host-tools
+
+cmake -GNinja \
+      -DCMAKE_C_COMPILER=clang \
+      -DCMAKE_CXX_COMPILER=clang++ \
+      -DIREE_BUILD_COMPILER=OFF \
+      -DIREE_BUILD_SAMPLES=OFF \
+      -DIREE_BUILD_TESTS=OFF \
+      -DCMAKE_INSTALL_PREFIX=../build-iree-host-install \
+      ../third_party/iree/
+cmake --build . --target generate_embed_data iree-flatcc-cli
+
+cp build_tools/embed_data/generate_embed_data ../build-iree-host-install/bin
+cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
+cd ..
+```
 
 #### Target Build
 
