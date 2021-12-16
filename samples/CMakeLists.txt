@@ -27,7 +27,16 @@ if(BUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
-set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
+if(EXISTS ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
+  # Use `iree-translate` if installed to IREE_HOST_BINARY_ROOT.
+  set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
+else()
+  # Use `iree-translate` provided via a snapshot.
+  find_program(_TRANSLATE_TOOL_EXECUTABLE iree-translate)
+  if(_TRANSLATE_TOOL_EXECUTABLE STREQUAL _TRANSLATE_TOOL_EXECUTABLE-NOTFOUND)
+    message(FATAL_ERROR "Could not find iree-translate.")
+  endif()
+endif()
 
 #-------------------------------------------------------------------------------
 # VMVX sample, float
