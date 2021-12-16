@@ -52,13 +52,53 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
   target_sources(sample_vmvx_sync
     PRIVATE
       simple_embedding_float.c
-      ${IREE_SOURCE_DIR}/iree/samples/simple_embedding/device_vmvx_sync.c
+      device_vmvx_sync.c
+  )
+
+  set(_TRANSLATE_ARGS)
+  list(APPEND _TRANSLATE_ARGS "-iree-input-type=mhlo")
+  list(APPEND _TRANSLATE_ARGS "-iree-mlir-to-vm-bytecode-module")
+  list(APPEND _TRANSLATE_ARGS "-iree-hal-target-backends=vmvx")
+  list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/iree/samples/simple_embedding/simple_embedding_test.mlir")
+  list(APPEND _TRANSLATE_ARGS "-o")
+  list(APPEND _TRANSLATE_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
+
+  add_custom_command(
+    OUTPUT "simple_embedding_test_bytecode_module_vmvx.vmfb"
+    COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
+  )
+
+  set(_GEN_EMBED_ARG)
+  list(APPEND _GEN_EMBED_ARGS "--output_header=simple_embedding_test_bytecode_module_vmvx_c.h")
+  list(APPEND _GEN_EMBED_ARGS "--output_impl=simple_embedding_test_bytecode_module_vmvx_c.c")
+  list(APPEND _GEN_EMBED_ARGS "--identifier=iree_samples_simple_embedding_test_module_vmvx")
+  list(APPEND _GEN_EMBED_ARGS "--flatten")
+  list(APPEND _GEN_EMBED_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
+
+  add_custom_command(
+    OUTPUT
+      "simple_embedding_test_bytecode_module_vmvx_c.h"
+      "simple_embedding_test_bytecode_module_vmvx_c.c"
+    COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
+    DEPENDS generate_embed_data simple_embedding_test_bytecode_module_vmvx.vmfb
+  )
+
+  add_library(simple_embedding_test_bytecode_module_vmvx STATIC "")
+  target_sources(simple_embedding_test_bytecode_module_vmvx
+    PRIVATE
+      simple_embedding_test_bytecode_module_vmvx_c.c
+      simple_embedding_test_bytecode_module_vmvx_c.h
   )
 
   set_target_properties(sample_vmvx_sync PROPERTIES OUTPUT_NAME sample_vmvx_sync)
 
+  target_include_directories(sample_vmvx_sync
+    PRIVATE
+      ${CMAKE_CURRENT_BINARY_DIR}
+  )
+
   target_link_libraries(sample_vmvx_sync
-    iree::samples::simple_embedding::simple_embedding_test_bytecode_module_vmvx_c
+    simple_embedding_test_bytecode_module_vmvx
     iree::base
     iree::hal
     iree::hal::local
