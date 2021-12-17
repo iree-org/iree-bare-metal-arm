@@ -1,0 +1,142 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+env:
+  TOOLCHAIN: gcc-arm-none-eabi
+  TOOLCHAIN_VERSION: 10.3-2021.10
+  VENV: venv-iree
+  IREE_HOST_INSTALL: build-iree-host-install
+
+jobs:
+  install-toolchain:
+    name: Install GNU Arm Embedded Toolchain
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Cache Toolchain
+      id: cache-toolchain
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.TOOLCHAIN }}
+        key: ${{ runner.os }}-${{ env.TOOLCHAIN }}-${{ env.TOOLCHAIN_VERSION }}
+      
+    - name: Install GNU Arm Embedded Toolchain
+      if: steps.cache-toolchain.outputs.cache-hit != 'true'
+      run: |
+        wget -q https://developer.arm.com/-/media/Files/downloads/gnu-rm/${{ env.TOOLCHAIN_VERSION }}/gcc-arm-none-eabi-${{ env.TOOLCHAIN_VERSION }}-x86_64-linux.tar.bz2
+        tar xfj gcc-arm-none-eabi-${{ env.TOOLCHAIN_VERSION }}-x86_64-linux.tar.bz2
+        mv gcc-arm-none-eabi-${{ env.TOOLCHAIN_VERSION }} ${{ env.TOOLCHAIN }}
+
+
+  install-snapshot:
+    name: Install IREE snaphot
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        path: ${{ env.REPO }}
+
+    - name: Cache IREE Snapshot
+      id: cache-snapshot
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ env.VENV }}
+          ${{ env.IREE_HOST_INSTALL }}
+        key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('requirements.txt') }}
+
+    - name: Install IREE Snapshot
+      if: steps.cache-snapshot.outputs.cache-hit != 'true'
+      run: |
+        python3 -m venv ${{ env.VENV }}
+        source ${{ env.VENV }}/bin/activate
+        pip install -r requirements.txt
+
+    - name: Install Dependencies
+      if: steps.cache-snapshot.outputs.cache-hit != 'true'
+      run: |
+        sudo apt update
+        sudo apt install cmake clang ninja-build
+
+    - name: Install IREE Tools
+      if: steps.cache-snapshot.outputs.cache-hit != 'true'
+      run: |
+        git submodule update --init
+        cd third_party/iree
+        git submodule update --init
+        cd ../../
+        mkdir ${{ env.IREE_HOST_INSTALL }}-build
+        mkdir -p ${{ env.IREE_HOST_INSTALL }}/bin
+        cd ${{ env.IREE_HOST_INSTALL }}-build
+        cmake -GNinja \
+              -DCMAKE_C_COMPILER=clang \
+              -DCMAKE_CXX_COMPILER=clang++ \
+              -DIREE_BUILD_COMPILER=OFF \
+              -DIREE_BUILD_SAMPLES=OFF \
+              -DIREE_BUILD_TESTS=OFF \
+              ../third_party/iree/
+        cmake --build . --target generate_embed_data iree-flatcc-cli
+        cp build_tools/embed_data/generate_embed_data ../${{ env.IREE_HOST_INSTALL }}/bin
+        cp build_tools/third_party/flatcc/iree-flatcc-cli ../${{ env.IREE_HOST_INSTALL }}/bin
+
+  build:
+    name: Build Samples
+    needs: [install-toolchain, install-snapshot]
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install cmake ninja-build
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        path: ${{ env.REPO }}
+        #submodules: 'true'
+
+    # TODO(marbre): Relax `check_submodule_init` upstream.
+    - name: Initalize submodules
+      run : |
+        git submodule update --init
+        cd third_party/iree
+        git submodule update --init
+
+    - name: Cache Toolchain
+      id: cache-toolchain
+      uses: actions/cache@v2
+      with:
+        path: ${{ env.TOOLCHAIN }}
+        key: ${{ runner.os }}-${{ env.TOOLCHAIN }}-${{ env.TOOLCHAIN_VERSION }}
+
+    - name: Cache IREE Snapshot
+      id: cache-snapshot
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ env.VENV }}
+          ${{ env.IREE_HOST_INSTALL }}
+        key: ${{ runner.os}}-iree-snapshot-${{ hashFiles('requirements.txt') }}
+
+    - name: Build with CMSIS
+      run: |
+        source ${{ env.VENV }}/bin/activate
+        mkdir build-cmsis
+        cd build-cmsis
+        export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
+        ../build_tools/configure_stm32f4.sh cmsis stm32f4xx
+        cmake --build . --target \
+          sample_vmvx_sync \
+          sample_embedded_sync \
+          sample_static_library \
+          sample_static_library_c
