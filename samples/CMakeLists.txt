@@ -77,7 +77,7 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
     COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
   )
 
-  set(_GEN_EMBED_ARG)
+  set(_GEN_EMBED_ARGS)
   list(APPEND _GEN_EMBED_ARGS "--output_header=simple_embedding_test_bytecode_module_vmvx_c.h")
   list(APPEND _GEN_EMBED_ARGS "--output_impl=simple_embedding_test_bytecode_module_vmvx_c.c")
   list(APPEND _GEN_EMBED_ARGS "--identifier=iree_samples_simple_embedding_test_module_vmvx")
@@ -149,7 +149,7 @@ add_custom_command(
   COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
 )
 
-set(_GEN_EMBED_ARG)
+set(_GEN_EMBED_ARGS)
 list(APPEND _GEN_EMBED_ARGS "--output_header=simple_embedding_test_module_dylib_arm_32.h")
 list(APPEND _GEN_EMBED_ARGS "--output_impl=simple_embedding_test_module_dylib_arm_32.c")
 list(APPEND _GEN_EMBED_ARGS "--identifier=iree_samples_simple_embedding_test_module_dylib_arm_32")
