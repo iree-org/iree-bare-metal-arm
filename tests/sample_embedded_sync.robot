@@ -5,10 +5,10 @@ Test Setup                    Reset Emulation
 Resource                      ${RENODEKEYWORDS}
 
 *** Test Cases ***
-Should Run simple_embedding
-    Execute Command         mach create
-    Execute Command         machine LoadPlatformDescription @platforms/boards/stm32f4_discovery-kit.repl
-    Execute Command         sysbus LoadELF @${ELF}
+Should Run sample_embedded_sync
+    Execute Command         mach create "STM32F4XX"
+    Execute Command         machine LoadPlatformDescription @${BASE_DIR}/third_party/renode/stm32f4xx-highmem.repl
+    Execute Command         sysbus LoadELF @${BASE_DIR}/build-cmsis/samples/sample_embedded_sync
 
     Create Terminal Tester  sysbus.uart2
 
