@@ -120,6 +120,9 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+    - name: Configure environment
+      run: echo "${GITHUB_WORKSPACE}/${{ env.TOOLCHAIN }}/bin" >> ${GITHUB_PATH}
+
     - name: Install Dependencies
       run: |
         sudo apt update
@@ -176,6 +179,29 @@ jobs:
           build-cmsis/samples/sample_embedded_sync
           build-cmsis/samples/sample_static_library
           build-cmsis/samples/sample_static_library_c
+
+    - name: Build with libopencm3 for STM32F4xx
+      run: |
+        source ${{ env.VENV_IREE }}/bin/activate
+        mkdir build-libopencm3
+        cd build-libopencm3
+        export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
+        ../build_tools/configure_stm32f4.sh libopencm3 stm32f4xx
+        cmake --build . --target \
+          sample_vmvx_sync \
+          sample_embedded_sync \
+          sample_static_library \
+          sample_static_library_c
+
+    - name: Upload libopencm3 build artifact for STM32F4xx
+      uses: actions/upload-artifact@master
+      with:
+        name: libopencm3-stm32f4xx-build-artifact
+        path: |
+          build-libopencm3/samples/sample_vmvx_sync
+          build-libopencm3/samples/sample_embedded_sync
+          build-libopencm3/samples/sample_static_library
+          build-libopencm3/samples/sample_static_library_c
 
   test:
     name: Test Samples
