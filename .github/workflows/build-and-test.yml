@@ -268,3 +268,13 @@ jobs:
       uses: geekyeggo/delete-artifact@v1
       with:
         name: cmsis-stm32f4xx-build-artifact
+
+    - name: Delete crt0.s build artifact for STM32F4xx
+      uses: geekyeggo/delete-artifact@v1
+      with:
+        name: crt0-stm32f4xx-build-artifact
+
+    - name: Delete libopencm3 build artifact for STM32F4xx
+      uses: geekyeggo/delete-artifact@v1
+      with:
+        name: libopencm3-stm32f4xx-build-artifact
