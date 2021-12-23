@@ -90,6 +90,7 @@ cmake -GNinja \
       -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="armv7e-m" \
+      -DIREE_ERROR_ON_MISSING_SUBMODULES=OFF \
       -DIREE_HAL_DRIVERS_TO_BUILD="VMVX_Sync;DYLIB_Sync" \
       -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
