@@ -111,7 +111,7 @@ jobs:
               -DCMAKE_CXX_COMPILER=clang++ \
               -DIREE_ERROR_ON_MISSING_SUBMODULES=OFF \
               -DIREE_ENABLE_THREADING=OFF \
-              -DIREE_HAL_DRIVERS_TO_BUILD="" \
+              -DIREE_HAL_DRIVER_DEFAULTS=OFF \
               -DIREE_BUILD_COMPILER=OFF \
               -DIREE_BUILD_SAMPLES=OFF \
               -DIREE_BUILD_TESTS=OFF \

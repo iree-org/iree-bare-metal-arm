@@ -1,2 +1,2 @@
--f https://github.com/google/iree/releases/tag/snapshot-20211222.724
+-f https://github.com/google/iree/releases/tag/snapshot-20211223.726
 iree-compiler-snapshot
