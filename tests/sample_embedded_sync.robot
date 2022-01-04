@@ -1,19 +1,22 @@
 *** Settings ***
-Suite Setup                   Setup
-Suite Teardown                Teardown
-Test Setup                    Reset Emulation
-Resource                      ${RENODEKEYWORDS}
+Suite Setup         Setup
+Suite Teardown      Teardown
+Test Setup          Reset Emulation
+Resource            ${RENODEKEYWORDS}
+Resource            samples.resource
+
+*** Variables ***
+${NAME}             simple_embedding
+${EXECUTABLE}       sample_embedded_sync
 
 *** Test Cases ***
-Should Run sample_embedded_sync
-    Execute Command         mach create "STM32F4XX"
-    Execute Command         machine LoadPlatformDescription @${BASE_DIR}/third_party/renode/stm32f4xx-highmem.repl
-    Execute Command         sysbus LoadELF @${BASE_DIR}/build-cmsis/samples/sample_embedded_sync
+CMSIS
+    Run Sample for Library      cmsis           ${EXECUTABLE}
+    Output should show success
 
-    Create Terminal Tester  sysbus.uart2
 
-    Start Emulation
-
-    Wait For Line On Uart   Running simple_embedding...
-    Wait For Line On Uart   Execution succesfull!
-    Wait For Line On Uart   simple_embedding done
+*** Keywords ***
+Output should show success
+    Wait For Line On Uart       Running ${NAME}...
+    Wait For Line On Uart       Execution succesfull!
+    Wait For Line On Uart       ${NAME} done
