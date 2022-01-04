@@ -14,6 +14,9 @@ CMSIS
     Run Sample for Library      cmsis           ${EXECUTABLE}
     Output should show success
 
+LIBOPENCM3
+    Run Sample for Library      libopencm3      ${EXECUTABLE}
+    Output should show success
 
 *** Keywords ***
 Output should show success
