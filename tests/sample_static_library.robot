@@ -10,14 +10,14 @@ ${EXECUTABLE}       sample_static_library
 
 *** Test Cases ***
 CMSIS
-    Run Sample for Library      cmsis           ${EXECUTABLE}
-    Output should show success
+    Run Sample For Library      cmsis           ${EXECUTABLE}
+    Output Should Show Success
 
 LIBOPENCM3
-    Run Sample for Library      libopencm3      ${EXECUTABLE}
-    Output should show success
+    Run Sample For Library      libopencm3      ${EXECUTABLE}
+    Output Should Show Success
 
 *** Keywords ***
-Output should show success
+Output Should Show Success
     Wait For Line On Uart       Execution succesfull!
     Wait For Line On Uart       static_library_run_bytecode passed

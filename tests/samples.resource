@@ -6,7 +6,7 @@ ${MACHINE}          STM32F4XX
 ${PLATFORMFILE}     @${BASE_DIR}/third_party/renode/stm32f4xx-highmem.repl
 
 *** Keywords ***
-Run Sample for Library
+Run Sample For Library
     [Arguments]             ${lib}  ${executable}
 
     Setup Machine
