@@ -6,8 +6,7 @@ Resource            ${RENODEKEYWORDS}
 Resource            samples.resource
 
 *** Variables ***
-${NAME}             simple_embedding
-${EXECUTABLE}       sample_embedded_sync
+${EXECUTABLE}       sample_static_library
 
 *** Test Cases ***
 CMSIS
@@ -20,6 +19,5 @@ LIBOPENCM3
 
 *** Keywords ***
 Output Should Show Success
-    Wait For Line On Uart       Running ${NAME}...
     Wait For Line On Uart       Execution succesfull!
-    Wait For Line On Uart       ${NAME} done
+    Wait For Line On Uart       static_library_run_bytecode passed

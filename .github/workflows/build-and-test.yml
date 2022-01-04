@@ -259,6 +259,12 @@ jobs:
         name: cmsis-stm32f4xx-build-artifact
         path: build-cmsis/samples
 
+    - name: Download libopencm3 build artifact for STM32F4xx
+      uses: actions/download-artifact@master
+      with:
+        name: libopencm3-stm32f4xx-build-artifact
+        path: build-libopencm3/samples
+
     - name: Run Renode tests
       run: |
         source ${{ env.VENV_RENODE }}/bin/activate
