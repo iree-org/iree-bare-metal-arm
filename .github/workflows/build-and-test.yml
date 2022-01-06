@@ -259,6 +259,12 @@ jobs:
         name: cmsis-stm32f4xx-build-artifact
         path: build-cmsis/samples
 
+    - name: Download crt0.s build artifact for STM32F4xx
+      uses: actions/download-artifact@master
+      with:
+        name: crt0-stm32f4xx-build-artifact
+        path: build-crt0/samples
+
     - name: Download libopencm3 build artifact for STM32F4xx
       uses: actions/download-artifact@master
       with:

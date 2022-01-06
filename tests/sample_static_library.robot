@@ -17,6 +17,10 @@ LIBOPENCM3
     Run Sample For Library      libopencm3      ${EXECUTABLE}
     Output Should Show Success
 
+CRT0
+    Run Sample For Library      crt0            ${EXECUTABLE}
+    Output Should Show Success
+
 *** Keywords ***
 Output Should Show Success
     Wait For Line On Uart       Execution succesfull!
