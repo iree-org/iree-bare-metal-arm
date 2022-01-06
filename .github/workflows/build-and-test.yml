@@ -268,7 +268,7 @@ jobs:
     - name: Run Renode tests
       run: |
         source ${{ env.VENV_RENODE }}/bin/activate
-        ${{ env.RENODE }}/test.sh --variable BASE_DIR:$GITHUB_WORKSPACE tests/*.robot
+        ${{ env.RENODE }}/test.sh --variable BASE_DIR:$GITHUB_WORKSPACE --exclude NoCI tests/*.robot
 
     - name: Delete CMSIS build artifact for STM32F4xx
       uses: geekyeggo/delete-artifact@v1
