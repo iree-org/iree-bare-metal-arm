@@ -157,7 +157,7 @@ cd renode_1.12.0_portable
 ```
 Inside the shell you need to execute the following statements:
 ```shell
-(monitor) include ${PATH_TO_REPOSITORY_ROOT}/third_party/renode/stm32f407.resc
+(monitor) include @${PATH_TO_REPOSITORY_ROOT}/third_party/renode/stm32f407.resc
 (STM32F407) sysbus LoadELF @${PATH_TO_BINARY}
 (STM32F407) start
 ```
@@ -167,5 +167,5 @@ This example also comes with a robot test file:
 
 ```shell
 cd renode_1.12.0_portable
-test.sh --variable ELF:${PATH_TO_BINARY} ${PATH_TO_REPOSITORY_ROOT}/tests/simple_embedding.robot
+./test.sh --variable BASE_DIR:${PATH_TO_REPOSITORY_ROOT} ${PATH_TO_REPOSITORY_ROOT}/tests/vmvx_sample.robot
 ```
