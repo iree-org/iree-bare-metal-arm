@@ -1,2 +1,2 @@
--f https://github.com/google/iree/releases/tag/snapshot-20220104.751
-iree-compiler-snapshot
+-f https://github.com/google/iree/releases/tag/candidate-20220109.10
+iree-compiler
