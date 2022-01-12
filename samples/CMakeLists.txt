@@ -7,23 +7,17 @@ add_executable(sample_static_library "")
 add_executable(sample_static_library_c "")
 
 if(BUILD_WITH_CMSIS)
-  target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_CMSIS)
-  target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_CMSIS)
-  target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_CMSIS)
+  set(UTILS_SRC utils_cmsis.c)
   set(CONDITIONAL_DEP cmsis_device_f4)
 endif()
 
 if(BUILD_WITH_CRT0)
-  target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_CRT0)
-  target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_CRT0)
-  target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_CRT0)
+  set(UTILS_SRC utils_crt0.c)
   set(CONDITIONAL_DEP custom_crt0)
 endif()
 
 if(BUILD_WITH_LIBOPENCM3)
-  target_compile_definitions(sample_embedded_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
-  target_compile_definitions(sample_static_library PRIVATE -DBUILD_WITH_LIBOPENCM3)
-  target_compile_definitions(sample_static_library_c PRIVATE -DBUILD_WITH_LIBOPENCM3)
+  set(UTILS_SRC utils_libopencm3.c)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
@@ -46,22 +40,11 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
 
   add_executable(sample_vmvx_sync "")
 
-  if(BUILD_WITH_CMSIS)
-    target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CMSIS)
-  endif()
-
-  if(BUILD_WITH_CRT0)
-    target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_CRT0)
-  endif()
-
-  if(BUILD_WITH_LIBOPENCM3)
-    target_compile_definitions(sample_vmvx_sync PRIVATE -DBUILD_WITH_LIBOPENCM3)
-  endif()
-
   target_sources(sample_vmvx_sync
     PRIVATE
       simple_embedding_float.c
       device_vmvx_sync.c
+      ${UTILS_SRC}
   )
 
   set(_TRANSLATE_ARGS)
@@ -129,6 +112,7 @@ target_sources(sample_embedded_sync
   PRIVATE
     simple_embedding_int.c
     device_embedded_sync.c
+    ${UTILS_SRC}
 )
 
 set(_TRANSLATE_ARGS)
@@ -197,6 +181,7 @@ target_sources(sample_static_library
   PRIVATE
     static_library_demo.c
     create_bytecode_module.c
+    ${UTILS_SRC}
 )
 
 set(_TRANSLATE_ARGS)
@@ -309,6 +294,7 @@ target_sources(sample_static_library_c
   PRIVATE
     static_library_demo.c
     create_c_module.c
+    ${UTILS_SRC}
 )
 
 target_include_directories(sample_static_library_c
