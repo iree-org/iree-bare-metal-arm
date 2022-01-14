@@ -1,2 +1,2 @@
--f https://github.com/google/iree/releases/tag/candidate-20220109.10
-iree-compiler
+-f https://github.com/google/iree/releases/tag/candidate-20220114.16
+iree-compiler==20220114.16
