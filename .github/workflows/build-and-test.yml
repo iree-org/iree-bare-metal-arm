@@ -182,10 +182,10 @@ jobs:
       with:
         name: cmsis-stm32f4xx-build-artifact
         path: |
-          build-cmsis/samples/sample_vmvx_sync
-          build-cmsis/samples/sample_embedded_sync
-          build-cmsis/samples/sample_static_library
-          build-cmsis/samples/sample_static_library_c
+          build-cmsis/samples/simple_embedding/sample_vmvx_sync
+          build-cmsis/samples/simple_embedding/sample_embedded_sync
+          build-cmsis/samples/static_library/sample_static_library
+          build-cmsis/samples/static_library/sample_static_library_c
 
     - name: Build with crt0.s for STM32F4xx
       run: |
@@ -205,10 +205,10 @@ jobs:
       with:
         name: crt0-stm32f4xx-build-artifact
         path: |
-          build-crt0/samples/sample_vmvx_sync
-          build-crt0/samples/sample_embedded_sync
-          build-crt0/samples/sample_static_library
-          build-crt0/samples/sample_static_library_c
+          build-crt0/samples/simple_embedding/sample_vmvx_sync
+          build-crt0/samples/simple_embedding/sample_embedded_sync
+          build-crt0/samples/static_library/sample_static_library
+          build-crt0/samples/static_library/sample_static_library_c
 
     - name: Build with libopencm3 for STM32F4xx
       run: |
@@ -228,10 +228,10 @@ jobs:
       with:
         name: libopencm3-stm32f4xx-build-artifact
         path: |
-          build-libopencm3/samples/sample_vmvx_sync
-          build-libopencm3/samples/sample_embedded_sync
-          build-libopencm3/samples/sample_static_library
-          build-libopencm3/samples/sample_static_library_c
+          build-libopencm3/samples/simple_embedding/sample_vmvx_sync
+          build-libopencm3/samples/simple_embedding/sample_embedded_sync
+          build-libopencm3/samples/static_library/sample_static_library
+          build-libopencm3/samples/static_library/sample_static_library_c
 
   test:
     name: Test Samples
