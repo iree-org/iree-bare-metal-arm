@@ -118,6 +118,11 @@ target_sources(simple_mul_c_module
     simple_mul_emitc.h
 )
 
+target_compile_definitions(simple_mul_c_module
+  PUBLIC
+    EMITC_IMPLEMENTATION
+)
+
 SET_TARGET_PROPERTIES(
   simple_mul_c_module
   PROPERTIES
