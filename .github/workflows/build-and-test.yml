@@ -232,6 +232,15 @@ jobs:
           build-libopencm3/samples/simple_embedding/sample_embedded_sync
           build-libopencm3/samples/static_library/sample_static_library
           build-libopencm3/samples/static_library/sample_static_library_c
+    
+    - name: Generate build stats
+      run: python3 build_tools/generate_build_stats.py
+
+    - name: Upload build stats artifact
+      uses: actions/upload-artifact@master
+      with:
+        name: build-stats
+        path: build_stats.json
 
   test:
     name: Test Samples
