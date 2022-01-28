@@ -38,7 +38,7 @@ set(ARM_COMPILER_FLAGS_RELEASE)
 set(ARM_LINKER_FLAGS "-lc -lm ${CUSTOM_ARM_LINKER_FLAGS} -T ${LINKER_SCRIPT}")
 set(ARM_LINKER_FLAGS_EXE)
 
-if(ARM_CPU STREQUAL "armv7e-m")
+if(ARM_CPU STREQUAL "cortex-m4")
   list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -Wl,--gc-sections -ffunction-sections -fdata-sections")
 endif()
 
