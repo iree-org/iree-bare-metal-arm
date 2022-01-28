@@ -128,7 +128,7 @@ cmake -GNinja \
 #     -DBUILD_WITH_LIBOPENCM3=ON \
       -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
-      -DARM_CPU="armv7e-m" \
+      -DARM_CPU="cortex-m4" \
       -DIREE_HAL_DRIVER_DEFAULTS=OFF \
       -DIREE_HAL_DRIVER_DYLIB_SYNC=ON \
       -DIREE_HAL_DRIVER_VMVX_SYNC=ON \

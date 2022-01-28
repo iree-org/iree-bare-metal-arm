@@ -89,7 +89,7 @@ cmake -GNinja \
       -DBUILD_WITH_${BUILD_WITH}=ON \
       -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
-      -DARM_CPU="armv7e-m" \
+      -DARM_CPU="cortex-m4" \
       -DIREE_ERROR_ON_MISSING_SUBMODULES=OFF \
       -DIREE_HAL_DRIVER_DEFAULTS=OFF \
       -DIREE_HAL_DRIVER_DYLIB_SYNC=ON \
