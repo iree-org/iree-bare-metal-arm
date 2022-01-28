@@ -10,3 +10,6 @@
 [submodule "third_party/CMSIS_5"]
 	path = third_party/CMSIS_5
 	url = https://github.com/ARM-software/CMSIS_5.git
+[submodule "third_party/cmsis_device_f7"]
+	path = third_party/cmsis_device_f7
+	url = https://github.com/STMicroelectronics/cmsis_device_f7.git
