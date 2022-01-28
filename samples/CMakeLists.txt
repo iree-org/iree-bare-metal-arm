@@ -4,7 +4,7 @@
 
 if(BUILD_WITH_CMSIS)
   set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/utils/utils_cmsis.c)
-  set(CONDITIONAL_DEP cmsis_device_f4)
+  set(CONDITIONAL_DEP cmsis_device_f407)
 endif()
 
 if(BUILD_WITH_CRT0)
