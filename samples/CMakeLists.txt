@@ -3,17 +3,17 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 if(BUILD_WITH_CMSIS)
-  set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/utils/utils_cmsis.c)
+  set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_cmsis.c)
   set(CONDITIONAL_DEP cmsis_device_f407)
 endif()
 
 if(BUILD_WITH_CRT0)
-  set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/utils/utils_crt0.c)
+  set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_crt0.c)
   set(CONDITIONAL_DEP custom_crt0)
 endif()
 
 if(BUILD_WITH_LIBOPENCM3)
-  set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/utils/utils_libopencm3.c)
+  set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_libopencm3.c)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
