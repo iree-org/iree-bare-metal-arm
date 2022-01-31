@@ -1,0 +1,11 @@
+:name: STM32F446
+:description: This script runs the STM32F446.
+
+using sysbus
+$name?="STM32F446"
+mach create $name
+machine LoadPlatformDescription $ORIGIN/stm32f446.repl
+
+cpu PerformanceInMips 125
+
+showAnalyzer sysbus.usart2
