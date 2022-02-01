@@ -4,7 +4,11 @@
 
 if(BUILD_WITH_CMSIS)
   set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_cmsis.c)
-  set(CONDITIONAL_DEP cmsis_device_f407)
+  if(ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX")
+    set(CONDITIONAL_DEP cmsis_device_f407)
+  elseif(ARM_TARGET STREQUAL "STM32F446")
+    set(CONDITIONAL_DEP cmsis_device_f446)
+  endif()
 endif()
 
 if(BUILD_WITH_CRT0)
