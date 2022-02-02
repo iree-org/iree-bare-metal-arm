@@ -49,6 +49,11 @@ case $2 in
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-libopencm3.ld`"
     fi
     ;;
+  
+  stm32f446)
+    echo "Building for STM32F446"
+    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446-cmsis.ld`"
+    ;;
 
   stm32f4xx)
     echo "Building for STM32F4xx, high memory"
@@ -60,7 +65,7 @@ case $2 in
     ;;
 
   *)
-    echo "Unknown device. Use 'stm32f407' or 'stm32f4xx"
+    echo "Unknown device. Use 'stm32f407', 'stm32f446' or 'stm32f4xx"
     exit 1
     ;;
 esac
