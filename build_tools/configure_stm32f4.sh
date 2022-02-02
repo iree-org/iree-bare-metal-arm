@@ -65,7 +65,7 @@ case $2 in
     ;;
 
   *)
-    echo "Unknown device. Use 'stm32f407', 'stm32f446' or 'stm32f4xx"
+    echo "Unknown device. Use 'stm32f407', 'stm32f446' or 'stm32f4xx'"
     exit 1
     ;;
 esac
