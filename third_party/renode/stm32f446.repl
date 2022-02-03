@@ -1,5 +1,5 @@
 flash: Memory.MappedMemory @ sysbus 0x08000000
-    size: 0x200000
+    size: 0x80000
 
 sram: Memory.MappedMemory @ sysbus 0x20000000
     size: 0x20000
