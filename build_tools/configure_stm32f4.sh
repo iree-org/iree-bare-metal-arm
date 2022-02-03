@@ -43,6 +43,7 @@ esac
 case $2 in
   stm32f407)
     echo "Building for STM32F407"
+    export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-cmsis.ld`"
     else
@@ -52,20 +53,28 @@ case $2 in
   
   stm32f446)
     echo "Building for STM32F446"
+    export ARM_CPU="cortex-m4"
     export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446-cmsis.ld`"
     ;;
 
   stm32f4xx)
     echo "Building for STM32F4xx, high memory"
+    export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xx-highmem-cmsis.ld`"
     else
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xx-highmem-libopencm3.ld`"
     fi
     ;;
+  
+  stm32f746)
+    echo "Building for STM32F746"
+    export ARM_CPU="cortex-m7"
+    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f746-cmsis.ld`"
+    ;;
 
   *)
-    echo "Unknown device. Use 'stm32f407', 'stm32f446' or 'stm32f4xx'"
+    echo "Unknown device. Use 'stm32f407', 'stm32f446', 'stm32f4xx' or 'stm32f746'"
     exit 1
     ;;
 esac
@@ -94,7 +103,7 @@ cmake -GNinja \
       -DBUILD_WITH_${BUILD_WITH}=ON \
       -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
-      -DARM_CPU="cortex-m4" \
+      -DARM_CPU="${ARM_CPU}" \
       -DARM_TARGET="${2^^}" \
       -DIREE_ERROR_ON_MISSING_SUBMODULES=OFF \
       -DIREE_HAL_DRIVER_DEFAULTS=OFF \

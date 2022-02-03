@@ -40,6 +40,12 @@ set(ARM_LINKER_FLAGS_EXE)
 
 if(ARM_CPU STREQUAL "cortex-m4")
   list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -Wl,--gc-sections -ffunction-sections -fdata-sections")
+elseif(ARM_CPU STREQUAL "cortex-m7" OR ARM_CPU STREQUAL "cortex-m7-sp")
+  # Single-precision FPU
+  list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv5-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -Wl,--gc-sections -ffunction-sections -fdata-sections")
+elseif(ARM_CPU STREQUAL "cortex-m7-dp")
+  # Single- and double-precision FPU
+  list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv5-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -Wl,--gc-sections -ffunction-sections -fdata-sections")
 endif()
 
 set(CMAKE_C_FLAGS             "${ARM_COMPILER_FLAGS} ${CMAKE_C_FLAGS}")

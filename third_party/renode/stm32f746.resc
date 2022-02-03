@@ -1,0 +1,11 @@
+:name: STM32F746
+:description: This script runs the STM32F746.
+
+using sysbus
+$name?="STM32F746"
+mach create $name
+machine LoadPlatformDescription $ORIGIN/stm32f746.repl
+
+cpu PerformanceInMips 125
+
+showAnalyzer sysbus.usart2

@@ -1,0 +1,14 @@
+using "platforms/boards/stm32f7_discovery-bb.repl"
+
+// According to https://www.st.com/resource/en/datasheet/stm32f746ng.pdf,
+// flash at 0x0800 0000 is 1024 kB and sram at 0x2000 0000 is 64+240+16 kB.
+
+flash: @ sysbus 0x08000000
+    size: 0x100000
+
+sram: @ sysbus 0x20000000
+    size: 0x50000
+
+// Renode 1.12 does not define usart2 yet
+usart2: UART.STM32F7_USART @ sysbus 0x40004400
+    -> nvic@38

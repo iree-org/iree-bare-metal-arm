@@ -69,4 +69,4 @@ MEMORY
   RAM   (rwx) : ORIGIN = __RAM_BASE, LENGTH = __RAM_SIZE
 }
 
-INCLUDE stm32f4xx-cmsis-base.ld
+INCLUDE stm32-cmsis-base.ld
