@@ -68,6 +68,7 @@ add_definitions(-DIREE_STATUS_FEATURES=0)
 add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
 
 add_subdirectory(build_tools/third_party/cmsis_device_f4 EXCLUDE_FROM_ALL)
+add_subdirectory(build_tools/third_party/cmsis_device_f7 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/custom_crt0 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/libopencm3 EXCLUDE_FROM_ALL)
 add_subdirectory(third_party/iree EXCLUDE_FROM_ALL)
