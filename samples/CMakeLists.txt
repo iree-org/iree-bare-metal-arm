@@ -3,11 +3,17 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 if(BUILD_WITH_CMSIS)
-  set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_cmsis.c)
+  if(ARM_TARGET MATCHES "^STM32F4")
+    set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_cmsis.c)
+  elseif(ARM_TARGET MATCHES "^STM32F7")
+    set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f7_cmsis.c)
+  endif()
   if(ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX")
     set(CONDITIONAL_DEP cmsis_device_f407)
   elseif(ARM_TARGET STREQUAL "STM32F446")
     set(CONDITIONAL_DEP cmsis_device_f446)
+  elseif(ARM_TARGET STREQUAL "STM32F746")
+    set(CONDITIONAL_DEP cmsis_device_f746)
   endif()
 endif()
 
