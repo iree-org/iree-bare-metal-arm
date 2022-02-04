@@ -114,11 +114,11 @@ cd build
 
 # To build with CMSIS
 # export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
-# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-cmsis.ld`"
+# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-cmsis.ld`"
 
 # To build with libopencm3
 # export CUSTOM_ARM_LINKER_FLAGS="-nostartfiles"
-# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-libopencm3.ld`"
+# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-libopencm3.ld`"
 
 
 # export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"

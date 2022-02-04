@@ -45,32 +45,32 @@ case $2 in
     echo "Building for STM32F407"
     export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-cmsis.ld`"
+      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-cmsis.ld`"
     else
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407-libopencm3.ld`"
+      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-libopencm3.ld`"
     fi
     ;;
   
   stm32f446)
     echo "Building for STM32F446"
     export ARM_CPU="cortex-m4"
-    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446-cmsis.ld`"
+    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-cmsis.ld`"
     ;;
 
   stm32f4xx)
     echo "Building for STM32F4xx, high memory"
     export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xx-highmem-cmsis.ld`"
+      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xxxx-cmsis.ld`"
     else
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xx-highmem-libopencm3.ld`"
+      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xxxx-libopencm3.ld`"
     fi
     ;;
   
   stm32f746)
     echo "Building for STM32F746"
     export ARM_CPU="cortex-m7"
-    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f746-cmsis.ld`"
+    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f746xg-cmsis.ld`"
     ;;
 
   *)
