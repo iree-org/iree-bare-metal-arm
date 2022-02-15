@@ -29,7 +29,7 @@ if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_CRT0 AND NOT BUILD_WITH_LIBOPENCM3)
 endif()
 
 set(ARM_TARGET STM32F407 CACHE STRING "Target for which the samples are build")
-set(ARM_TARGET_VALUES "STM32F407;STM32F446;STM32F4XX;STM32F746" CACHE INTERNAL "List of possible targets")
+set(ARM_TARGET_VALUES "STM32F303XE;STM32F407;STM32F446;STM32F4XX;STM32F746" CACHE INTERNAL "List of possible targets")
 set_property(CACHE ARM_TARGET PROPERTY STRINGS ${ARM_TARGET_VALUES})
 string(TOUPPER "${ARM_TARGET}" ARM_TARGET)
 
@@ -67,6 +67,7 @@ add_definitions(-DIREE_SYNCHRONIZATION_DISABLE_UNSAFE=1)
 add_definitions(-DIREE_STATUS_FEATURES=0)
 add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
 
+add_subdirectory(build_tools/third_party/cmsis_device_f3 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/cmsis_device_f4 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/cmsis_device_f7 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/custom_crt0 EXCLUDE_FROM_ALL)
