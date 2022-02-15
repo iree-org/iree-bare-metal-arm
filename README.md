@@ -113,7 +113,7 @@ cd build
 # export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10.3-2021.10"
 
 # To build with CMSIS
-# export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
+# export CUSTOM_ARM_LINKER_FLAGS=""
 # export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-cmsis.ld`"
 
 # To build with libopencm3
