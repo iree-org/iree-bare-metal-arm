@@ -17,13 +17,13 @@ fi
 case $1 in
   cmsis)
     echo "Building with CMSIS"
-    export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
+    export CUSTOM_ARM_LINKER_FLAGS=""
     export BUILD_WITH="CMSIS"
     ;;
   
   crt0)
     echo "Building with crt0.s"
-    export CUSTOM_ARM_LINKER_FLAGS="-lnosys"
+    export CUSTOM_ARM_LINKER_FLAGS=""
     export BUILD_WITH="CRT0"
     ;;
 
