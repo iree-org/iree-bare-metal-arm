@@ -126,7 +126,7 @@ cd build
 cmake -GNinja \
 #     -DBUILD_WITH_CMSIS=ON \
 #     -DBUILD_WITH_LIBOPENCM3=ON \
-      -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
+      -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm-none-eabi-gcc.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="cortex-m4" \
       -DARM_TARGET="STM32F407" \
