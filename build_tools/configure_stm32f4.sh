@@ -101,7 +101,7 @@ fi
 # Configure project
 cmake -GNinja \
       -DBUILD_WITH_${BUILD_WITH}=ON \
-      -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm.toolchain.cmake`" \
+      -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm-none-eabi-gcc.cmake`" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="${ARM_CPU}" \
       -DARM_TARGET="${2^^}" \
