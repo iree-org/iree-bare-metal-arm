@@ -170,7 +170,7 @@ jobs:
         mkdir build-cmsis
         cd build-cmsis
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
-        ../build_tools/configure_stm32f4.sh cmsis stm32f4xx
+        ../build_tools/configure_stm32.sh cmsis stm32f4xx
         cmake --build . --target \
           sample_vmvx_sync \
           sample_embedded_sync \
@@ -193,7 +193,7 @@ jobs:
         mkdir build-crt0
         cd build-crt0
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
-        ../build_tools/configure_stm32f4.sh crt0 stm32f4xx
+        ../build_tools/configure_stm32.sh crt0 stm32f4xx
         cmake --build . --target \
           sample_vmvx_sync \
           sample_embedded_sync \
@@ -216,7 +216,7 @@ jobs:
         mkdir build-libopencm3
         cd build-libopencm3
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
-        ../build_tools/configure_stm32f4.sh libopencm3 stm32f4xx
+        ../build_tools/configure_stm32.sh libopencm3 stm32f4xx
         cmake --build . --target \
           sample_vmvx_sync \
           sample_embedded_sync \
