@@ -140,7 +140,7 @@ cmake -GNinja \
 cmake --build . --target sample_vmvx_sync
 ```
 > Note:<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;You can use the [`build_tools/configure_stm32f4.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/configure_stm32f4.sh) shell script to configure the build.
+> &nbsp;&nbsp;&nbsp;&nbsp;You can use the [`build_tools/configure_stm32.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/configure_stm32.sh) shell script to configure the build.
 
 ### Test with Renode
 
