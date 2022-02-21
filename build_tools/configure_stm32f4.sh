@@ -41,6 +41,12 @@ esac
 
 # Set path to linker script
 case $2 in
+  stm32f303xe)
+    echo "Building for STM32F303xE"
+    export ARM_CPU="cortex-m4"
+    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f303xe-cmsis.ld`"
+    ;;
+
   stm32f407)
     echo "Building for STM32F407"
     export ARM_CPU="cortex-m4"
@@ -74,7 +80,7 @@ case $2 in
     ;;
 
   *)
-    echo "Unknown device. Use 'stm32f407', 'stm32f446', 'stm32f4xx' or 'stm32f746'"
+    echo "Unknown device. Use 'stm32f303xe' 'stm32f407', 'stm32f446', 'stm32f4xx' or 'stm32f746'"
     exit 1
     ;;
 esac

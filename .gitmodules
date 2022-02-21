@@ -16,3 +16,6 @@
 [submodule "third_party/cmsis_device_h7"]
 	path = third_party/cmsis_device_h7
 	url = https://github.com/STMicroelectronics/cmsis_device_h7.git
+[submodule "third_party/cmsis_device_f3"]
+	path = third_party/cmsis_device_f3
+	url = https://github.com/STMicroelectronics/cmsis_device_f3.git

@@ -1,0 +1,11 @@
+:name: STM32F303
+:description: This script runs the STM32F303.
+
+using sysbus
+$name?="STM32F303"
+mach create $name
+machine LoadPlatformDescription $ORIGIN/stm32f303.repl
+
+cpu PerformanceInMips 125
+
+showAnalyzer sysbus.usart2
