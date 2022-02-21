@@ -9,23 +9,23 @@ set(CMSIS_5_SOURCE_DIR "${PROJECT_SOURCE_DIR}/third_party/CMSIS_5/")
 # STM32F407xx
 #-------------------------------------------------------------------------------
 
-add_library(cmsis_device_f407 STATIC "")
+add_library(cmsis_device_f407xx STATIC "")
 
-target_sources(cmsis_device_f407 PRIVATE
+target_sources(cmsis_device_f407xx PRIVATE
   ${cmsis_device_f4_SOURCE_DIR}/Source/Templates/system_stm32f4xx.c
   ${cmsis_device_f4_SOURCE_DIR}/Source/Templates/gcc/startup_stm32f407xx.s
 )
 
-target_include_directories(cmsis_device_f407
+target_include_directories(cmsis_device_f407xx
   PUBLIC
   ${cmsis_device_f4_SOURCE_DIR}/Include/
   ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
 )
 
-target_compile_definitions(cmsis_device_f407 PUBLIC -DSTM32F407xx)
+target_compile_definitions(cmsis_device_f407xx PUBLIC -DSTM32F407xx)
 
 # Allow ld to find generic linker script
-target_link_directories(cmsis_device_f407 INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
+target_link_directories(cmsis_device_f407xx INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
 
 #-------------------------------------------------------------------------------
 # STM32F446xx
