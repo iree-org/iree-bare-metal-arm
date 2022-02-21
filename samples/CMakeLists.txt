@@ -17,7 +17,7 @@ if(BUILD_WITH_CMSIS)
   elseif(ARM_TARGET STREQUAL "STM32F446")
     set(CONDITIONAL_DEP cmsis_device_f446xx)
   elseif(ARM_TARGET STREQUAL "STM32F746")
-    set(CONDITIONAL_DEP cmsis_device_f746)
+    set(CONDITIONAL_DEP cmsis_device_f746xx)
   endif()
 endif()
 
