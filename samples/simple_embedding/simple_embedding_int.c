@@ -7,6 +7,10 @@
 // A example of setting up the HAL module to run simple pointwise array
 // multiplication with the device implemented by different backends via
 // create_sample_driver().
+//
+// NOTE: this file does not properly handle error cases and will leak on
+// failure. Applications that are just going to exit()/abort() on failure can
+// probably get away with the same thing but really should prefer not to.
 
 #include <stdio.h>
 
@@ -78,16 +82,24 @@ iree_status_t Run() {
   IREE_RETURN_IF_ERROR(iree_hal_buffer_view_allocate_buffer(
       iree_hal_device_allocator(device), shape, IREE_ARRAYSIZE(shape),
       IREE_HAL_ELEMENT_TYPE_SINT_32, IREE_HAL_ENCODING_TYPE_DENSE_ROW_MAJOR,
-      IREE_HAL_MEMORY_TYPE_DEVICE_LOCAL | IREE_HAL_MEMORY_TYPE_HOST_VISIBLE,
-      IREE_HAL_BUFFER_USAGE_DISPATCH | IREE_HAL_BUFFER_USAGE_TRANSFER |
-          IREE_HAL_BUFFER_USAGE_MAPPING,
+      (iree_hal_buffer_params_t){
+          .type = IREE_HAL_MEMORY_TYPE_DEVICE_LOCAL |
+                  IREE_HAL_MEMORY_TYPE_HOST_VISIBLE,
+          .usage = IREE_HAL_BUFFER_USAGE_DISPATCH |
+                   IREE_HAL_BUFFER_USAGE_TRANSFER |
+                   IREE_HAL_BUFFER_USAGE_MAPPING,
+      },
       iree_make_const_byte_span(kInt4, sizeof(kInt4)), &arg0_buffer_view));
   IREE_RETURN_IF_ERROR(iree_hal_buffer_view_allocate_buffer(
       iree_hal_device_allocator(device), shape, IREE_ARRAYSIZE(shape),
       IREE_HAL_ELEMENT_TYPE_SINT_32, IREE_HAL_ENCODING_TYPE_DENSE_ROW_MAJOR,
-      IREE_HAL_MEMORY_TYPE_DEVICE_LOCAL | IREE_HAL_MEMORY_TYPE_HOST_VISIBLE,
-      IREE_HAL_BUFFER_USAGE_DISPATCH | IREE_HAL_BUFFER_USAGE_TRANSFER |
-          IREE_HAL_BUFFER_USAGE_MAPPING,
+      (iree_hal_buffer_params_t){
+          .type = IREE_HAL_MEMORY_TYPE_DEVICE_LOCAL |
+                  IREE_HAL_MEMORY_TYPE_HOST_VISIBLE,
+          .usage = IREE_HAL_BUFFER_USAGE_DISPATCH |
+                   IREE_HAL_BUFFER_USAGE_TRANSFER |
+                   IREE_HAL_BUFFER_USAGE_MAPPING,
+      },
       iree_make_const_byte_span(kInt2, sizeof(kInt2)), &arg1_buffer_view));
 
   // Setup call inputs with our buffers.
