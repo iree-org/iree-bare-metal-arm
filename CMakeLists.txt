@@ -41,7 +41,7 @@ else()
 endif()
 
 # Check if the combination of library and target is supported
-if(NOT (ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX") AND
+if(NOT (ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F446" OR ARM_TARGET STREQUAL "STM32F4XX") AND
    (BUILD_WITH_CRT0 OR BUILD_WITH_LIBOPENCM3))
   message(FATAL_ERROR "Devices other than STM32F407 or STM32F4XX are only supported with CMSIS")
 endif()
