@@ -44,7 +44,7 @@ target_include_directories(cmsis_device_f411xe
   ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
 )
 
-target_compile_definitions(cmsis_device_f411xe PUBLIC -DSTM32F446xx)
+target_compile_definitions(cmsis_device_f411xe PUBLIC -DSTM32F411xE)
 
 # Allow ld to find generic linker script
 target_link_directories(cmsis_device_f411xe INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
