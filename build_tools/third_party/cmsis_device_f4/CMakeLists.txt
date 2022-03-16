@@ -28,6 +28,28 @@ target_compile_definitions(cmsis_device_f407xx PUBLIC -DSTM32F407xx)
 target_link_directories(cmsis_device_f407xx INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
 
 #-------------------------------------------------------------------------------
+# STM32F411xe
+#-------------------------------------------------------------------------------
+
+add_library(cmsis_device_f411xe STATIC "")
+
+target_sources(cmsis_device_f411xe PRIVATE
+  ${cmsis_device_f4_SOURCE_DIR}/Source/Templates/system_stm32f4xx.c
+  ${cmsis_device_f4_SOURCE_DIR}/Source/Templates/gcc/startup_stm32f411xe.s
+)
+
+target_include_directories(cmsis_device_f411xe
+  PUBLIC
+  ${cmsis_device_f4_SOURCE_DIR}/Include/
+  ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
+)
+
+target_compile_definitions(cmsis_device_f411xe PUBLIC -DSTM32F446xx)
+
+# Allow ld to find generic linker script
+target_link_directories(cmsis_device_f411xe INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
+
+#-------------------------------------------------------------------------------
 # STM32F446xx
 #-------------------------------------------------------------------------------
 

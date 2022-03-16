@@ -29,7 +29,7 @@ if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_CRT0 AND NOT BUILD_WITH_LIBOPENCM3)
 endif()
 
 set(ARM_TARGET STM32F407 CACHE STRING "Target for which the samples are build")
-set(ARM_TARGET_VALUES "STM32F303XE;STM32F407;STM32F446;STM32F4XX;STM32F746" CACHE INTERNAL "List of possible targets")
+set(ARM_TARGET_VALUES "STM32F303XE;STM32F407;STM32F411XE;STM32F446;STM32F4XX;STM32F746" CACHE INTERNAL "List of possible targets")
 set_property(CACHE ARM_TARGET PROPERTY STRINGS ${ARM_TARGET_VALUES})
 string(TOUPPER "${ARM_TARGET}" ARM_TARGET)
 
@@ -41,9 +41,12 @@ else()
 endif()
 
 # Check if the combination of library and target is supported
-if(NOT (ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F446" OR ARM_TARGET STREQUAL "STM32F4XX") AND
-   (BUILD_WITH_CRT0 OR BUILD_WITH_LIBOPENCM3))
-  message(FATAL_ERROR "Devices other than STM32F407 or STM32F4XX are only supported with CMSIS")
+if(NOT (ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX") AND BUILD_WITH_CRT0)
+message(FATAL_ERROR "Devices other than STM32F407 or STM32F4XX are not supported by crt0.s")
+endif()
+
+if(NOT (ARM_TARGET MATCHES "^STM32F4") AND BUILD_WITH_LIBOPENCM3)
+  message(FATAL_ERROR "Only STM32F4 series devices are supported via libopencm3")
 endif()
 
 #-------------------------------------------------------------------------------
