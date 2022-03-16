@@ -56,11 +56,21 @@ case $2 in
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-libopencm3.ld`"
     fi
     ;;
+
+  stm32f411xe)
+    echo "Building for STM32F411xE"
+    export ARM_CPU="cortex-m4"
+    if [ "$1" == "cmsis" ]; then
+      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-cmsis.ld`"
+    else
+      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-libopencm3.ld`"
+    fi
+    ;;
   
   stm32f446)
     echo "Building for STM32F446"
     export ARM_CPU="cortex-m4"
-    if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
+    if [ "$1" == "cmsis" ]; then
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-cmsis.ld`"
     else
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-libopencm3.ld`"
@@ -84,7 +94,13 @@ case $2 in
     ;;
 
   *)
-    echo "Unknown device. Use 'stm32f303xe' 'stm32f407', 'stm32f446', 'stm32f4xx' or 'stm32f746'"
+    echo "Unknown device. Supported devices are"
+    echo "  'stm32f303xe'"
+    echo "  'stm32f407'"
+    echo "  'stm32f411xe'"
+    echo "  'stm32f446'"
+    echo "  'stm32f4xx'"
+    echo "  'stm32f746'"
     exit 1
     ;;
 esac
