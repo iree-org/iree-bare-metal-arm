@@ -42,7 +42,7 @@ endif()
 
 # Check if the combination of library and target is supported
 if(NOT (ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX") AND BUILD_WITH_CRT0)
-message(FATAL_ERROR "Devices other than STM32F407 or STM32F4XX are not supported by crt0.s")
+  message(FATAL_ERROR "Devices other than STM32F407 or STM32F4XX are not supported by crt0.s")
 endif()
 
 if(NOT (ARM_TARGET MATCHES "^STM32F4") AND BUILD_WITH_LIBOPENCM3)
