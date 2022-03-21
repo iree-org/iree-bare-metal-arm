@@ -33,14 +33,14 @@ if(BUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
-if(EXISTS ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
-  # Use `iree-translate` if installed to IREE_HOST_BINARY_ROOT.
-  set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-translate)
+if(EXISTS ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
+  # Use `iree-compile` if installed to IREE_HOST_BINARY_ROOT.
+  set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
 else()
-  # Use `iree-translate` provided via a snapshot.
-  find_program(_TRANSLATE_TOOL_EXECUTABLE iree-translate)
+  # Use `iree-compile` provided via a snapshot.
+  find_program(_TRANSLATE_TOOL_EXECUTABLE iree-compile)
   if(_TRANSLATE_TOOL_EXECUTABLE STREQUAL _TRANSLATE_TOOL_EXECUTABLE-NOTFOUND)
-    message(FATAL_ERROR "Could not find iree-translate.")
+    message(FATAL_ERROR "Could not find iree-compile.")
   endif()
 endif()
 
