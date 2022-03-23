@@ -22,7 +22,10 @@ target_include_directories(cmsis_device_f407xx
   ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
 )
 
-target_compile_definitions(cmsis_device_f407xx PUBLIC -DSTM32F407xx)
+target_compile_definitions(cmsis_device_f407xx
+  PUBLIC STM32F407xx
+  PRIVATE HSI_VALUE=16000000 HSE_VALUE=8000000
+)
 
 # Allow ld to find generic linker script
 target_link_directories(cmsis_device_f407xx INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
@@ -44,7 +47,10 @@ target_include_directories(cmsis_device_f411xe
   ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
 )
 
-target_compile_definitions(cmsis_device_f411xe PUBLIC -DSTM32F411xE)
+target_compile_definitions(cmsis_device_f411xe
+  PUBLIC STM32F411xE
+  PRIVATE HSI_VALUE=16000000 HSE_VALUE=8000000
+)
 
 # Allow ld to find generic linker script
 target_link_directories(cmsis_device_f411xe INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
@@ -66,7 +72,10 @@ target_include_directories(cmsis_device_f446xx
   ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
 )
 
-target_compile_definitions(cmsis_device_f446xx PUBLIC -DSTM32F446xx)
+target_compile_definitions(cmsis_device_f446xx
+  PUBLIC STM32F446xx
+  PRIVATE HSI_VALUE=16000000 HSE_VALUE=8000000
+)
 
 # Allow ld to find generic linker script
 target_link_directories(cmsis_device_f446xx INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
