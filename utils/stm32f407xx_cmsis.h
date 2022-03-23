@@ -7,7 +7,8 @@
 
 #include "stm32f407xx.h"
 
-// Using the PLL clock needs configuration. Change these values to your needs.
+// When using the PLL, the clock needs to be configured accordingly. Adjust
+// these values to your needs.
 
 #define FLASH_WAIT_STATES FLASH_ACR_LATENCY_5WS
 #define AHB_PRESCALER RCC_CFGR_HPRE_DIV1
