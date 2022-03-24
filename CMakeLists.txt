@@ -49,6 +49,11 @@ if(NOT (ARM_TARGET MATCHES "^STM32F4") AND BUILD_WITH_LIBOPENCM3)
   message(FATAL_ERROR "Only STM32F4 series devices are supported via libopencm3")
 endif()
 
+# We don't support UART1 on STM32F4 Discovery kit
+if(ARM_TARGET STREQUAL "STM32F407" AND USE_UART1)
+  message(FATAL_ERROR "UART1 is not supported for STM32F407")
+endif()
+
 #-------------------------------------------------------------------------------
 # Third-party dependencies
 #-------------------------------------------------------------------------------

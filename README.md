@@ -104,6 +104,10 @@ cd ..
 One can choose to either build the sample with libopencm3 or with CMSIS by either setting `BUILD_WITH_LIBOPENCM3` or `BUILD_WITH_CMSIS` to `ON`.
 Depending on whether you build with libopencm3 or CMSIS, you need to pass the correct linker flags via `CUSTOM_ARM_LINKER_FLAGS`
 and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
+When building with CMSIS, UART1 and UART2 can be initialized by setting `USE_UART1` and `USE_UART2` to `ON`.
+If building with libopencm3 this isn't configurable (yet) and UART2 is used.
+The clock can be configured in four ways. The internal clock `HSI` or the external clock `HSE` can either be used with or without using a phase-locked loop (PLL).
+To configure the clock set `CLOCK_SOURCE` to `HSI`, `HSE`, `PLL_HSI` or `PLL_HSE`. The option defaults to `HSI`.
 
 ```shell
 mkdir build
@@ -136,6 +140,8 @@ cmake -GNinja \
       -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
+#     -DUSE_UART1=ON \
+#     -DUSE_UART2=ON \
       ..
 cmake --build . --target sample_vmvx_sync
 ```
