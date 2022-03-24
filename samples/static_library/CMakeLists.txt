@@ -82,6 +82,8 @@ target_link_libraries(sample_static_library
   ${CONDITIONAL_DEP}
 )
 
+add_ihex(sample_static_library)
+
 #-------------------------------------------------------------------------------
 # Static library sample, EmitC
 #-------------------------------------------------------------------------------
@@ -148,3 +150,5 @@ target_link_libraries(sample_static_library_c
   iree::vm::shims_emitc
   ${CONDITIONAL_DEP}
 )
+
+add_ihex(sample_static_library_c)
