@@ -15,6 +15,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 option(BUILD_WITH_CMSIS "Builds the sample with CMSIS" OFF)
 option(BUILD_WITH_CRT0 "Builds the sample with crt0.s" OFF)
 option(BUILD_WITH_LIBOPENCM3 "Builds the sample with libopencm3" OFF)
+option(BUILD_IHEX "Build ihex files in addition to ELF files" ON)
 
 if(
   (BUILD_WITH_CMSIS AND BUILD_WITH_CRT0) OR
@@ -53,6 +54,16 @@ endif()
 if(ARM_TARGET STREQUAL "STM32F407" AND USE_UART1)
   message(FATAL_ERROR "UART1 is not supported for STM32F407")
 endif()
+
+#-------------------------------------------------------------------------------
+# Utility definitions
+#-------------------------------------------------------------------------------
+
+list(APPEND CMAKE_MODULE_PATH
+  ${CMAKE_CURRENT_LIST_DIR}/build_tools/cmake/
+)
+
+include(add_ihex)
 
 #-------------------------------------------------------------------------------
 # Third-party dependencies

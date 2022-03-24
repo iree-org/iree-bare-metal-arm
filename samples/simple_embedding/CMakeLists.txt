@@ -73,6 +73,8 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
     ${CONDITIONAL_DEP}
   )
 
+  add_ihex(sample_vmvx_sync)
+
 endif()
 
 #-------------------------------------------------------------------------------
@@ -145,3 +147,5 @@ target_link_libraries(sample_embedded_sync
   iree::vm::bytecode_module
   ${CONDITIONAL_DEP}
 )
+
+add_ihex(sample_embedded_sync)
