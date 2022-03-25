@@ -31,6 +31,7 @@ if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_CRT0 AND NOT BUILD_WITH_LIBOPENCM3)
   message(FATAL_ERROR "Either set BUILD_WITH_CMSIS, BUILD_WITH_CRT0 or BUILD_WITH_LIBOPENCM3 to ON")
 endif()
 
+# Define ARM_TARGET property
 set(ARM_TARGET STM32F407 CACHE STRING "Target for which the samples are build")
 set(ARM_TARGET_VALUES "STM32F407;STM32F411XE;STM32F446;STM32F4XX;STM32F746" CACHE INTERNAL "List of possible targets")
 set_property(CACHE ARM_TARGET PROPERTY STRINGS ${ARM_TARGET_VALUES})
@@ -55,6 +56,19 @@ endif()
 # We don't support UART1 on STM32F4 Discovery kit
 if(ARM_TARGET STREQUAL "STM32F407" AND USE_UART1)
   message(FATAL_ERROR "UART1 is not supported for STM32F407")
+endif()
+
+# Define CLOCK_SOURCE property
+set(CLOCK_SOURCE HSI CACHE STRING "Clock source to be configured")
+set(CLOCK_SOURCE_VALUES "HSI;HSE;PLL_HSI;PLL_HSE" CACHE INTERNAL "List of possible clock sources")
+set_property(CACHE CLOCK_SOURCE PROPERTY STRINGS ${CLOCK_SOURCE_VALUES})
+string(TOUPPER "${CLOCK_SOURCE}" CLOCK_SOURCE)
+
+# Check if the clock source is supported
+if(NOT CLOCK_SOURCE IN_LIST CLOCK_SOURCE_VALUES)
+  message(FATAL_ERROR "Clock source ${CLOCK_SOURCE} is not supported!")
+else()
+  message(STATUS "Configuring clock source as ${CLOCK_SOURCE}")
 endif()
 
 #-------------------------------------------------------------------------------
