@@ -2,32 +2,7 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-# TODO: replace this by target_compile_definitions when utils get own target
-if(USE_UART1)
-  add_compile_definitions(USE_UART1)
-endif()
-
-if(USE_UART2)
-  add_compile_definitions(USE_UART2)
-endif()
-
-# TODO: replace this by target_compile_definitions when utils get own target
-if(CLOCK_SOURCE STREQUAL "HSI")
-  add_compile_definitions(USE_HSI_CLOCK)
-elseif(CLOCK_SOURCE STREQUAL "HSE")
-  add_compile_definitions(USE_HSE_CLOCK)
-elseif(CLOCK_SOURCE STREQUAL "PLL_HSI")
-  add_compile_definitions(USE_PLL_HSI_CLOCK)
-elseif(CLOCK_SOURCE STREQUAL "PLL_HSE")
-  add_compile_definitions(USE_PLL_HSE_CLOCK)
-endif()
-
 if(BUILD_WITH_CMSIS)
-  if(ARM_TARGET MATCHES "^STM32F4")
-    set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_cmsis.c)
-  elseif(ARM_TARGET MATCHES "^STM32F7")
-    set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f7_cmsis.c)
-  endif()
   if(ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX")
     set(CONDITIONAL_DEP cmsis_device_f407xx)
   elseif(ARM_TARGET STREQUAL "STM32F411XE")
@@ -37,15 +12,9 @@ if(BUILD_WITH_CMSIS)
   elseif(ARM_TARGET STREQUAL "STM32F746")
     set(CONDITIONAL_DEP cmsis_device_f746xx)
   endif()
-endif()
-
-if(BUILD_WITH_CRT0)
-  set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_crt0.c)
+elseif(BUILD_WITH_CRT0)
   set(CONDITIONAL_DEP custom_crt0)
-endif()
-
-if(BUILD_WITH_LIBOPENCM3)
-  set(UTILS_SRC ${CMAKE_SOURCE_DIR}/utils/stm32f4_libopencm3.c)
+elseif(BUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 

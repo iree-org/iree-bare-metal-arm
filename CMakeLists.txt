@@ -113,3 +113,4 @@ add_subdirectory(third_party/iree EXCLUDE_FROM_ALL)
 #-------------------------------------------------------------------------------
 
 add_subdirectory(samples)
+add_subdirectory(utils)

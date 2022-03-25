@@ -12,7 +12,6 @@ target_sources(sample_static_library
   PRIVATE
     static_library_demo.c
     create_bytecode_module.c
-    ${UTILS_SRC}
 )
 
 set(_TRANSLATE_ARGS)
@@ -80,6 +79,7 @@ target_link_libraries(sample_static_library
   iree::hal::local::sync_driver
   simple_mul
   ${CONDITIONAL_DEP}
+  utils
 )
 
 add_ihex(sample_static_library)
@@ -134,7 +134,6 @@ target_sources(sample_static_library_c
   PRIVATE
     static_library_demo.c
     create_c_module.c
-    ${UTILS_SRC}
 )
 
 target_include_directories(sample_static_library_c
@@ -149,6 +148,7 @@ target_link_libraries(sample_static_library_c
   iree::hal::local::sync_driver
   iree::vm::shims_emitc
   ${CONDITIONAL_DEP}
+  utils
 )
 
 add_ihex(sample_static_library_c)
