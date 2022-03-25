@@ -13,6 +13,11 @@ if [[ $# -ne 2 ]] ; then
   exit 1
 fi
 
+# Set the path to the GNU Arm Embedded Toolchain
+if [ -z ${PATH_TO_ARM_TOOLCHAIN+x} ]; then
+  export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10.3-2021.10"
+fi
+
 # Set linker flags
 case $1 in
   cmsis)
@@ -87,6 +92,13 @@ case $2 in
     export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f746xg-cmsis.ld`"
     ;;
 
+  corstone-300)
+    echo "Building for Corstone-300"
+    export ARM_CPU="cortex-m55"
+    ${PATH_TO_ARM_TOOLCHAIN}/bin/arm-none-eabi-gcc -E -x c -P -C -o platform_parsed.ld "`realpath ../third_party/ethos-u-core-platform/targets/corstone-300/platform.ld`"
+    export PATH_TO_LINKER_SCRIPT="`realpath platform_parsed.ld`"
+    ;;
+
   *)
     echo "Unknown device. Supported devices are"
     echo "  'stm32f407'"
@@ -94,14 +106,10 @@ case $2 in
     echo "  'stm32f446'"
     echo "  'stm32f4xx'"
     echo "  'stm32f746'"
+    echo "  'corstone-300'"
     exit 1
     ;;
 esac
-
-# Set the path to the GNU Arm Embedded Toolchain
-if [ -z ${PATH_TO_ARM_TOOLCHAIN+x} ]; then
-  export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10.3-2021.10"
-fi
 
 # Set the path to the IREE host binary
 export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
