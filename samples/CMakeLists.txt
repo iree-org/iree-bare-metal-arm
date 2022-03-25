@@ -2,9 +2,6 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-option(USE_UART1 "Initializes UART1" OFF)
-option(USE_UART2 "Initializes UART2" OFF)
-
 # TODO: replace this by target_compile_definitions when utils get own target
 if(USE_UART1)
   add_compile_definitions(USE_UART1)
