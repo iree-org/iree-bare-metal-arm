@@ -16,6 +16,8 @@ option(BUILD_WITH_CMSIS "Builds the sample with CMSIS" OFF)
 option(BUILD_WITH_CRT0 "Builds the sample with crt0.s" OFF)
 option(BUILD_WITH_LIBOPENCM3 "Builds the sample with libopencm3" OFF)
 option(BUILD_IHEX "Build ihex files in addition to ELF files" ON)
+option(USE_UART1 "Initializes UART1" OFF)
+option(USE_UART2 "Initializes UART2" OFF)
 
 if(
   (BUILD_WITH_CMSIS AND BUILD_WITH_CRT0) OR
