@@ -1,0 +1,7 @@
+# Build artifacts
+build/
+build-*/
+
+# Visual Studio Code files
+.vscode/
+*.code-workspace
