@@ -15,7 +15,6 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
     PRIVATE
       simple_embedding_float.c
       device_vmvx_sync.c
-      ${UTILS_SRC}
   )
 
   set(_TRANSLATE_ARGS)
@@ -71,6 +70,7 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
     iree::vm
     iree::vm::bytecode_module
     ${CONDITIONAL_DEP}
+    utils
   )
 
   add_ihex(sample_vmvx_sync)
@@ -87,7 +87,6 @@ target_sources(sample_embedded_sync
   PRIVATE
     simple_embedding_int.c
     device_embedded_sync.c
-    ${UTILS_SRC}
 )
 
 set(_TRANSLATE_ARGS)
@@ -146,6 +145,7 @@ target_link_libraries(sample_embedded_sync
   iree::vm
   iree::vm::bytecode_module
   ${CONDITIONAL_DEP}
+  utils
 )
 
 add_ihex(sample_embedded_sync)
