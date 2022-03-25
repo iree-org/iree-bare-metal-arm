@@ -11,18 +11,6 @@ if(USE_UART2)
   add_compile_definitions(USE_UART2)
 endif()
 
-set(CLOCK_SOURCE HSI CACHE STRING "Clock source to be configured")
-set(CLOCK_SOURCE_VALUES "HSI;HSE;PLL_HSI;PLL_HSE" CACHE INTERNAL "List of possible clock sources")
-set_property(CACHE CLOCK_SOURCE PROPERTY STRINGS ${CLOCK_SOURCE_VALUES})
-string(TOUPPER "${CLOCK_SOURCE}" CLOCK_SOURCE)
-
-# Check if the clock source is supported
-if(NOT CLOCK_SOURCE IN_LIST CLOCK_SOURCE_VALUES)
-  message(FATAL_ERROR "Clock source ${CLOCK_SOURCE} is not supported!")
-else()
-  message(STATUS "Configuring clock source as ${CLOCK_SOURCE}")
-endif()
-
 # TODO: replace this by target_compile_definitions when utils get own target
 if(CLOCK_SOURCE STREQUAL "HSI")
   add_compile_definitions(USE_HSI_CLOCK)
