@@ -75,7 +75,7 @@ source venv-iree-snapshot/bin/activate
 pip3 install -r requirements.txt
 ```
 
-For further information, see the [TensorFlow Integration](https://google.github.io/iree/ml-frameworks/tensorflow/) or[TensorFlow Lite Integration](https://google.github.io/iree/ml-frameworks/tensorflow-lite/) guide.
+For further information, see the [TensorFlow Integration](https://google.github.io/iree/getting-started/tensorflow/) or [TensorFlow Lite Integration](https://google.github.io/iree/getting-started/tflite/) guide.
 The next lines can be used to build the missing tools from the already cloned submodule:
 
 ```shell
