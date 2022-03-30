@@ -6,7 +6,7 @@ Resource            ${RENODEKEYWORDS}
 Resource            samples.resource
 
 *** Variables ***
-${EXECUTABLE}       static_library/sample_static_library_c
+${EXECUTABLE}       static_library/sample_static_library_c.elf
 
 *** Test Cases ***
 CMSIS

@@ -7,7 +7,7 @@ Resource            samples.resource
 
 *** Variables ***
 ${NAME}             simple_embedding
-${EXECUTABLE}       simple_embedding/sample_vmvx_sync
+${EXECUTABLE}       simple_embedding/sample_vmvx_sync.elf
 
 *** Test Cases ***
 CMSIS

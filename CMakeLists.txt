@@ -71,6 +71,9 @@ else()
   message(STATUS "Configuring clock source as ${CLOCK_SOURCE}")
 endif()
 
+# Set executable suffix to elf
+set(CMAKE_EXECUTABLE_SUFFIX ".elf")
+
 #-------------------------------------------------------------------------------
 # Utility definitions
 #-------------------------------------------------------------------------------
