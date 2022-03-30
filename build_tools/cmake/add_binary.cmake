@@ -4,17 +4,17 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-# add_ihex()
+# add_binary()
 #
-# CMake function to add a hex file.
+# CMake function to add a binary file.
 
-function(add_ihex TARGET)
-  if(NOT BUILD_IHEX)
+function(add_binary TARGET)
+  if(NOT BUILD_BINARY)
     return()
   endif()
 
   add_custom_command(
     TARGET ${TARGET} POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O ihex ${TARGET}.elf ${TARGET}.hex
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${TARGET}.elf ${TARGET}.bin
   )
 endfunction()
