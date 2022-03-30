@@ -6,12 +6,12 @@
 This project is not intended for everyday use and made available without any support.
 However, we welcome any kind of feedback via the issue tracker or if appropriate via IREE's [communication channels](https://github.com/google/iree#communication-channels), e.g. via the Discord server.
 
-This projects demonstrates how to build [IREE](https://github.com/google/iree) with the [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
+This projects demonstrates how to build [IREE](https://github.com/google/iree) with the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
 ## Getting Started
 
 ### Prerequisites
 
-You need CMake and the [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm) installed on your host machine. Further, a C/C++ compiler is required to build IREE for your host machine.
+You need CMake and the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) installed on your host machine. Further, a C/C++ compiler is required to build IREE for your host machine.
 
 ### Clone and Build
 #### Clone
@@ -113,7 +113,7 @@ mkdir build
 cd build
 
 # Set the path to the GNU Arm Embedded Toolchain, e.g.
-# export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-none-eabi-10.3-2021.10"
+# export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-11.2-2022.02-x86_64-arm-none-eabi"
 
 # To build with CMSIS
 # export CUSTOM_ARM_LINKER_FLAGS=""
