@@ -13,10 +13,10 @@ commit_hash = os.environ.get("GITHUB_SHA", None)
 
 libs = ["cmsis", "crt0", "libopencm3"]
 targets = {
-    "sample_vmvx_sync": os.path.join("samples", "simple_embedding"),
-    "sample_embedded_sync": os.path.join("samples", "simple_embedding"),
-    "sample_static_library": os.path.join("samples", "static_library"),
-    "sample_static_library_c": os.path.join("samples", "static_library"),
+    "sample_vmvx_sync.elf": os.path.join("samples", "simple_embedding"),
+    "sample_embedded_sync.elf": os.path.join("samples", "simple_embedding"),
+    "sample_static_library.elf": os.path.join("samples", "static_library"),
+    "sample_static_library_c.elf": os.path.join("samples", "static_library"),
 }
 
 build_stats = {
