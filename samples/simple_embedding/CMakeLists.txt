@@ -73,6 +73,7 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
     utils
   )
 
+  add_binary(sample_vmvx_sync)
   add_ihex(sample_vmvx_sync)
 
 endif()
@@ -148,4 +149,5 @@ target_link_libraries(sample_embedded_sync
   utils
 )
 
+add_binary(sample_embedded_sync)
 add_ihex(sample_embedded_sync)

@@ -82,6 +82,7 @@ target_link_libraries(sample_static_library
   utils
 )
 
+add_binary(sample_static_library)
 add_ihex(sample_static_library)
 
 #-------------------------------------------------------------------------------
@@ -151,4 +152,5 @@ target_link_libraries(sample_static_library_c
   utils
 )
 
+add_binary(sample_static_library_c)
 add_ihex(sample_static_library_c)
