@@ -21,14 +21,15 @@ endif()
 #-------------------------------------------------------------------------------
 
 add_library(ethos_u_core_platform_cmsis INTERFACE)
+
 target_include_directories(ethos_u_core_platform_cmsis INTERFACE
   ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include
   ${CMSIS_5_SOURCE_DIR}/Device/ARM/${_ARM_CPU}/Include
 )
 
 target_sources(ethos_u_core_platform_cmsis INTERFACE
-    ${CMSIS_5_SOURCE_DIR}/Device/ARM/${_ARM_CPU}/Source/startup_${_ARM_CPU}.c
-    ${CMSIS_5_SOURCE_DIR}/Device/ARM/${_ARM_CPU}/Source/system_${_ARM_CPU}.c
+  ${CMSIS_5_SOURCE_DIR}/Device/ARM/${_ARM_CPU}/Source/startup_${_ARM_CPU}.c
+  ${CMSIS_5_SOURCE_DIR}/Device/ARM/${_ARM_CPU}/Source/system_${_ARM_CPU}.c
 )
 
 target_compile_definitions(ethos_u_core_platform_cmsis INTERFACE ${_ARM_CPU}${_ARM_FEATURES})
@@ -43,13 +44,16 @@ add_subdirectory(${ethos_u_core_platform_SOURCE_DIR}/drivers/uart ${CMAKE_CURREN
 # ethos_u_core_platform_corstone-300
 #-------------------------------------------------------------------------------
 
-add_library(ethos_u_core_platform_corstone-300 INTERFACE)
+add_library(ethos_u_core_platform_corstone-300 STATIC "")
 
-target_sources(ethos_u_core_platform_corstone-300 INTERFACE
+target_sources(ethos_u_core_platform_corstone-300 PRIVATE
   ${ethos_u_core_platform_SOURCE_DIR}/targets/corstone-300/retarget.c
 )
 
-target_link_libraries(ethos_u_core_platform_corstone-300 INTERFACE
-  ethos_u_core_platform_cmsis
-  ethosu_uart_cmsdk_apb
+target_link_libraries(ethos_u_core_platform_corstone-300
+  PUBLIC
+    ethosu_uart_common
+  PRIVATE
+    ethos_u_core_platform_cmsis
+    ethosu_uart_cmsdk_apb
 )
