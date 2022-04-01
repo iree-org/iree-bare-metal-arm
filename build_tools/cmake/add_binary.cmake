@@ -15,6 +15,6 @@ function(add_binary TARGET)
 
   add_custom_command(
     TARGET ${TARGET} POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${TARGET}.elf ${TARGET}.bin
+    COMMAND ${CMAKE_OBJCOPY} ARGS -O binary ${TARGET}.elf ${TARGET}.bin
   )
 endfunction()

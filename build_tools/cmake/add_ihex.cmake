@@ -15,6 +15,6 @@ function(add_ihex TARGET)
 
   add_custom_command(
     TARGET ${TARGET} POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O ihex ${TARGET}.elf ${TARGET}.hex
+    COMMAND ${CMAKE_OBJCOPY} ARGS -O ihex ${TARGET}.elf ${TARGET}.hex
   )
 endfunction()
