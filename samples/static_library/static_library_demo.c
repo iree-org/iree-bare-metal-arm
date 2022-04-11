@@ -222,7 +222,7 @@ int main(void) {
     iree_status_free(result);
     return -1;
   } else {
-    printf("Execution succesfull!\n");
+    printf("Execution successful!\n");
   }
   print_success();
 

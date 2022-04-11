@@ -173,7 +173,7 @@ int main(void) {
     iree_status_fprint(stderr, result);
     iree_status_free(result);
   } else {
-    printf("Execution succesfull!\n");
+    printf("Execution successful!\n");
   }
   printf("simple_embedding done\n");
 

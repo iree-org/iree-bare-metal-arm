@@ -25,5 +25,5 @@ LIBOPENCM3
 *** Keywords ***
 Output Should Show Success
     Wait For Line On Uart       Running ${NAME}...
-    Wait For Line On Uart       Execution succesfull!
+    Wait For Line On Uart       Execution successful!
     Wait For Line On Uart       ${NAME} done
