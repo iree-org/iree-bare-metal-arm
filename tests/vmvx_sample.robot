@@ -16,7 +16,7 @@ CMSIS
     [tags]  NoCI
     Execute Command         mach create "${MACHINE}"
     Execute Command         machine LoadPlatformDescription ${PLATFORMFILE}
-    Execute Command         sysbus LoadELF @${BASE_DIR}/build/samples/${EXECUTABLE}
+    Execute Command         sysbus LoadELF @${BASE_DIR}/build/samples/simple_embedding/${EXECUTABLE}
     Run Emulation
     Output Should Show Success
 
