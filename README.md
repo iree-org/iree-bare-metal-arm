@@ -99,14 +99,40 @@ cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin
 cd ..
 ```
 
-#### Target Build
+#### Target Support
 
-One can choose to either build the sample with libopencm3 or with CMSIS by either setting `BUILD_WITH_LIBOPENCM3` or `BUILD_WITH_CMSIS` to `ON`.
+At the moment, the samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html):
+
+ * STM32F407
+ * STM32F411xE
+ * STM32F446
+ * STM32F746
+
+Best support is provided for boards with the
+[STM32F411RE](https://www.st.com/en/microcontrollers-microprocessors/stm32f411re.html) or
+[STM32F446](https://www.st.com/en/microcontrollers-microprocessors/stm32f446.html) MCU.
+The samples are tested regularly on the
+[STM32 Nucleo Boards](https://www.st.com/en/evaluation-tools/stm32-nucleo-boards.html)
+[NUCLEO-F411RE](https://www.st.com/en/evaluation-tools/nucleo-f411re.html) and
+[NUCLEO-F446RE](https://www.st.com/en/evaluation-tools/nucleo-f446re.html),
+whereas other boards or rather boards with other MCUs are only supported to a limited extend.
+
+
+When building for an STM32F4 MCU, one can choose to either build the samples with libopencm3 or with CMSIS by either setting `BUILD_WITH_LIBOPENCM3` or `BUILD_WITH_CMSIS` to `ON`.
 Depending on whether you build with libopencm3 or CMSIS, you need to pass the correct linker flags via `CUSTOM_ARM_LINKER_FLAGS`
 and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
+
+
+When using CMSIS and building for STM32411xE or STM32F446, one can select with UART to use.
 UART1 and UART2 can be initialized by setting `USE_UART1` and `USE_UART2` to `ON`.
-The clock can be configured in four ways. The internal clock `HSI` or the external clock `HSE` can either be used with or without using a phase-locked loop (PLL).
+For STM32F407 and STM32F746 only UART2 is supported.
+
+
+When using CMSIS and building for one of the supported STM32F4 MCUs, the clock can be configured in four ways.
+The internal clock `HSI` or the external clock `HSE` can either be used with or without using a phase-locked loop (PLL).
 To configure the clock set `CLOCK_SOURCE` to `HSI`, `HSE`, `PLL_HSI` or `PLL_HSE`. The option defaults to `HSI`.
+
+#### Target Build
 
 ```shell
 mkdir build
