@@ -43,6 +43,10 @@
  *   __fini_array_start
  *   __fini_array_end
  *   __data_end__
+ *   __got_start__
+ *   __got_end__
+ *   __got_plt_start__
+ *   __got_plt_end__
  *   __bss_start__
  *   __bss_end__
  *   __end__
@@ -165,6 +169,11 @@ SECTIONS
     LONG (__got_start__)
     LONG ((__got_end__ - __got_start__) / 4)
 
+    /* .got.plt section */
+    LONG (LOADADDR(.got.plt))
+    LONG (__got_plt_start__)
+    LONG ((__got_plt_end__ - __got_plt_start__) / 4)
+
     __copy_table_end__ = .;
   } > FLASH
 
@@ -247,11 +256,20 @@ SECTIONS
 
   .got :
   {
+    . = ALIGN(4);
     __got_start__ = .;
     *(.got)
-    *(.got.*)
     . = ALIGN(4);
     __got_end__ = .;
+  } > RAM
+
+  .got.plt :
+  {
+    . = ALIGN(4);
+    __got_plt_start__ = .;
+    *(.got.plt)
+    . = ALIGN(4);
+    __got_plt_end__ = .;
   } > RAM
 
   .bss :
