@@ -43,6 +43,10 @@
  *   __fini_array_start
  *   __fini_array_end
  *   __data_end__
+ *   __got_start__
+ *   __got_end__
+ *   __got_plt_start__
+ *   __got_plt_end__
  *   __bss_start__
  *   __bss_end__
  *   __end__
@@ -149,9 +153,10 @@ SECTIONS
     . = ALIGN(4);
     __copy_table_start__ = .;
 
+    /* .data section */
     LONG (__etext)
     LONG (__data_start__)
-    LONG ((__data_end__ - __data_start__))
+    LONG ((__data_end__ - __data_start__) / 4)
 
     /* Add each additional data section here */
 /*
@@ -159,6 +164,16 @@ SECTIONS
     LONG (__data2_start__)
     LONG ((__data2_end__ - __data2_start__) / 4)
 */
+    /* .got section */
+    LONG (LOADADDR(.got))
+    LONG (__got_start__)
+    LONG ((__got_end__ - __got_start__) / 4)
+
+    /* .got.plt section */
+    LONG (LOADADDR(.got.plt))
+    LONG (__got_plt_start__)
+    LONG ((__got_plt_end__ - __got_plt_start__) / 4)
+
     __copy_table_end__ = .;
   } > FLASH
 
@@ -167,7 +182,7 @@ SECTIONS
     . = ALIGN(4);
     __zero_table_start__ = .;
     LONG (__bss_start__)
-    LONG ((__bss_end__ - __bss_start__))
+    LONG ((__bss_end__ - __bss_start__) / 4)
     /* Add each additional bss section here */
 /*
     LONG (__bss2_start__)
@@ -238,6 +253,24 @@ SECTIONS
 
   } > RAM2
 */
+
+  .got :
+  {
+    . = ALIGN(4);
+    __got_start__ = .;
+    *(.got)
+    . = ALIGN(4);
+    __got_end__ = .;
+  } > RAM
+
+  .got.plt :
+  {
+    . = ALIGN(4);
+    __got_plt_start__ = .;
+    *(.got.plt)
+    . = ALIGN(4);
+    __got_plt_end__ = .;
+  } > RAM
 
   .bss :
   {
