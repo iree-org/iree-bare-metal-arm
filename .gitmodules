@@ -22,3 +22,6 @@
 [submodule "third_party/cmsis_device_l4"]
 	path = third_party/cmsis_device_l4
 	url = https://github.com/STMicroelectronics/cmsis_device_l4.git
+[submodule "third_party/nrfx"]
+	path = third_party/nrfx
+	url = https://github.com/NordicSemiconductor/nrfx.git
