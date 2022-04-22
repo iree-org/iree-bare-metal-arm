@@ -112,6 +112,7 @@ add_subdirectory(build_tools/third_party/cmsis_device_f7 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/custom_crt0 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/ethos-u-core-platform EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/libopencm3 EXCLUDE_FROM_ALL)
+add_subdirectory(build_tools/third_party/nrfx EXCLUDE_FROM_ALL)
 add_subdirectory(third_party/iree EXCLUDE_FROM_ALL)
 
 #-------------------------------------------------------------------------------
