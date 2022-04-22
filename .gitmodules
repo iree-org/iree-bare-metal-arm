@@ -19,3 +19,6 @@
 [submodule "third_party/ethos-u-core-platform"]
 	path = third_party/ethos-u-core-platform
 	url = https://git.mlplatform.org/ml/ethos-u/ethos-u-core-platform.git
+[submodule "third_party/cmsis_device_l4"]
+	path = third_party/cmsis_device_l4
+	url = https://github.com/STMicroelectronics/cmsis_device_l4.git
