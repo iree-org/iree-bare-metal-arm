@@ -21,8 +21,6 @@ list(APPEND _TRANSLATE_ARGS "-iree-llvm-target-triple=armv7em-pc-linux-elf")
 list(APPEND _TRANSLATE_ARGS "-iree-llvm-target-float-abi=hard")
 list(APPEND _TRANSLATE_ARGS "-iree-llvm-link-embedded=false")
 list(APPEND _TRANSLATE_ARGS "-iree-llvm-link-static")
-# TODO(marbre): Remove after IREE got cleaned up
-list(APPEND _TRANSLATE_ARGS "-iree-llvm-system-linker-path=${ARM_TOOLCHAIN_ROOT}/bin/arm-none-eabi-ld")
 list(APPEND _TRANSLATE_ARGS "-iree-llvm-static-library-output-path=simple_mul.o")
 list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/iree/samples/static_library/simple_mul.mlir")
 list(APPEND _TRANSLATE_ARGS "-o")
@@ -40,7 +38,7 @@ add_library(simple_mul
   STATIC
   ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.o)
 
-SET_TARGET_PROPERTIES(
+set_target_properties(
   simple_mul
   PROPERTIES
   LINKER_LANGUAGE C)
@@ -73,13 +71,14 @@ target_include_directories(sample_static_library
 )
 
 target_link_libraries(sample_static_library
-  simple_mul_c
-  iree::runtime
-  iree::hal::local::loaders::static_library_loader
-  iree::hal::local::sync_driver
-  simple_mul
-  ${CONDITIONAL_DEP}
-  utils
+  PRIVATE
+    simple_mul_c
+    iree::runtime
+    iree::hal::local::loaders::static_library_loader
+    iree::hal::local::sync_driver
+    simple_mul
+    ${CONDITIONAL_DEP}
+    utils
 )
 
 add_binary(sample_static_library)
@@ -126,7 +125,7 @@ target_compile_definitions(simple_mul_c_module
     EMITC_IMPLEMENTATION
 )
 
-SET_TARGET_PROPERTIES(
+set_target_properties(
   simple_mul_c_module
   PROPERTIES
   LINKER_LANGUAGE C)
@@ -143,13 +142,14 @@ target_include_directories(sample_static_library_c
 )
 
 target_link_libraries(sample_static_library_c
-  simple_mul_c_module
-  iree::runtime
-  iree::hal::local::loaders::static_library_loader
-  iree::hal::local::sync_driver
-  iree::vm::shims_emitc
-  ${CONDITIONAL_DEP}
-  utils
+  PRIVATE
+    simple_mul_c_module
+    iree::runtime
+    iree::hal::local::loaders::static_library_loader
+    iree::hal::local::sync_driver
+    iree::vm::shims_emitc
+    ${CONDITIONAL_DEP}
+    utils
 )
 
 add_binary(sample_static_library_c)
