@@ -59,7 +59,7 @@ case $2 in
   stm32f411xe)
     echo "Building for STM32F411xE"
     export ARM_CPU="cortex-m4"
-    if [ "$1" == "cmsis" ]; then
+    if [ "$1" == "cmsis" ] || [ "$1" == "crt0" ]; then
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-cmsis.ld`"
     else
       export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-libopencm3.ld`"
