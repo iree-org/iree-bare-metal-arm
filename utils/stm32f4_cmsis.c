@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <unistd.h>
 
@@ -224,3 +225,5 @@ int _write(int file, char* ptr, int len) {
   errno = EIO;
   return -1;
 }
+
+bool wait_until(uint64_t nanos) { return true; }
