@@ -75,3 +75,5 @@ int _write(int file, char* ptr, int len) {
   errno = EIO;
   return -1;
 }
+
+bool wait_until(uint64_t nanos) { return true; }
