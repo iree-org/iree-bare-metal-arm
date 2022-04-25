@@ -60,17 +60,18 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
   )
 
   target_link_libraries(sample_vmvx_sync
-    simple_embedding_test_bytecode_module_vmvx
-    iree::base
-    iree::hal
-    iree::hal::local
-    iree::hal::local::loaders::vmvx_module_loader
-    iree::hal::local::sync_driver
-    iree::modules::hal
-    iree::vm
-    iree::vm::bytecode_module
-    ${CONDITIONAL_DEP}
-    utils
+    PRIVATE
+      simple_embedding_test_bytecode_module_vmvx
+      iree::base
+      iree::hal
+      iree::hal::local
+      iree::hal::local::loaders::vmvx_module_loader
+      iree::hal::local::sync_driver
+      iree::modules::hal
+      iree::vm
+      iree::vm::bytecode_module
+      ${CONDITIONAL_DEP}
+      utils
   )
 
   add_binary(sample_vmvx_sync)
@@ -136,17 +137,18 @@ target_include_directories(sample_embedded_sync
 )
 
 target_link_libraries(sample_embedded_sync
-  simple_embedding_test_bytecode_module_dylib
-  iree::base
-  iree::hal
-  iree::hal::local
-  iree::hal::local::loaders::embedded_library_loader
-  iree::hal::local::sync_driver
-  iree::modules::hal
-  iree::vm
-  iree::vm::bytecode_module
-  ${CONDITIONAL_DEP}
-  utils
+  PRIVATE
+    simple_embedding_test_bytecode_module_dylib
+    iree::base
+    iree::hal
+    iree::hal::local
+    iree::hal::local::loaders::embedded_library_loader
+    iree::hal::local::sync_driver
+    iree::modules::hal
+    iree::vm
+    iree::vm::bytecode_module
+    ${CONDITIONAL_DEP}
+    utils
 )
 
 add_binary(sample_embedded_sync)
