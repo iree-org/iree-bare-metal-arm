@@ -34,7 +34,7 @@ endif()
 
 # Define ARM_TARGET property
 set(ARM_TARGET STM32F407 CACHE STRING "Target for which the samples are build")
-set(ARM_TARGET_VALUES "STM32F407;STM32F411XE;STM32F446;STM32F4XX;STM32F746;CORSTONE-300" CACHE INTERNAL "List of possible targets")
+set(ARM_TARGET_VALUES "STM32F407;STM32F411XE;STM32F446;STM32F4XX;STM32F746;STM32L476;CORSTONE-300" CACHE INTERNAL "List of possible targets")
 set_property(CACHE ARM_TARGET PROPERTY STRINGS ${ARM_TARGET_VALUES})
 string(TOUPPER "${ARM_TARGET}" ARM_TARGET)
 
@@ -70,6 +70,11 @@ if(NOT CLOCK_SOURCE IN_LIST CLOCK_SOURCE_VALUES)
   message(FATAL_ERROR "Clock source ${CLOCK_SOURCE} is not supported!")
 else()
   message(STATUS "Configuring clock source as ${CLOCK_SOURCE}")
+endif()
+
+# We don't support clock sources HSE and PLL_HSE on STM32L476
+if(ARM_TARGET STREQUAL "STM32L476" AND (CLOCK_SOURCE STREQUAL "HSE" OR CLOCK_SOURCE STREQUAL "PLL_HSE"))
+  message(FATAL_ERROR "Clock sources other than HSI and PLL_HSI are not supported on STM32L476")
 endif()
 
 # Set executable suffix to elf
