@@ -133,7 +133,7 @@ When using CMSIS and building for one of the supported STM32F4 MCUs, the clock c
 The internal clock `HSI` or the external clock `HSE` can either be used with or without using a phase-locked loop (PLL).
 To configure the clock set `CLOCK_SOURCE` to `HSI`, `HSE`, `PLL_HSI` or `PLL_HSE`. The option defaults to `HSI`.
 
-When using CMSIS and building for STM32L476, the clock can be configured in only two ways.
+When using CMSIS and building for STM32L476, the clock can be configured in two ways.
 The internal clock `HSI` can either be used with or without using a phase-locked loop (PLL).
 To configure the clock set `CLOCK_SOURCE` to `HSI`, or `PLL_HSI`. The option defaults to `HSI`. The options `HSE` and `PLL_HSE` are not supported, because by default the [NUCLEO-L476RG](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board does not allow to use the clock of the attached ST-LINK as the external clock. The STM32L476 also has an internal multi-speed clock `MSI` which is not supported.
 
