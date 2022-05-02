@@ -2,8 +2,8 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-set(cmsis_device_f4_SOURCE_DIR "${PROJECT_SOURCE_DIR}/third_party/cmsis_device_f4/")
-set(CMSIS_5_SOURCE_DIR "${PROJECT_SOURCE_DIR}/third_party/CMSIS_5/")
+set(cmsis_device_f4_SOURCE_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/cmsis_device_f4/")
+set(CMSIS_5_SOURCE_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/CMSIS_5/")
 
 #-------------------------------------------------------------------------------
 # STM32F407xx
@@ -35,7 +35,7 @@ target_compile_definitions(cmsis_device_f407xx
 )
 
 # Allow ld to find generic linker script
-target_link_directories(cmsis_device_f407xx INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
+target_link_directories(cmsis_device_f407xx INTERFACE "${iree-bare-metal-arm_SOURCE_DIR}/build_tools/")
 
 #-------------------------------------------------------------------------------
 # STM32F411xe
@@ -67,7 +67,7 @@ target_compile_definitions(cmsis_device_f411xe
 )
 
 # Allow ld to find generic linker script
-target_link_directories(cmsis_device_f411xe INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
+target_link_directories(cmsis_device_f411xe INTERFACE "${iree-bare-metal-arm_SOURCE_DIR}/build_tools/")
 
 #-------------------------------------------------------------------------------
 # STM32F446xx
@@ -99,4 +99,4 @@ target_compile_definitions(cmsis_device_f446xx
 )
 
 # Allow ld to find generic linker script
-target_link_directories(cmsis_device_f446xx INTERFACE "${PROJECT_SOURCE_DIR}/build_tools/")
+target_link_directories(cmsis_device_f446xx INTERFACE "${iree-bare-metal-arm_SOURCE_DIR}/build_tools/")

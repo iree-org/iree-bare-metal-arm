@@ -2,7 +2,7 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-set(libopencm3_SOURCE_DIR "${PROJECT_SOURCE_DIR}/third_party/libopencm3/")
+set(libopencm3_SOURCE_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/libopencm3/")
 
 #-------------------------------------------------------------------------------
 # STM32F4
