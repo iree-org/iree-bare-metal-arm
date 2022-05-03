@@ -103,6 +103,7 @@ case $2 in
     export ARM_CPU="cortex-m55"
     ${PATH_TO_ARM_TOOLCHAIN}/bin/arm-none-eabi-gcc -E -x c -P -C -o platform_parsed.ld "`realpath ../third_party/ethos-u-core-platform/targets/corstone-300/platform.ld`"
     export PATH_TO_LINKER_SCRIPT="`realpath platform_parsed.ld`"
+    patch platform_parsed.ld `realpath ../build_tools/platform_parsed.patch`
     ;;
 
   *)

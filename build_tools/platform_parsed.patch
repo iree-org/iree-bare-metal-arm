@@ -1,0 +1,62 @@
+Explicitly copy .got and .got.plt section.
+
+Authored-by: Marius Brehler <marius.brehler@iml.fraunhofer.de>
+
+SPDX-License-Identifier: Apache-2.0
+--- a/platform_parsed.ld
++++ b/platform_parsed.ld
+@@ -166,7 +166,18 @@
+     __copy_table_start__ = .;
+     LONG (__etext)
+     LONG (__data_start__)
+-    LONG (__data_end__ - __data_start__)
++    LONG ((__data_end__ - __data_start__) / 4)
++
++    /* .got section */
++    LONG (LOADADDR(.got))
++    LONG (__got_start__)
++    LONG ((__got_end__ - __got_start__) / 4)
++
++    /* .got.plt section */
++    LONG (LOADADDR(.got.plt))
++    LONG (__got_plt_start__)
++    LONG ((__got_plt_end__ - __got_plt_start__) / 4)
++
+     LONG (__eddr_data)
+     LONG (__sram_data_start__)
+     LONG (__sram_data_end__ - __sram_data_start__ )
+@@ -177,7 +188,7 @@
+     . = ALIGN(4);
+     __zero_table_start__ = .;
+     LONG (__bss_start__)
+-    LONG (__bss_end__ - __bss_start__)
++    LONG ((__bss_end__ - __bss_start__) / 4)
+     __zero_table_end__ = .;
+   /**
+    * Location counter can end up 2byte aligned with narrow Thumb code but
+@@ -214,6 +225,25 @@
+     /* All data end */
+     __data_end__ = .;
+   } > DTCM :rom_exec
++
++  .got :
++  {
++    . = ALIGN(4);
++    __got_start__ = .;
++    *(.got)
++    . = ALIGN(4);
++    __got_end__ = .;
++  } > DTCM :rom_exec
++
++  .got.plt :
++  {
++    . = ALIGN(4);
++    __got_plt_start__ = .;
++    *(.got.plt)
++    . = ALIGN(4);
++    __got_plt_end__ = .;
++  } > DTCM :rom_exec
++
+   .sram.bss :
+   {
+     . = ALIGN(16);
