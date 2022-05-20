@@ -23,5 +23,5 @@ Load Sample
     Execute Command         sysbus LoadELF @${BASE_DIR}/build-${lib}/samples/${executable}
 
 Run Emulation
-    Create Terminal Tester  sysbus.uart2
+    Create Terminal Tester  sysbus.usart2
     Start Emulation

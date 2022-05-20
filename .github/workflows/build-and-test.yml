@@ -12,7 +12,7 @@ env:
   TOOLCHAIN: gcc-arm-none-eabi
   TOOLCHAIN_VERSION: 11.2-2022.02
   RENODE: renode
-  RENODE_VERSION: 1.12.0
+  RENODE_VERSION: 1.13.0
   VENV_IREE: venv-iree
   VENV_RENODE: venv-renode
   IREE_HOST_INSTALL: build-iree-host-install
@@ -283,7 +283,7 @@ jobs:
     - name: Run Renode tests
       run: |
         source ${{ env.VENV_RENODE }}/bin/activate
-        ${{ env.RENODE }}/test.sh --variable BASE_DIR:$GITHUB_WORKSPACE --exclude NoCI tests/*.robot
+        ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --exclude NoCI tests/*.robot
 
     - name: Delete CMSIS build artifact for STM32F4xx
       uses: geekyeggo/delete-artifact@v1
