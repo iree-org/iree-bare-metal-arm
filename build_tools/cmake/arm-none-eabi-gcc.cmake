@@ -16,6 +16,18 @@
 
 cmake_minimum_required (VERSION 3.13.4)
 
+# https://android.googlesource.com/platform/ndk/+/d45abffea8df0a52d8623c3aa28fd5f950a94ea7%5E%21/
+#
+# CMake invokes the toolchain file twice during the first build, but only once
+# during subsequent rebuilds. This was causing the various flags to be added
+# twice on the first build, and on a rebuild ninja would see only one set of the
+# flags and rebuild the world.
+# https://github.com/android-ndk/ndk/issues/323
+if(ARM_NONE_EABI_GCC_TOOLCHAIN_INCLUDED)
+	return()
+endif(ARM_NONE_EABI_GCC_TOOLCHAIN_INCLUDED)
+set(ARM_NONE_EABI_GCC_TOOLCHAIN_INCLUDED TRUE)
+
 set(CMAKE_CROSSCOMPILING TRUE)
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm CACHE STRING "" FORCE)
