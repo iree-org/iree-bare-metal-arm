@@ -21,7 +21,7 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
   list(APPEND _TRANSLATE_ARGS "--iree-input-type=mhlo")
   list(APPEND _TRANSLATE_ARGS "--iree-mlir-to-vm-bytecode-module")
   list(APPEND _TRANSLATE_ARGS "--iree-hal-target-backends=vmvx")
-  list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/iree_simple_embedding/simple_embedding_test.mlir")
+  list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir")
   list(APPEND _TRANSLATE_ARGS "-o")
   list(APPEND _TRANSLATE_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
 
