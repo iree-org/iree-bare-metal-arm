@@ -20,6 +20,8 @@ option(BUILD_IHEX "Build ihex files in addition to ELF files" ON)
 option(USE_UART1 "Initializes UART1" OFF)
 option(USE_UART2 "Initializes UART2" OFF)
 
+message(STATUS "Building a ${CMAKE_BUILD_TYPE} build")
+
 if(
   (BUILD_WITH_CMSIS AND BUILD_WITH_CRT0) OR
   (BUILD_WITH_CMSIS AND BUILD_WITH_LIBOPENCM3) OR
