@@ -8,9 +8,16 @@
 
 # Bash script to configure a build for stm32f4.
 
-if [[ $# -ne 2 ]] ; then
+if [[ $# -ne 2 && $# -ne 3 ]] ; then
   echo "Usage: $0 <lib> <device>"
+  echo "   or: $0 <lib> <device> <build type>"
   exit 1
+fi
+
+if [[ $# -eq 3 ]] ; then
+  export BUILD_TYPE=$3
+else
+  export BUILD_TYPE=MinSizeRel
 fi
 
 # Set the path to the GNU Arm Embedded Toolchain
@@ -147,4 +154,5 @@ cmake -GNinja \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
       -DUSE_UART2=ON \
+      -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
       ..
