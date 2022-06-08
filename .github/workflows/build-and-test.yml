@@ -97,12 +97,7 @@ jobs:
       if: steps.cache-snapshot.outputs.cache-hit != 'true'
       run: |
         git submodule update --init -- third_party/iree
-        cd third_party/iree
-        git submodule update --init -- third_party/googletest
-        git submodule update --init -- third_party/flatcc
-        git submodule update --init -- third_party/libyaml
-        git submodule update --init -- third_party/vulkan_headers
-        cd ../../
+        ./build_tools/init_iree_submodules.sh
         mkdir ${{ env.IREE_HOST_INSTALL }}-build
         mkdir -p ${{ env.IREE_HOST_INSTALL }}/bin
         cd ${{ env.IREE_HOST_INSTALL }}-build

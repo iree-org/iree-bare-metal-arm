@@ -20,9 +20,7 @@ You need CMake and the [Arm GNU Toolchain](https://developer.arm.com/tools-and-s
 git clone https://github.com/iml130/iree-bare-metal-arm.git
 cd iree-bare-metal-arm
 git submodule update --init
-cd third_party/iree
-git submodule update --init
-cd ../../
+./build_tools/init_iree_submodules.sh
 ```
 > Note:<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;The submodules used within IREE themself include submodules, so that we advice to avoid an recursive update.
@@ -86,6 +84,7 @@ cd build-iree-host-tools
 cmake -GNinja \
       -DCMAKE_C_COMPILER=clang \
       -DCMAKE_CXX_COMPILER=clang++ \
+      -DIREE_ERROR_ON_MISSING_SUBMODULES=OFF \
       -DIREE_HAL_DRIVER_DEFAULTS=OFF \
       -DIREE_BUILD_COMPILER=OFF \
       -DIREE_BUILD_SAMPLES=OFF \
