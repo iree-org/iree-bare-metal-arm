@@ -1,0 +1,3 @@
+-f https://github.com/google/iree/releases/tag/candidate-20220518.142
+iree-tools-tf==20220518.142
+iree-tools-tflite==20220518.142
