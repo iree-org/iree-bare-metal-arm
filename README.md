@@ -35,35 +35,7 @@ You will need an installation of IREE on your host machine.
 One option is to build IREE on your host machine.
 Another option is to install a snapshot build and to compile some additional tools.
 
-##### Option A: Build IREE
-
-The lines below can be used to build IREE from the already cloned submodule:
-
-```shell
-mkdir build-iree-host
-cd build-iree-host
-
-cmake -GNinja \
-      -DCMAKE_C_COMPILER=clang \
-      -DCMAKE_CXX_COMPILER=clang++ \
-      -DIREE_HAL_DRIVER_DEFAULTS=OFF \
-      -DIREE_HAL_DRIVER_DYLIB_SYNC=ON \
-      -DIREE_HAL_DRIVER_VMVX_SYNC=ON \
-      -DIREE_HAL_DRIVER_VMVX=ON \
-      -DIREE_TARGET_BACKEND_DEFAULTS=OFF \
-      -DIREE_TARGET_BACKEND_DYLIB_LLVM_AOT=ON \
-      -DIREE_TARGET_BACKEND_VMVX=ON \
-      -DIREE_BUILD_SAMPLES=OFF \
-      -DIREE_BUILD_TESTS=OFF \
-      -DCMAKE_INSTALL_PREFIX=../build-iree-host-install \
-      ../third_party/iree/
-cmake --build . --target install
-cd ..
-```
-
-For further information, see the [Getting started](https://google.github.io/iree/building-from-source/getting-started/) guide.
-
-##### Option B: Install a Snapshot
+##### Install a Snapshot
 
 The snapshot can be installed via the following commands:
 
@@ -98,6 +70,34 @@ cp build_tools/embed_data/generate_embed_data ../build-iree-host-install/bin
 cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
 cd ..
 ```
+
+##### Alternative: Build IREE from Source
+
+The lines below can be used to build IREE from the already cloned submodule:
+
+```shell
+mkdir build-iree-host
+cd build-iree-host
+
+cmake -GNinja \
+      -DCMAKE_C_COMPILER=clang \
+      -DCMAKE_CXX_COMPILER=clang++ \
+      -DIREE_HAL_DRIVER_DEFAULTS=OFF \
+      -DIREE_HAL_DRIVER_DYLIB_SYNC=ON \
+      -DIREE_HAL_DRIVER_VMVX_SYNC=ON \
+      -DIREE_HAL_DRIVER_VMVX=ON \
+      -DIREE_TARGET_BACKEND_DEFAULTS=OFF \
+      -DIREE_TARGET_BACKEND_DYLIB_LLVM_AOT=ON \
+      -DIREE_TARGET_BACKEND_VMVX=ON \
+      -DIREE_BUILD_SAMPLES=OFF \
+      -DIREE_BUILD_TESTS=OFF \
+      -DCMAKE_INSTALL_PREFIX=../build-iree-host-install \
+      ../third_party/iree/
+cmake --build . --target install
+cd ..
+```
+
+For further information, see the [Getting started](https://google.github.io/iree/building-from-source/getting-started/) guide.
 
 #### Target Support
 
