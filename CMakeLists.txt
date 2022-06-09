@@ -13,7 +13,6 @@ project(iree-bare-metal-arm VERSION 1.0 LANGUAGES C ASM)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 option(BUILD_WITH_CMSIS "Builds the sample with CMSIS" OFF)
-option(BUILD_WITH_CRT0 "Builds the sample with crt0.s" OFF)
 option(BUILD_WITH_LIBOPENCM3 "Builds the sample with libopencm3" OFF)
 option(BUILD_BINARY "Build binary files in addition to ELF files" ON)
 option(BUILD_IHEX "Build ihex files in addition to ELF files" ON)
@@ -22,16 +21,12 @@ option(USE_UART2 "Initializes UART2" OFF)
 
 message(STATUS "Building a ${CMAKE_BUILD_TYPE} build")
 
-if(
-  (BUILD_WITH_CMSIS AND BUILD_WITH_CRT0) OR
-  (BUILD_WITH_CMSIS AND BUILD_WITH_LIBOPENCM3) OR
-  (BUILD_WITH_CRT0 AND BUILD_WITH_LIBOPENCM3)
-)
-  message(FATAL_ERROR "Only one of CMSIS, crt0.s or libopencm3 can be used at the same time")
+if(BUILD_WITH_CMSIS AND BUILD_WITH_LIBOPENCM3)
+  message(FATAL_ERROR "Only one of CMSIS or libopencm3 can be used at the same time")
 endif()
 
-if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_CRT0 AND NOT BUILD_WITH_LIBOPENCM3)
-  message(FATAL_ERROR "Either set BUILD_WITH_CMSIS, BUILD_WITH_CRT0 or BUILD_WITH_LIBOPENCM3 to ON")
+if(NOT BUILD_WITH_CMSIS AND NOT BUILD_WITH_LIBOPENCM3)
+  message(FATAL_ERROR "Either set BUILD_WITH_CMSIS or BUILD_WITH_LIBOPENCM3 to ON")
 endif()
 
 # Define ARM_TARGET property
@@ -45,11 +40,6 @@ if(NOT ARM_TARGET IN_LIST ARM_TARGET_VALUES)
   message(FATAL_ERROR "${ARM_TARGET} is not supported!")
 else()
   message(STATUS "Building samples for ${ARM_TARGET}")
-endif()
-
-# Check if the combination of library and target is supported
-if(NOT (ARM_TARGET STREQUAL "STM32F407" OR ARM_TARGET STREQUAL "STM32F4XX") AND BUILD_WITH_CRT0)
-  message(FATAL_ERROR "Devices other than STM32F407 or STM32F4XX are not supported by crt0.s")
 endif()
 
 if(NOT (ARM_TARGET MATCHES "^STM32F4") AND BUILD_WITH_LIBOPENCM3)
@@ -118,7 +108,6 @@ add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
 add_subdirectory(build_tools/third_party/cmsis_device_f4 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/cmsis_device_f7 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/cmsis_device_l4 EXCLUDE_FROM_ALL)
-add_subdirectory(build_tools/third_party/custom_crt0 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/ethos-u-core-platform EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/libopencm3 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/nrfx EXCLUDE_FROM_ALL)
