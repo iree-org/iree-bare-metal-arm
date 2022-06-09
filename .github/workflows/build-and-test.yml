@@ -97,7 +97,7 @@ jobs:
       if: steps.cache-snapshot.outputs.cache-hit != 'true'
       run: |
         git submodule update --init -- third_party/iree
-        ./build_tools/init_iree_submodules.sh
+        ./build_tools/update_iree_submodules.sh
         mkdir ${{ env.IREE_HOST_INSTALL }}-build
         mkdir -p ${{ env.IREE_HOST_INSTALL }}/bin
         cd ${{ env.IREE_HOST_INSTALL }}-build
