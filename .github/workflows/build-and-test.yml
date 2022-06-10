@@ -182,29 +182,6 @@ jobs:
           build-cmsis/samples/static_library/sample_static_library.elf
           build-cmsis/samples/static_library/sample_static_library_c.elf
 
-    - name: Build with crt0.s for STM32F4xx
-      run: |
-        source ${{ env.VENV_IREE }}/bin/activate
-        mkdir build-crt0
-        cd build-crt0
-        export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
-        ../build_tools/configure_build.sh crt0 stm32f4xx
-        cmake --build . --target \
-          sample_vmvx_sync \
-          sample_embedded_sync \
-          sample_static_library \
-          sample_static_library_c
-
-    - name: Upload crt0.s build artifact for STM32F4xx
-      uses: actions/upload-artifact@master
-      with:
-        name: crt0-stm32f4xx-build-artifact
-        path: |
-          build-crt0/samples/simple_embedding/sample_vmvx_sync.elf
-          build-crt0/samples/simple_embedding/sample_embedded_sync.elf
-          build-crt0/samples/static_library/sample_static_library.elf
-          build-crt0/samples/static_library/sample_static_library_c.elf
-
     - name: Build with libopencm3 for STM32F4xx
       run: |
         source ${{ env.VENV_IREE }}/bin/activate
@@ -263,12 +240,6 @@ jobs:
         name: cmsis-stm32f4xx-build-artifact
         path: build-cmsis/samples
 
-    - name: Download crt0.s build artifact for STM32F4xx
-      uses: actions/download-artifact@master
-      with:
-        name: crt0-stm32f4xx-build-artifact
-        path: build-crt0/samples
-
     - name: Download libopencm3 build artifact for STM32F4xx
       uses: actions/download-artifact@master
       with:
@@ -284,11 +255,6 @@ jobs:
       uses: geekyeggo/delete-artifact@v1
       with:
         name: cmsis-stm32f4xx-build-artifact
-
-    - name: Delete crt0.s build artifact for STM32F4xx
-      uses: geekyeggo/delete-artifact@v1
-      with:
-        name: crt0-stm32f4xx-build-artifact
 
     - name: Delete libopencm3 build artifact for STM32F4xx
       uses: geekyeggo/delete-artifact@v1

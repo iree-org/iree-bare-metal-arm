@@ -11,7 +11,7 @@ import os
 
 commit_hash = os.environ.get("GITHUB_SHA", None)
 
-libs = ["cmsis", "crt0", "libopencm3"]
+libs = ["cmsis", "libopencm3"]
 targets = {
     "sample_vmvx_sync.elf": os.path.join("samples", "simple_embedding"),
     "sample_embedded_sync.elf": os.path.join("samples", "simple_embedding"),
