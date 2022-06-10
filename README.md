@@ -184,7 +184,7 @@ You can use [Renode](https://renode.io/) to execute the created binary.
 
 ```shell
 wget https://github.com/renode/renode/releases/download/v1.13.0/renode-1.13.0.linux-portable.tar.gz
-tar -xvzf renode-1.12.0.linux-portable.tar.gz
+tar -xvzf renode-1.13.0.linux-portable.tar.gz
 ```
 Execution is done via the interactive Renode shell (for headless execution see [here](https://github.com/renode/renode/issues/138)):
 
