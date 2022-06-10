@@ -20,14 +20,15 @@ You need CMake and the [Arm GNU Toolchain](https://developer.arm.com/tools-and-s
 git clone https://github.com/iml130/iree-bare-metal-arm.git
 cd iree-bare-metal-arm
 git submodule update --init
-./build_tools/init_iree_submodules.sh
+./build_tools/update_iree_submodules.sh
 ```
 > Note:<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;The submodules used within IREE themself include submodules, so that we advice to avoid an recursive update.
 
 > Note:<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;It may happen that new submodules are added to IREE.<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;Thus it might not be sufficient to only pull the latest master and you may need update the submodules manually.
+> &nbsp;&nbsp;&nbsp;&nbsp;It may happen that IREE submodules need to be updated.<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;Thus it might not be sufficient to only pull the latest master.<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;You can (re)run [`build_tools/update_iree_submodules.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/update_iree_submodules.sh) to update IREE's submodules.
 
 #### Host Build
 
