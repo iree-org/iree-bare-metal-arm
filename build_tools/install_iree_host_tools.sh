@@ -8,18 +8,22 @@
 
 # Bash script to build / install the IREE host tools.
 
+if [ "${VIRTUAL_ENV}" != "" ]; then
+  echo "$0 cannot be executed in a venv since it creates a new venv."
+  exit 1;
+fi
 
 PATH_TO_SCRIPT="`dirname $0`"
 PATH_TO_REQUIREMENTS="`realpath ${PATH_TO_SCRIPT}/../requirements.txt`"
 IREE_VERSION="`sed -n 2p ${PATH_TO_REQUIREMENTS} | sed 's/.*=//'`"
 
-echo ${IREE_VERSION}
+echo "Installing IREE host tools candidate-${IREE_VERSION}"
 
 python3 -m venv venv-iree-snapshot-${IREE_VERSION}
 source venv-iree-snapshot-${IREE_VERSION}/bin/activate
 pip3 install -r requirements.txt
 
-mkdir build-iree-host-tools-${IREE_VERSION}
+mkdir -p build-iree-host-tools-${IREE_VERSION}
 ln -sfn build-iree-host-tools-${IREE_VERSION} build-iree-host-tools
 
 mkdir -p build-iree-host-install-${IREE_VERSION}/bin
@@ -43,3 +47,8 @@ cmake --build . --target generate_embed_data iree-flatcc-cli
 cp build_tools/embed_data/generate_embed_data ../build-iree-host-install/bin
 cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
 cd ..
+
+echo ""
+echo "Installed IREE snapshot to 'venv-iree-snapshot-${IREE_VERSION}'"
+echo "Copied IREE tools to 'build-iree-host-install-${IREE_VERSION}'"
+echo "Created a symbolic link to 'build-iree-host-install-${IREE_VERSION}' with the name 'build-iree-host-install'"\
