@@ -107,6 +107,7 @@ add_definitions(-DFLATCC_USE_GENERIC_ALIGNED_ALLOC)
 
 add_subdirectory(build_tools/third_party/cmsis_device_f4 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/cmsis_device_f7 EXCLUDE_FROM_ALL)
+add_subdirectory(build_tools/third_party/cmsis_device_h7 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/cmsis_device_l4 EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/ethos-u-core-platform EXCLUDE_FROM_ALL)
 add_subdirectory(build_tools/third_party/libopencm3 EXCLUDE_FROM_ALL)
