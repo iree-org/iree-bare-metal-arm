@@ -33,10 +33,13 @@ git submodule update --init
 #### Host Build
 
 You will need an installation of IREE on your host machine.
-One option is to build IREE on your host machine.
-Another option is to install a snapshot build and to compile some additional tools.
+We recommend to install a snapshot and to only build some additional tools.
+Another option is to build everything on your host machine.
 
 ##### Install a Snapshot
+
+> TL;DR:<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;You can use [`build_tools/install_iree_host_tools.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/install_iree_host_tools.sh) to install the host build. Make sure you active the virtual environment afterwards.
 
 The snapshot can be installed via the following commands:
 
@@ -102,7 +105,12 @@ For further information, see the [Getting started](https://google.github.io/iree
 
 #### Target Support
 
-At the moment, the samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html):
+The samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html)
+and for the Arm [Corstone-300](https://developer.arm.com/Processors/Corstone-300).
+
+##### STM32 Targets
+
+At the moment, the samples can be build for the following [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html):
 
  * STM32F407
  * STM32F411xE
@@ -138,7 +146,14 @@ When using CMSIS and building for STM32L476, the clock can be configured in two 
 The internal clock `HSI` can either be used with or without using a phase-locked loop (PLL).
 To configure the clock set `CLOCK_SOURCE` to `HSI` or `PLL_HSI`. The option defaults to `HSI`. The options `HSE` and `PLL_HSE` are not supported since the [NUCLEO-L476RG](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board does not allow to use the clock of the attached ST-LINK as the external clock by default. The STM32L476 also has an internal multi-speed clock `MSI` which is not supported.
 
+#### Corstone-300 Target
+
+The Corstone-300 target is only supported with CMSIS.
+
 #### Target Build
+
+To build for the desired target specify the `ARM_TARGET` (as listed above) and set `ARM_CPU` accordingly.
+The toolchain file supports building for the CPUs `cortex-m4`, `cortex-m7-sp` (equivalent to `cortex-m7`), `cortex-m7-dp` and `cortex-m55`.
 
 ```shell
 mkdir build
@@ -206,3 +221,8 @@ This example also comes with a robot test file:
 cd renode_1.13.0_portable
 ./test.sh --variable BASE_DIR:${PATH_TO_REPOSITORY_ROOT} ${PATH_TO_REPOSITORY_ROOT}/tests/vmvx_sample.robot
 ```
+
+### Test with a Fixed Virtual Platform
+
+The samples build for Corstone-300 can also be tested with an Arm Ecosystem Fixed Virtual Platform (FVP).
+The Corstone-300 Ecosysten FVP can be downloaded from the [Arm Ecosystem FVP download page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps).

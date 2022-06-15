@@ -49,6 +49,7 @@ cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin
 cd ..
 
 echo ""
-echo "Installed IREE snapshot to 'venv-iree-snapshot-${IREE_VERSION}'"
-echo "Copied IREE tools to 'build-iree-host-install-${IREE_VERSION}'"
-echo "Created a symbolic link to 'build-iree-host-install-${IREE_VERSION}' with the name 'build-iree-host-install'"\
+echo -e "Installed IREE snapshot to '\033[36mvenv-iree-snapshot-${IREE_VERSION}\033[m'"
+echo -e "\033[32mMake sure to active the virtual environment before building the samples\033[m"
+echo -e "Copied IREE tools to '\033[36mbuild-iree-host-install-${IREE_VERSION}\033[m'"
+echo -e "Created a symbolic link to '\033[36mbuild-iree-host-install-${IREE_VERSION}\033[m' with the name '\033[36mbuild-iree-host-install\033[m'"
