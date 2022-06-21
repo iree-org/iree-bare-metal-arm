@@ -14,14 +14,14 @@ if [ "${VIRTUAL_ENV}" != "" ]; then
 fi
 
 PATH_TO_SCRIPT="`dirname $0`"
-PATH_TO_REQUIREMENTS="`realpath ${PATH_TO_SCRIPT}/../requirements.txt`"
-IREE_VERSION="`sed -n 2p ${PATH_TO_REQUIREMENTS} | sed 's/.*=//'`"
+PATH_TO_REPO="`realpath ${PATH_TO_SCRIPT}/../`"
+IREE_VERSION="`sed -n 2p ${PATH_TO_REPO}/requirements.txt | sed 's/.*=//'`"
 
 echo "Installing IREE host tools candidate-${IREE_VERSION}"
 
 python3 -m venv venv-iree-snapshot-${IREE_VERSION}
 source venv-iree-snapshot-${IREE_VERSION}/bin/activate
-pip3 install -r requirements.txt
+pip3 install -r ${PATH_TO_REPO}/requirements.txt
 
 mkdir -p build-iree-host-tools-${IREE_VERSION}
 ln -sfn build-iree-host-tools-${IREE_VERSION} build-iree-host-tools
@@ -41,7 +41,7 @@ cmake -GNinja \
       -DIREE_BUILD_SAMPLES=OFF \
       -DIREE_BUILD_TESTS=OFF \
       -DCMAKE_INSTALL_PREFIX=../build-iree-host-install \
-      ../third_party/iree/
+      ${PATH_TO_REPO}/third_party/iree/
 cmake --build . --target generate_embed_data iree-flatcc-cli
 
 cp build_tools/embed_data/generate_embed_data ../build-iree-host-install/bin
