@@ -27,7 +27,7 @@ git submodule update --init
 
 > Note:<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;It may happen that IREE submodules need to be updated.<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;Thus it might not be sufficient to only pull the latest master.<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;Thus it might not be sufficient to only pull the latest main branch.<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;You can (re)run [`build_tools/update_iree_submodules.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/update_iree_submodules.sh) to update IREE's submodules.
 
 #### Host Build
@@ -76,6 +76,15 @@ cd ..
 ```
 
 ##### Alternative: Build IREE from Source
+
+You need to close all of IREE's submodules to build the host tools yourself.
+Running `build_tools/update_iree_submodules.sh` is not sufficient. Update all submodules by running:
+
+```shell
+cd third_party/iree
+git submodule update --init
+cd ../../
+```
 
 The lines below can be used to build IREE from the already cloned submodule:
 
