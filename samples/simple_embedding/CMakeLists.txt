@@ -7,7 +7,7 @@
 # VMVX sample, float
 #-------------------------------------------------------------------------------
 
-if(IREE_HAL_DRIVER_VMVX_SYNC)
+if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
 
   add_executable(sample_vmvx_sync "")
 
@@ -21,7 +21,7 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
   list(APPEND _TRANSLATE_ARGS "--iree-input-type=mhlo")
   list(APPEND _TRANSLATE_ARGS "--iree-mlir-to-vm-bytecode-module")
   list(APPEND _TRANSLATE_ARGS "--iree-hal-target-backends=vmvx")
-  list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/iree_simple_embedding/simple_embedding_test.mlir")
+  list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir")
   list(APPEND _TRANSLATE_ARGS "-o")
   list(APPEND _TRANSLATE_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
 
@@ -64,9 +64,9 @@ if(IREE_HAL_DRIVER_VMVX_SYNC)
       simple_embedding_test_bytecode_module_vmvx
       iree::base
       iree::hal
+      iree::hal::drivers::local_sync::sync_driver
       iree::hal::local
       iree::hal::local::loaders::vmvx_module_loader
-      iree::hal::local::sync_driver
       iree::modules::hal
       iree::vm
       iree::vm::bytecode_module
@@ -141,9 +141,9 @@ target_link_libraries(sample_embedded_sync
     simple_embedding_test_bytecode_module_dylib
     iree::base
     iree::hal
+    iree::hal::drivers::local_sync::sync_driver
     iree::hal::local
-    iree::hal::local::loaders::embedded_library_loader
-    iree::hal::local::sync_driver
+    iree::hal::local::loaders::embedded_elf_loader
     iree::modules::hal
     iree::vm
     iree::vm::bytecode_module
