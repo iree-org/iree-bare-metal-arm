@@ -1,6 +1,9 @@
 # Build artifacts
 build/
-build-*/
+build-*
+
+# Python Virtual Environments
+venv-iree-*/
 
 # Visual Studio Code files
 .vscode/
