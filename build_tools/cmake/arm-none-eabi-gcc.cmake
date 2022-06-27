@@ -74,6 +74,12 @@ elseif(ARM_CPU STREQUAL "cortex-m55")
   list(APPEND ARM_COMPILER_FLAGS "-mthumb -mcpu=cortex-m55 -mfloat-abi=hard -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until  -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
 endif()
 
+if(ARM_CPU STREQUAL "cortex-m55")
+  set(IREE_LLVM_TARGET_TRIPLE "armv8.1m.main-pc-linux-elf")
+else()
+  set(IREE_LLVM_TARGET_TRIPLE "armv7em-pc-linux-elf")
+endif()
+
 set(CMAKE_C_FLAGS             "${ARM_COMPILER_FLAGS} ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS           "${ARM_COMPILER_FLAGS} ${ARM_COMPILER_FLAGS_CXX} ${CMAKE_CXX_FLAGS}")
 set(CMAKE_ASM_FLAGS           "${ARM_COMPILER_FLAGS} ${CMAKE_ASM_FLAGS}")
