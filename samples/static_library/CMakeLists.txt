@@ -22,7 +22,7 @@ list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-float-abi=hard")
 list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-embedded=false")
 list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-static")
 list(APPEND _TRANSLATE_ARGS "--iree-llvm-static-library-output-path=simple_mul.o")
-list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/iree_static_library/simple_mul.mlir")
+list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/static_library/simple_mul.mlir")
 list(APPEND _TRANSLATE_ARGS "-o")
 list(APPEND _TRANSLATE_ARGS "simple_mul.vmfb")
 
@@ -74,8 +74,8 @@ target_link_libraries(sample_static_library
   PRIVATE
     simple_mul_c
     iree::runtime
+    iree::hal::drivers::local_sync::sync_driver
     iree::hal::local::loaders::static_library_loader
-    iree::hal::local::sync_driver
     simple_mul
     ${CONDITIONAL_DEP}
     utils
@@ -98,7 +98,7 @@ list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-float-abi=hard")
 list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-embedded=false")
 list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-static")
 list(APPEND _TRANSLATE_ARGS "--iree-llvm-static-library-output-path=simple_mul_c_module.o")
-list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/iree_static_library/simple_mul.mlir")
+list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/static_library/simple_mul.mlir")
 list(APPEND _TRANSLATE_ARGS "-o")
 list(APPEND _TRANSLATE_ARGS "simple_mul_emitc.h")
 
@@ -145,8 +145,8 @@ target_link_libraries(sample_static_library_c
   PRIVATE
     simple_mul_c_module
     iree::runtime
+    iree::hal::drivers::local_sync::sync_driver
     iree::hal::local::loaders::static_library_loader
-    iree::hal::local::sync_driver
     iree::vm::shims_emitc
     ${CONDITIONAL_DEP}
     utils
