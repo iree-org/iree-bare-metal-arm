@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include <errno.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <unistd.h>
 
