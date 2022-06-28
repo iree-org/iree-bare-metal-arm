@@ -124,7 +124,6 @@ At the moment, the samples can be build for the following [STM32 32-bit Arm Cort
  * STM32F407
  * STM32F411xE
  * STM32F446
- * STM32F746
  * STM32L476
 
 Best support is provided for boards with the
@@ -144,7 +143,7 @@ and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
 
 When using CMSIS and building for STM32411xE or STM32F446, one can select with UART to use.
 UART1 and UART2 can be initialized by setting `USE_UART1` and `USE_UART2` to `ON`.
-For STM32F407 and STM32F746 only UART2 is supported.
+For STM32F407 only UART2 is supported.
 
 
 When using CMSIS and building for one of the supported STM32F4 MCUs, the clock can be configured in four ways.
