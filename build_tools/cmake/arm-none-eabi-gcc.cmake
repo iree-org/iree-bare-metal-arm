@@ -47,6 +47,18 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_EXE_LINKER_FLAGS "-specs=nosys.specs" CACHE INTERNAL "")
 
+# Define ARM_CPU property
+set(ARM_CPU cortex-m4 CACHE STRING "CPU for which to compile")
+set(ARM_CPU_VALUES "cortex-m4;cortex-m7;cortex-m55" CACHE INTERNAL "List of possible CPUs")
+set_property(CACHE ARM_CPU PROPERTY STRINGS ${ARM_CPU_VALUES})
+string(TOLOWER "${ARM_CPU}" ARM_CPU)
+
+# Check if the CPU is supported
+if(NOT ARM_CPU IN_LIST ARM_CPU_VALUES)
+  message(FATAL_ERROR "${ARM_CPU} is not supported!")
+else()
+  message(STATUS "Building for ${ARM_CPU}")
+endif()
 
 set(CMAKE_C_COMPILER "${ARM_TOOLCHAIN_ROOT}/bin/arm-none-eabi-gcc")
 set(CMAKE_CXX_COMPILER "${ARM_TOOLCHAIN_ROOT}/bin/arm-none-eabi-g++")
