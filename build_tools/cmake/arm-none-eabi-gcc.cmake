@@ -75,19 +75,23 @@ set(ARM_LINKER_FLAGS "-lc -lm ${CUSTOM_ARM_LINKER_FLAGS} -T ${LINKER_SCRIPT}")
 set(ARM_LINKER_FLAGS_EXE)
 
 if(ARM_CPU STREQUAL "cortex-m4")
-  list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16")
 elseif(ARM_CPU STREQUAL "cortex-m7")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -march=armv7e-m -mfloat-abi=hard")
   # The FPU is selected based on the ARM_TARGET.
   if(ARM_TARGET STREQUAL "STM32F746")
     # Single-precision FPU
-    list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv5-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+    set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mfpu=fpv5-sp-d16")
   else()
     # Single- and double-precision FPU
-    list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv5-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+    set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mfpu=fpv5-d16")
   endif()
 elseif(ARM_CPU STREQUAL "cortex-m55")
-  list(APPEND ARM_COMPILER_FLAGS "-mthumb -mcpu=cortex-m55 -mfloat-abi=hard -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until  -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -mcpu=cortex-m55 -mfloat-abi=hard")
 endif()
+
+set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until")
+set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
 
 if(ARM_CPU STREQUAL "cortex-m55")
   set(IREE_LLVM_TARGET_TRIPLE "armv8.1m.main-pc-linux-elf")
