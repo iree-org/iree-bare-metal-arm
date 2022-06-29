@@ -78,7 +78,7 @@ target_link_libraries(sample_static_library
     iree::hal::drivers::local_sync::sync_driver
     iree::hal::local::loaders::static_library_loader
     simple_mul
-    ${CONDITIONAL_DEP}
+    firmware
     utils
 )
 
@@ -150,7 +150,7 @@ target_link_libraries(sample_static_library_c
     iree::hal::drivers::local_sync::sync_driver
     iree::hal::local::loaders::static_library_loader
     iree::vm::shims_emitc
-    ${CONDITIONAL_DEP}
+    firmware
     utils
 )
 
