@@ -162,7 +162,7 @@ The Corstone-300 target is only supported with CMSIS.
 #### Target Build
 
 To build for the desired target specify the `ARM_TARGET` (as listed above) and set `ARM_CPU` accordingly.
-The toolchain file supports building for the CPUs `cortex-m4`, `cortex-m7-sp` (equivalent to `cortex-m7`), `cortex-m7-dp` and `cortex-m55`.
+The toolchain file supports building for the CPUs `cortex-m4`, `cortex-m7` (defaults to the DP FPU) and `cortex-m55`.
 
 ```shell
 mkdir build
