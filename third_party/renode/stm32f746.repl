@@ -8,7 +8,3 @@ flash: @ sysbus 0x08000000
 
 sram: @ sysbus 0x20000000
     size: 0x50000
-
-// Renode 1.12 does not define usart2 yet
-usart2: UART.STM32F7_USART @ sysbus 0x40004400
-    -> nvic@38
