@@ -22,11 +22,11 @@ endif()
 
 if(EXISTS ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
   # Use `iree-compile` if installed to IREE_HOST_BINARY_ROOT.
-  set(_TRANSLATE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
+  set(_COMPILE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
 else()
   # Use `iree-compile` provided via a snapshot.
-  find_program(_TRANSLATE_TOOL_EXECUTABLE iree-compile)
-  if(_TRANSLATE_TOOL_EXECUTABLE STREQUAL _TRANSLATE_TOOL_EXECUTABLE-NOTFOUND)
+  find_program(_COMPILE_TOOL_EXECUTABLE iree-compile)
+  if(_COMPILE_TOOL_EXECUTABLE STREQUAL _COMPILE_TOOL_EXECUTABLE-NOTFOUND)
     message(FATAL_ERROR "Could not find iree-compile.")
   endif()
 endif()
