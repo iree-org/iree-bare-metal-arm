@@ -17,17 +17,17 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
       device_vmvx_sync.c
   )
 
-  set(_TRANSLATE_ARGS)
-  list(APPEND _TRANSLATE_ARGS "--iree-input-type=mhlo")
-  list(APPEND _TRANSLATE_ARGS "--iree-mlir-to-vm-bytecode-module")
-  list(APPEND _TRANSLATE_ARGS "--iree-hal-target-backends=vmvx")
-  list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir")
-  list(APPEND _TRANSLATE_ARGS "-o")
-  list(APPEND _TRANSLATE_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
+  set(_COMPILE_ARGS)
+  list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
+  list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
+  list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=vmvx")
+  list(APPEND _COMPILE_ARGS "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir")
+  list(APPEND _COMPILE_ARGS "-o")
+  list(APPEND _COMPILE_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
 
   add_custom_command(
     OUTPUT "simple_embedding_test_bytecode_module_vmvx.vmfb"
-    COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
+    COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
   )
 
   set(_GEN_EMBED_ARGS)
@@ -91,23 +91,23 @@ target_sources(sample_embedded_sync
     device_embedded_sync.c
 )
 
-set(_TRANSLATE_ARGS)
-list(APPEND _TRANSLATE_ARGS "--iree-input-type=mhlo")
-list(APPEND _TRANSLATE_ARGS "--iree-mlir-to-vm-bytecode-module")
-list(APPEND _TRANSLATE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-float-abi=hard")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-debug-symbols=false")
-list(APPEND _TRANSLATE_ARGS "--iree-vm-bytecode-module-strip-source-map=true")
-list(APPEND _TRANSLATE_ARGS "--iree-vm-emit-polyglot-zip=false")
-list(APPEND _TRANSLATE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/simple_embedding_int_test.mlir")
-list(APPEND _TRANSLATE_ARGS "-o")
-list(APPEND _TRANSLATE_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
+set(_COMPILE_ARGS)
+list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
+list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
+list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-float-abi=hard")
+list(APPEND _COMPILE_ARGS "--iree-llvm-debug-symbols=false")
+list(APPEND _COMPILE_ARGS "--iree-vm-bytecode-module-strip-source-map=true")
+list(APPEND _COMPILE_ARGS "--iree-vm-emit-polyglot-zip=false")
+list(APPEND _COMPILE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/simple_embedding_int_test.mlir")
+list(APPEND _COMPILE_ARGS "-o")
+list(APPEND _COMPILE_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
 
 add_custom_command(
   OUTPUT "simple_embedding_test_module_dylib_arm_32.vmfb"
-  COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
+  COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
 )
 
 set(_GEN_EMBED_ARGS)

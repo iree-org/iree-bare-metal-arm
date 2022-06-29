@@ -14,25 +14,25 @@ target_sources(sample_static_library
     create_bytecode_module.c
 )
 
-set(_TRANSLATE_ARGS)
-list(APPEND _TRANSLATE_ARGS "--iree-mlir-to-vm-bytecode-module")
-list(APPEND _TRANSLATE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-float-abi=hard")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-embedded=false")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-static")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-static-library-output-path=simple_mul.o")
-list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/static_library/simple_mul.mlir")
-list(APPEND _TRANSLATE_ARGS "-o")
-list(APPEND _TRANSLATE_ARGS "simple_mul.vmfb")
+set(_COMPILE_ARGS)
+list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
+list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-float-abi=hard")
+list(APPEND _COMPILE_ARGS "--iree-llvm-link-embedded=false")
+list(APPEND _COMPILE_ARGS "--iree-llvm-link-static")
+list(APPEND _COMPILE_ARGS "--iree-llvm-static-library-output-path=simple_mul.o")
+list(APPEND _COMPILE_ARGS "${IREE_SOURCE_DIR}/samples/static_library/simple_mul.mlir")
+list(APPEND _COMPILE_ARGS "-o")
+list(APPEND _COMPILE_ARGS "simple_mul.vmfb")
 
 add_custom_command(
   OUTPUT
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.h
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.o
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.vmfb
-  COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
+  COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
 )
 
 add_library(simple_mul
@@ -91,25 +91,25 @@ add_ihex(sample_static_library)
 
 add_executable(sample_static_library_c "")
 
-set(_TRANSLATE_ARGS)
-list(APPEND _TRANSLATE_ARGS "--iree-mlir-to-vm-c-module")
-list(APPEND _TRANSLATE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-target-float-abi=hard")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-embedded=false")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-link-static")
-list(APPEND _TRANSLATE_ARGS "--iree-llvm-static-library-output-path=simple_mul_c_module.o")
-list(APPEND _TRANSLATE_ARGS "${IREE_SOURCE_DIR}/samples/static_library/simple_mul.mlir")
-list(APPEND _TRANSLATE_ARGS "-o")
-list(APPEND _TRANSLATE_ARGS "simple_mul_emitc.h")
+set(_COMPILE_ARGS)
+list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-c-module")
+list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
+list(APPEND _COMPILE_ARGS "--iree-llvm-target-float-abi=hard")
+list(APPEND _COMPILE_ARGS "--iree-llvm-link-embedded=false")
+list(APPEND _COMPILE_ARGS "--iree-llvm-link-static")
+list(APPEND _COMPILE_ARGS "--iree-llvm-static-library-output-path=simple_mul_c_module.o")
+list(APPEND _COMPILE_ARGS "${IREE_SOURCE_DIR}/samples/static_library/simple_mul.mlir")
+list(APPEND _COMPILE_ARGS "-o")
+list(APPEND _COMPILE_ARGS "simple_mul_emitc.h")
 
 add_custom_command(
   OUTPUT
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.h
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.o
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_emitc.h
-  COMMAND ${_TRANSLATE_TOOL_EXECUTABLE} ${_TRANSLATE_ARGS}
+  COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
 )
 
 add_library(simple_mul_c_module
