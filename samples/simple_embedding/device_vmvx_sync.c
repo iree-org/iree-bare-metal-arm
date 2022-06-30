@@ -4,7 +4,7 @@
 // See https://llvm.org/LICENSE.txt for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-// A example of setting up the vmvx-sync driver.
+// A example of setting up the local-sync driver using VMVX for execution.
 
 #include <stddef.h>
 
@@ -27,8 +27,9 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
   IREE_RETURN_IF_ERROR(iree_vm_instance_create(host_allocator, &instance));
 
   iree_hal_executable_loader_t* loader = NULL;
-  iree_status_t status =
-      iree_hal_vmvx_module_loader_create(instance, host_allocator, &loader);
+  iree_status_t status = iree_hal_vmvx_module_loader_create(
+      instance, /*user_module_count=*/0, /*user_modules=*/NULL, host_allocator,
+      &loader);
   iree_vm_instance_release(instance);
 
   // Use the default host allocator for buffer allocations.
