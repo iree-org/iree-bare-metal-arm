@@ -70,7 +70,7 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
       iree::modules::hal
       iree::vm
       iree::vm::bytecode_module
-      ${CONDITIONAL_DEP}
+      firmware
       utils
   )
 
@@ -148,7 +148,7 @@ target_link_libraries(sample_embedded_sync
     iree::modules::hal
     iree::vm
     iree::vm::bytecode_module
-    ${CONDITIONAL_DEP}
+    firmware
     utils
 )
 

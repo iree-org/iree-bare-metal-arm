@@ -47,6 +47,18 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_EXE_LINKER_FLAGS "-specs=nosys.specs" CACHE INTERNAL "")
 
+# Define ARM_CPU property
+set(ARM_CPU cortex-m4 CACHE STRING "CPU for which to compile")
+set(ARM_CPU_VALUES "cortex-m4;cortex-m7;cortex-m55" CACHE INTERNAL "List of possible CPUs")
+set_property(CACHE ARM_CPU PROPERTY STRINGS ${ARM_CPU_VALUES})
+string(TOLOWER "${ARM_CPU}" ARM_CPU)
+
+# Check if the CPU is supported
+if(NOT ARM_CPU IN_LIST ARM_CPU_VALUES)
+  message(FATAL_ERROR "${ARM_CPU} is not supported!")
+else()
+  message(STATUS "Building for ${ARM_CPU}")
+endif()
 
 set(CMAKE_C_COMPILER "${ARM_TOOLCHAIN_ROOT}/bin/arm-none-eabi-gcc")
 set(CMAKE_CXX_COMPILER "${ARM_TOOLCHAIN_ROOT}/bin/arm-none-eabi-g++")
@@ -63,19 +75,23 @@ set(ARM_LINKER_FLAGS "-lc -lm ${CUSTOM_ARM_LINKER_FLAGS} -T ${LINKER_SCRIPT}")
 set(ARM_LINKER_FLAGS_EXE)
 
 if(ARM_CPU STREQUAL "cortex-m4")
-  list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv4-sp-d16")
 elseif(ARM_CPU STREQUAL "cortex-m7")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -march=armv7e-m -mfloat-abi=hard")
   # The FPU is selected based on the ARM_TARGET.
   if(ARM_TARGET STREQUAL "STM32F746")
     # Single-precision FPU
-    list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv5-sp-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+    set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mfpu=fpv5-sp-d16")
   else()
     # Single- and double-precision FPU
-    list(APPEND ARM_COMPILER_FLAGS "-mthumb -march=armv7e-m -mfloat-abi=hard -mfpu=fpv5-d16 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+    set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mfpu=fpv5-d16")
   endif()
 elseif(ARM_CPU STREQUAL "cortex-m55")
-  list(APPEND ARM_COMPILER_FLAGS "-mthumb -mcpu=cortex-m55 -mfloat-abi=hard -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until  -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -mcpu=cortex-m55 -mfloat-abi=hard")
 endif()
+
+set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until")
+set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -Wl,--gc-sections -ffunction-sections -fdata-sections -mno-unaligned-access")
 
 if(ARM_CPU STREQUAL "cortex-m55")
   set(IREE_LLVM_TARGET_TRIPLE "armv8.1m.main-pc-linux-elf")
