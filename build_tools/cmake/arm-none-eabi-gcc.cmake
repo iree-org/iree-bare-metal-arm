@@ -87,7 +87,7 @@ elseif(ARM_CPU STREQUAL "cortex-m7")
     set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mfpu=fpv5-d16")
   endif()
 elseif(ARM_CPU STREQUAL "cortex-m55")
-  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -mcpu=cortex-m55 -mfloat-abi=hard")
+  set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -mcpu=cortex-m55 -mfloat-abi=softfp")
 endif()
 
 set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until")
@@ -95,8 +95,10 @@ set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -Wl,--gc-sections -ffunction-secti
 
 if(ARM_CPU STREQUAL "cortex-m55")
   set(IREE_LLVM_TARGET_TRIPLE "armv8.1m.main-pc-linux-elf")
+  set(IREE_LLVM_TARGET_FLOAT_ABI "default")
 else()
   set(IREE_LLVM_TARGET_TRIPLE "armv7em-pc-linux-elf")
+  set(IREE_LLVM_TARGET_FLOAT_ABI "hard")
 endif()
 
 set(CMAKE_C_FLAGS             "${ARM_COMPILER_FLAGS} ${CMAKE_C_FLAGS}")
