@@ -1,3 +1,3 @@
--f https://github.com/iree-org/iree/releases/tag/candidate-20220706.196
-iree-tools-tf==20220706.196
-iree-tools-tflite==20220706.196
+-f https://github.com/iree-org/iree/releases/tag/candidate-20220713.203
+iree-tools-tf==20220713.203
+iree-tools-tflite==20220713.203
