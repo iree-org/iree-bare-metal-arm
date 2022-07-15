@@ -171,6 +171,7 @@ jobs:
           sample_embedded_sync \
           sample_static_library \
           sample_static_library_c \
+          mnist_static_library \
           mnist_static_library_c
 
     - name: Upload CMSIS build artifact for STM32F4xx
@@ -182,6 +183,7 @@ jobs:
           build-cmsis/samples/simple_embedding/sample_embedded_sync.elf
           build-cmsis/samples/static_library/sample_static_library.elf
           build-cmsis/samples/static_library/sample_static_library_c.elf
+          build-cmsis/samples/vision_inference/mnist_static_library.elf
           build-cmsis/samples/vision_inference/mnist_static_library_c.elf
 
     - name: Build with libopencm3 for STM32F4xx
