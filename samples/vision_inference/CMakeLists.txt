@@ -65,7 +65,7 @@ if(NOT BUILD_WITH_LIBOPENCM3)
 
   set_target_properties(mnist
     PROPERTIES
-    LINKER_LANGUAGE C
+      LINKER_LANGUAGE C
   )
 
   set(_GEN_EMBED_ARGS)
@@ -157,7 +157,7 @@ target_compile_definitions(mnist_c_module
 
 set_target_properties(mnist_c_module
   PROPERTIES
-  LINKER_LANGUAGE C
+    LINKER_LANGUAGE C
 )
 
 target_sources(mnist_static_library_c
