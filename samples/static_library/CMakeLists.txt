@@ -37,12 +37,13 @@ add_custom_command(
 
 add_library(simple_mul
   STATIC
-  ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.o)
+    ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.o
+)
 
-set_target_properties(
-  simple_mul
+set_target_properties(simple_mul
   PROPERTIES
-  LINKER_LANGUAGE C)
+    LINKER_LANGUAGE C
+)
 
 set(_GEN_EMBED_ARGS)
 list(APPEND _GEN_EMBED_ARGS "--output_header=simple_mul_c.h")
@@ -114,7 +115,7 @@ add_custom_command(
 
 add_library(simple_mul_c_module
   STATIC
-  ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.o)
+    ${CMAKE_CURRENT_BINARY_DIR}/simple_mul_c_module.o)
 
 target_sources(simple_mul_c_module
   PRIVATE
@@ -127,10 +128,10 @@ target_compile_definitions(simple_mul_c_module
     EMITC_IMPLEMENTATION
 )
 
-set_target_properties(
-  simple_mul_c_module
+set_target_properties(simple_mul_c_module
   PROPERTIES
-  LINKER_LANGUAGE C)
+    LINKER_LANGUAGE C
+)
 
 target_sources(sample_static_library_c
   PRIVATE
