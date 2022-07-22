@@ -94,7 +94,7 @@ target_sources(sample_embedded_sync
 set(_COMPILE_ARGS)
 list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
 list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
-list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=dylib-llvm-aot")
+list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-float-abi=${IREE_LLVM_TARGET_FLOAT_ABI}")
