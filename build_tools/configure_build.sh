@@ -45,15 +45,19 @@ case $1 in
     ;;
 esac
 
+# Get path
+PATH_TO_SCRIPT="`dirname $0`"
+PATH_TO_REPO="`realpath ${PATH_TO_SCRIPT}/../`"
+
 # Set path to linker script
 case $2 in
   stm32f407)
     echo "Building for STM32F407"
     export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ]; then
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-cmsis.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f407xg-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-libopencm3.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f407xg-libopencm3.ld"
     fi
     ;;
 
@@ -61,9 +65,9 @@ case $2 in
     echo "Building for STM32F411xE"
     export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ]; then
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-cmsis.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-libopencm3.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-libopencm3.ld"
     fi
     ;;
   
@@ -71,9 +75,9 @@ case $2 in
     echo "Building for STM32F446"
     export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ]; then
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-cmsis.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f446xe-libopencm3.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-libopencm3.ld"
     fi
     ;;
 
@@ -81,30 +85,30 @@ case $2 in
     echo "Building for STM32F4xx, high memory"
     export ARM_CPU="cortex-m4"
     if [ "$1" == "cmsis" ]; then
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xxxx-cmsis.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f4xxxx-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f4xxxx-libopencm3.ld`"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f4xxxx-libopencm3.ld"
     fi
     ;;
   
   stm32f746)
     echo "Building for STM32F746"
     export ARM_CPU="cortex-m7"
-    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f746xg-cmsis.ld`"
+    export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f746xg-cmsis.ld"
     ;;
   
   stm32l476)
     echo "Building for STM32L476"
     export ARM_CPU="cortex-m4"
-    export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32l476xg-cmsis.ld`"
+    export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32l476xg-cmsis.ld"
     ;;
 
   corstone-300)
     echo "Building for Corstone-300"
     export ARM_CPU="cortex-m55"
-    ${PATH_TO_ARM_TOOLCHAIN}/bin/arm-none-eabi-gcc -E -x c -P -C -o platform_parsed.ld "`realpath ../third_party/ethos-u-core-platform/targets/corstone-300/platform.ld`"
+    ${PATH_TO_ARM_TOOLCHAIN}/bin/arm-none-eabi-gcc -E -x c -P -C -o platform_parsed.ld "${PATH_TO_REPO}/third_party/ethos-u-core-platform/targets/corstone-300/platform.ld"
     export PATH_TO_LINKER_SCRIPT="`realpath platform_parsed.ld`"
-    patch platform_parsed.ld `realpath ../build_tools/platform_parsed.patch`
+    patch platform_parsed.ld ${PATH_TO_REPO}/build_tools/platform_parsed.patch
     ;;
 
   *)
@@ -137,7 +141,7 @@ fi
 # Configure project
 cmake -GNinja \
       -DBUILD_WITH_${BUILD_WITH}=ON \
-      -DCMAKE_TOOLCHAIN_FILE="`realpath ../build_tools/cmake/arm-none-eabi-gcc.cmake`" \
+      -DCMAKE_TOOLCHAIN_FILE="${PATH_TO_REPO}/build_tools/cmake/arm-none-eabi-gcc.cmake" \
       -DARM_TOOLCHAIN_ROOT="${PATH_TO_ARM_TOOLCHAIN}" \
       -DARM_CPU="${ARM_CPU}" \
       -DARM_TARGET="${2^^}" \
