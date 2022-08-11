@@ -140,7 +140,7 @@ Depending on whether you build with libopencm3 or CMSIS, you need to pass the co
 and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
 
 
-When using CMSIS and building for STM32411xE or STM32F446, one can select with UART to use.
+When using CMSIS and building for STM32411xE or STM32F446, one can select which UART to use.
 UART1 and UART2 can be initialized by setting `USE_UART1` and `USE_UART2` to `ON`.
 For STM32F407 and STM32F746 only UART2 is supported.
 
