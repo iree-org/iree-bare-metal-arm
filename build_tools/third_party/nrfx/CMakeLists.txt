@@ -20,11 +20,17 @@ target_sources(nrfx_nrf52840
 target_include_directories(nrfx_nrf52840
   PUBLIC
     ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
-  PRIVATE
+    ${nrfx_DIR}
+    ${nrfx_DIR}/drivers/include/
+    ${nrfx_DIR}/hal/
+    ${nrfx_DIR}/templates/
     ${nrfx_DIR}/mdk/
 )
 
 target_compile_definitions(nrfx_nrf52840
-  PRIVATE
+  PUBLIC
     NRF52840_XXAA
 )
+
+# Allow ld to find generic linker script
+target_link_directories(nrfx_nrf52840 INTERFACE "${nrfx_DIR}/mdk/")

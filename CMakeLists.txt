@@ -16,6 +16,7 @@ option(BUILD_WITH_CMSIS "Builds the sample with CMSIS" OFF)
 option(BUILD_WITH_LIBOPENCM3 "Builds the sample with libopencm3" OFF)
 option(BUILD_BINARY "Build binary files in addition to ELF files" ON)
 option(BUILD_IHEX "Build ihex files in addition to ELF files" ON)
+option(USE_UART0 "Initializes UART0" OFF)
 option(USE_UART1 "Initializes UART1" OFF)
 option(USE_UART2 "Initializes UART2" OFF)
 
@@ -31,7 +32,7 @@ endif()
 
 # Define ARM_TARGET property
 set(ARM_TARGET STM32F407 CACHE STRING "Target for which the samples are build")
-set(ARM_TARGET_VALUES "STM32F407;STM32F411XE;STM32F446;STM32F4XX;STM32F746;STM32L476;CORSTONE-300" CACHE INTERNAL "List of possible targets")
+set(ARM_TARGET_VALUES "NRF52840;STM32F407;STM32F411XE;STM32F446;STM32F4XX;STM32F746;STM32L476;CORSTONE-300" CACHE INTERNAL "List of possible targets")
 set_property(CACHE ARM_TARGET PROPERTY STRINGS ${ARM_TARGET_VALUES})
 string(TOUPPER "${ARM_TARGET}" ARM_TARGET)
 
@@ -46,9 +47,17 @@ if(NOT (ARM_TARGET MATCHES "^STM32F4") AND BUILD_WITH_LIBOPENCM3)
   message(FATAL_ERROR "Only STM32F4 series devices are supported via libopencm3")
 endif()
 
+# We don't support UART0 on any STM32 board
+if(ARM_TARGET MATCHES "^STM32" AND USE_UART0)
+  message(FATAL_ERROR "UART0 is not supported for STM32 boards")
+endif()
 # We don't support UART1 on STM32F4 Discovery kit
 if(ARM_TARGET STREQUAL "STM32F407" AND USE_UART1)
   message(FATAL_ERROR "UART1 is not supported for STM32F407")
+endif()
+# We don't support UART1 and UART2 on NRF52840
+if(ARM_TARGET STREQUAL "NRF52840" AND (USE_UART1 OR USE_UART2))
+  message(FATAL_ERROR "UART1 and UART2 are not supported for NF528400")
 endif()
 
 # Define CLOCK_SOURCE property
@@ -122,7 +131,7 @@ if(BUILD_WITH_CMSIS)
   if(ARM_TARGET STREQUAL "CORSTONE-300")
     add_subdirectory(build_tools/third_party/ethos-u-core-platform EXCLUDE_FROM_ALL)
   endif()
-  if(ARM_TARGET MATCHES "^NRFX")
+  if(ARM_TARGET MATCHES "^NRF")
     add_subdirectory(build_tools/third_party/nrfx EXCLUDE_FROM_ALL)
   endif()
 endif()
