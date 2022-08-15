@@ -20,10 +20,7 @@ target_sources(nrfx_nrf52840
 target_include_directories(nrfx_nrf52840
   PUBLIC
     ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
-    ${nrfx_DIR}
-    ${nrfx_DIR}/drivers/include/
-    ${nrfx_DIR}/hal/
-    ${nrfx_DIR}/templates/
+  PRIVATE
     ${nrfx_DIR}/mdk/
 )
 
@@ -34,3 +31,31 @@ target_compile_definitions(nrfx_nrf52840
 
 # Allow ld to find generic linker script
 target_link_directories(nrfx_nrf52840 INTERFACE "${nrfx_DIR}/mdk/")
+
+#-------------------------------------------------------------------------------
+# nRF UART
+#-------------------------------------------------------------------------------
+
+add_library(nrfx_uart INTERFACE "")
+
+target_sources(nrfx_uart
+  INTERFACE
+    ${nrfx_DIR}/drivers/src/nrfx_uart.c
+)
+
+target_include_directories(nrfx_uart
+  INTERFACE
+    ${nrfx_DIR}
+    ${nrfx_DIR}/drivers/include/
+    ${nrfx_DIR}/hal/
+    ${nrfx_DIR}/templates/
+    ${nrfx_DIR}/mdk/
+)
+
+if(USE_UART0)
+  target_compile_definitions(nrfx_uart
+    INTERFACE
+      NRFX_UART_ENABLED
+      NRFX_UART0_ENABLED
+  )
+endif()

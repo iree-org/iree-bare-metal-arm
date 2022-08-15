@@ -2,11 +2,9 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-set(nrfx_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/nrfx/")
-
 if(BUILD_WITH_CMSIS)
   if(ARM_TARGET STREQUAL "NRF52840")
-    set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/nrf52840_cmsis.c ${nrfx_DIR}/drivers/src/nrfx_uart.c)
+    set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/nrf52840_cmsis.c)
   elseif(ARM_TARGET MATCHES "^STM32F4")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4_cmsis.c)
   elseif(ARM_TARGET MATCHES "^STM32F7")
@@ -25,15 +23,12 @@ target_sources(utils INTERFACE
   ${UTILS_SRC}
 )
 
+if(ARM_TARGET STREQUAL "NRF52840")
+  target_link_libraries(utils INTERFACE nrfx_uart)
+endif()
+
 if(USE_UART0)
   target_compile_definitions(utils INTERFACE USE_UART0)
-  if(ARM_TARGET STREQUAL "NRF52840")
-    target_compile_definitions(utils
-      INTERFACE
-        NRFX_UART_ENABLED
-        NRFX_UART0_ENABLED
-    )
-  endif()
 endif()
 
 if(USE_UART1)
