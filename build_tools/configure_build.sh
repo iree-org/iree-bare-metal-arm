@@ -51,6 +51,12 @@ PATH_TO_REPO="`realpath ${PATH_TO_SCRIPT}/../`"
 
 # Set path to linker script
 case $2 in
+  nrf52840)
+    echo "Building for NRF52840"
+    export ARM_CPU="cortex-m4"
+    export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/nrfx/mdk/nrf52840_xxaa.ld"
+    ;;
+
   stm32f407)
     echo "Building for STM32F407"
     export ARM_CPU="cortex-m4"
@@ -113,6 +119,7 @@ case $2 in
 
   *)
     echo "Unknown device. Supported devices are"
+    echo "  'nrf52840'"
     echo "  'stm32f407'"
     echo "  'stm32f411xe'"
     echo "  'stm32f446'"
