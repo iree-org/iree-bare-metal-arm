@@ -179,7 +179,7 @@ cd build
 
 # To build with libopencm3
 # export CUSTOM_ARM_LINKER_FLAGS="-nostartfiles"
-# export PATH_TO_LINKER_SCRIPT="`realpath ../build_tools/stm32f407xg-libopencm3.ld`"
+# export PATH_TO_LINKER_SCRIPT="`realpath ../third_party/libopencm3-custom/stm32f407xg.ld`"
 
 
 # export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"

@@ -63,7 +63,7 @@ case $2 in
     if [ "$1" == "cmsis" ]; then
       export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f407xg-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f407xg-libopencm3.ld"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/libopencm3-custom/stm32f407xg.ld"
     fi
     ;;
 
@@ -73,7 +73,7 @@ case $2 in
     if [ "$1" == "cmsis" ]; then
       export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-libopencm3.ld"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/libopencm3-custom/stm32f446xe.ld"
     fi
     ;;
   
@@ -83,7 +83,7 @@ case $2 in
     if [ "$1" == "cmsis" ]; then
       export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f446xe-libopencm3.ld"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/libopencm3-custom/stm32f446xe.ld"
     fi
     ;;
 
@@ -93,7 +93,7 @@ case $2 in
     if [ "$1" == "cmsis" ]; then
       export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f4xxxx-cmsis.ld"
     else
-      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f4xxxx-libopencm3.ld"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/libopencm3-custom/stm32f4xxxx.ld"
     fi
     ;;
   
