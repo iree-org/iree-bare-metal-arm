@@ -112,7 +112,7 @@ For further information, see the [Getting started](https://iree-org.github.io/ir
 
 #### Target Support
 
-The samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html)
+The samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), for the [Nordic nRF52840 SoC](https://www.nordicsemi.com/products/nrf52840)
 and for the Arm [Corstone-300](https://developer.arm.com/Processors/Corstone-300).
 
 ##### STM32 Targets
@@ -140,7 +140,7 @@ Depending on whether you build with libopencm3 or CMSIS, you need to pass the co
 and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
 
 
-When using CMSIS and building for STM32411xE or STM32F446, one can select with UART to use.
+When using CMSIS and building for STM32411xE or STM32F446, one can select which UART to use.
 UART1 and UART2 can be initialized by setting `USE_UART1` and `USE_UART2` to `ON`.
 For STM32F407 and STM32F746 only UART2 is supported.
 
@@ -152,6 +152,10 @@ To configure the clock set `CLOCK_SOURCE` to `HSI`, `HSE`, `PLL_HSI` or `PLL_HSE
 When using CMSIS and building for STM32L476, the clock can be configured in two ways.
 The internal clock `HSI` can either be used with or without using a phase-locked loop (PLL).
 To configure the clock set `CLOCK_SOURCE` to `HSI` or `PLL_HSI`. The option defaults to `HSI`. The options `HSE` and `PLL_HSE` are not supported since the [NUCLEO-L476RG](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board does not allow to use the clock of the attached ST-LINK as the external clock by default. The STM32L476 also has an internal multi-speed clock `MSI` which is not supported.
+
+##### Nordic Targets
+
+At the moment, the only supported Nordic target is the [nRF52840 DK](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dk) board with a [nRF52840](https://www.nordicsemi.com/products/nrf52840). This target is only supported with CMSIS. The only supported UART is UART0 which can be initialized by setting `USE_UART0` to `ON`.
 
 #### Corstone-300 Target
 

@@ -3,7 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 if(BUILD_WITH_CMSIS)
-  if(ARM_TARGET MATCHES "^STM32F4")
+  if(ARM_TARGET STREQUAL "NRF52840")
+    set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/nrf52840_cmsis.c)
+  elseif(ARM_TARGET MATCHES "^STM32F4")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4_cmsis.c)
   elseif(ARM_TARGET MATCHES "^STM32F7")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f7_cmsis.c)
@@ -20,6 +22,14 @@ add_library(utils INTERFACE "")
 target_sources(utils INTERFACE
   ${UTILS_SRC}
 )
+
+if(ARM_TARGET STREQUAL "NRF52840")
+  target_link_libraries(utils INTERFACE nrfx_uart)
+endif()
+
+if(USE_UART0)
+  target_compile_definitions(utils INTERFACE USE_UART0)
+endif()
 
 if(USE_UART1)
   target_compile_definitions(utils INTERFACE USE_UART1)
