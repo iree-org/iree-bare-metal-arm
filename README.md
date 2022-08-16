@@ -157,7 +157,7 @@ To configure the clock set `CLOCK_SOURCE` to `HSI` or `PLL_HSI`. The option defa
 
 At the moment, the only supported Nordic target is the [nRF52840 DK](https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dk) board with a [nRF52840](https://www.nordicsemi.com/products/nrf52840). This target is only supported with CMSIS. The only supported UART is UART0 which can be initialized by setting `USE_UART0` to `ON`.
 
-#### Corstone-300 Target
+##### Corstone-300 Target
 
 The Corstone-300 target is only supported with CMSIS.
 
