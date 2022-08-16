@@ -1,0 +1,11 @@
+:name: nRF52840
+:description: This script runs the nRF52840.
+
+using sysbus
+$name?="nRF52840"
+mach create $name
+machine LoadPlatformDescription $ORIGIN/nrf52840.repl
+
+cpu PerformanceInMips 125
+
+showAnalyzer sysbus.uart0
