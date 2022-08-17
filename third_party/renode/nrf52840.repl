@@ -1,0 +1,5 @@
+using "platforms/cpus/nrf52840.repl"
+
+uart0: @ sysbus 0x40002000
+    easyDMA: false
+    -> nvic@2
