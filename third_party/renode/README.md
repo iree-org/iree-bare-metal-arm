@@ -1,6 +1,6 @@
 # Renode
 
-This folder contains a subset of files imported from [renode/renode](https://github.com/renode/renode/), adjusted to our needs.
+This folder contains a subset of files imported from [renode/renode](https://github.com/renode/renode/), adjusted to the needs of iree-bare-metal-arm, as well as files originally created in the context of the iree-bare-metal-arm project.
 
 - The file [`nrf52840.repl`](https://github.com/renode/renode/blob/748647ddc8c830d6736b9fb1378ee73b0f30344e/platforms/cpus/nrf52840.repl) was imported at state renode/renode@748647d and modified to the needs of iree-bare-metal-arm.
 - The file [`stm32f407.resc`](https://github.com/renode/renode/blob/4b08e55721d33efaf048c68eca6aabc0846eaf7b/scripts/single-node/stm32f4_discovery.resc) (renamed from `stm32f4_discovery.resc`) was imported at state renode/renode@4b08e55.
