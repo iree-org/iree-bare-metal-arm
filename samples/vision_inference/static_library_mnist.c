@@ -25,11 +25,12 @@
 #include "model_input.h"
 
 extern const iree_hal_executable_library_header_t**
-mnist_linked_llvm_library_query(
+mnist_linked_llvm_cpu_library_query(
     iree_hal_executable_library_version_t max_version,
     const iree_hal_executable_environment_v0_t* environment);
 // A function to create the bytecode or C module.
-extern iree_status_t create_module(iree_vm_module_t** module);
+extern iree_status_t create_module(iree_vm_instance_t* instance,
+                                   iree_vm_module_t** out_module);
 
 extern void print_success();
 
@@ -44,7 +45,7 @@ iree_status_t create_device_with_static_loader(iree_allocator_t host_allocator,
 
   // Register the statically linked executable library.
   const iree_hal_executable_library_query_fn_t libraries[] = {
-      mnist_linked_llvm_library_query,
+      mnist_linked_llvm_cpu_library_query,
   };
   iree_hal_executable_loader_t* library_loader = NULL;
   iree_status_t status = iree_hal_static_library_loader_create(
@@ -107,7 +108,8 @@ iree_status_t Run() {
   iree_vm_module_t* module = NULL;
 
   if (iree_status_is_ok(status)) {
-    status = create_module(&module);
+    status =
+        create_module(iree_runtime_instance_vm_instance(instance), &module);
   }
 
   if (iree_status_is_ok(status)) {

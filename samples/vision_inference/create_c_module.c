@@ -10,8 +10,10 @@
 #include "mnist_emitc.h"
 
 // A function to create the C module.
-iree_status_t create_module(iree_vm_module_t** module) {
-  return module_create(iree_allocator_system(), module);
+iree_status_t create_module(iree_vm_instance_t* instance,
+                            iree_vm_module_t** out_module) {
+  return module_create(instance, iree_vm_instance_allocator(instance),
+                       out_module);
 }
 
 void print_success() { printf("mnist_static_library_run_c passed\n"); }
