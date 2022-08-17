@@ -1,3 +1,3 @@
--f https://github.com/iree-org/iree/releases/tag/candidate-20220731.221
-iree-compiler==20220731.221
+-f https://github.com/iree-org/iree/releases/tag/candidate-20220816.237
+iree-compiler==20220816.237
 Pillow
