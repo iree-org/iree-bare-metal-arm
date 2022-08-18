@@ -198,6 +198,7 @@ jobs:
           sample_embedded_sync \
           sample_static_library \
           sample_static_library_c \
+          mnist_static_library \
           mnist_static_library_c
 
     - name: Upload libopencm3 build artifact for STM32F4xx
@@ -209,6 +210,7 @@ jobs:
           build-libopencm3/samples/simple_embedding/sample_embedded_sync.elf
           build-libopencm3/samples/static_library/sample_static_library.elf
           build-libopencm3/samples/static_library/sample_static_library_c.elf
+          build-libopencm3/samples/vision_inference/mnist_static_library.elf
           build-libopencm3/samples/vision_inference/mnist_static_library_c.elf
 
   test:
