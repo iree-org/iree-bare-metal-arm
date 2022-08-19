@@ -14,6 +14,7 @@ CMSIS
     Output Should Show Success
 
 LIBOPENCM3
+    [tags]  NoNRF
     Run Sample For Library      libopencm3      ${EXECUTABLE}
     Output Should Show Success
 
