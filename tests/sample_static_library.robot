@@ -3,7 +3,7 @@ Suite Setup         Setup
 Suite Teardown      Teardown
 Test Setup          Reset Emulation
 Resource            ${RENODEKEYWORDS}
-Resource            stm32f4xx.resource
+Resource            ${TARGET}.resource
 
 *** Variables ***
 ${EXECUTABLE}       static_library/sample_static_library.elf
@@ -14,6 +14,7 @@ CMSIS
     Output Should Show Success
 
 LIBOPENCM3
+    [tags]  libopencm3
     Run Sample For Library      libopencm3      ${EXECUTABLE}
     Output Should Show Success
 
