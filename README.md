@@ -232,7 +232,7 @@ This example also comes with a robot test file:
 
 ```shell
 cd renode_1.13.0_portable
-./test.sh --variable BASE_DIR:${PATH_TO_REPOSITORY_ROOT} ${PATH_TO_REPOSITORY_ROOT}/tests/vmvx_sample.robot
+./renode-test --variable BASE_DIR:${PATH_TO_REPOSITORY_ROOT} ${PATH_TO_REPOSITORY_ROOT}/tests/vmvx_sample.robot
 ```
 
 ### Test with a Fixed Virtual Platform
