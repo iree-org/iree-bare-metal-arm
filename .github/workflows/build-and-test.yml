@@ -213,8 +213,8 @@ jobs:
           build-libopencm3/samples/vision_inference/mnist_static_library.elf
           build-libopencm3/samples/vision_inference/mnist_static_library_c.elf
 
-  test:
-    name: Test Samples
+  test-stm32f4:
+    name: Test Samples (STM32F4xx)
     needs: [install-renode, build]
     runs-on: ubuntu-20.04
 
