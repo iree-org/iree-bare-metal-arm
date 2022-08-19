@@ -12,7 +12,7 @@ env:
   TOOLCHAIN: gcc-arm-none-eabi
   TOOLCHAIN_VERSION: 11.2-2022.02
   RENODE: renode
-  RENODE_VERSION: 1.13.0
+  RENODE_VERSION: 1.13.1
   VENV_IREE: venv-iree
   VENV_RENODE: venv-renode
   IREE_HOST_INSTALL: build-iree-host-install
