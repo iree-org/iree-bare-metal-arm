@@ -6,7 +6,7 @@ Resource            ${RENODEKEYWORDS}
 Resource            samples.resource
 
 *** Variables ***
-${MACHINE}          STM23F407
+${MACHINE}          STM32F407
 ${PLATFORMFILE}     @${BASE_DIR}/third_party/renode/stm32f407.repl
 ${NAME}             simple_embedding
 ${EXECUTABLE}       sample_vmvx_sync.elf
