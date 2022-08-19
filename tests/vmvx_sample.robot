@@ -3,7 +3,7 @@ Suite Setup         Setup
 Suite Teardown      Teardown
 Test Setup          Reset Emulation
 Resource            ${RENODEKEYWORDS}
-Resource            samples.resource
+Resource            stm32f4xx.resource
 
 *** Variables ***
 ${MACHINE}          STM32F407

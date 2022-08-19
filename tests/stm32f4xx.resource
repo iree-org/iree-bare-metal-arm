@@ -20,7 +20,7 @@ Setup Machine
 Load Sample
     [Arguments]             ${executable}   ${lib}
 
-    Execute Command         sysbus LoadELF @${BASE_DIR}/build-${lib}/samples/${executable}
+    Execute Command         sysbus LoadELF @${BASE_DIR}/build-${lib}-stm32f4xx/samples/${executable}
 
 Run Emulation
     Create Terminal Tester  sysbus.usart2
