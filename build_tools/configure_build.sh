@@ -131,6 +131,17 @@ case $2 in
     ;;
 esac
 
+# Set UART to use
+case $2 in
+  nrf52840)
+    UART=0
+    ;;
+
+  *)
+    UART=2
+    ;;
+esac
+
 # Set the path to the IREE host binary
 export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
 
@@ -159,6 +170,6 @@ cmake -GNinja \
       -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
-      -DUSE_UART2=ON \
+      -DUSE_UART${UART}=ON \
       -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
       ..
