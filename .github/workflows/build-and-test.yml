@@ -159,6 +159,33 @@ jobs:
           ${{ env.IREE_HOST_INSTALL }}
         key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('requirements.txt') }}
 
+    - name: Build with CMSIS for nRF52840
+      run: |
+        source ${{ env.VENV_IREE }}/bin/activate
+        mkdir build-cmsis-nrf52840
+        cd build-cmsis-nrf52840
+        export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
+        ../build_tools/configure_build.sh cmsis nrf52840
+        cmake --build . --target \
+          sample_vmvx_sync \
+          sample_embedded_sync \
+          sample_static_library \
+          sample_static_library_c \
+          mnist_static_library \
+          mnist_static_library_c
+
+    - name: Upload CMSIS build artifact for nRF52840
+      uses: actions/upload-artifact@master
+      with:
+        name: cmsis-nrf52840-build-artifact
+        path: |
+          build-cmsis-nrf52840/samples/simple_embedding/sample_vmvx_sync.elf
+          build-cmsis-nrf52840/samples/simple_embedding/sample_embedded_sync.elf
+          build-cmsis-nrf52840/samples/static_library/sample_static_library.elf
+          build-cmsis-nrf52840/samples/static_library/sample_static_library_c.elf
+          build-cmsis-nrf52840/samples/vision_inference/mnist_static_library.elf
+          build-cmsis-nrf52840/samples/vision_inference/mnist_static_library_c.elf
+
     - name: Build with CMSIS for STM32F4xx
       run: |
         source ${{ env.VENV_IREE }}/bin/activate
