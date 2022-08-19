@@ -162,8 +162,8 @@ jobs:
     - name: Build with CMSIS for STM32F4xx
       run: |
         source ${{ env.VENV_IREE }}/bin/activate
-        mkdir build-cmsis
-        cd build-cmsis
+        mkdir build-cmsis-stm32f4xx
+        cd build-cmsis-stm32f4xx
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
         ../build_tools/configure_build.sh cmsis stm32f4xx
         cmake --build . --target \
@@ -179,18 +179,18 @@ jobs:
       with:
         name: cmsis-stm32f4xx-build-artifact
         path: |
-          build-cmsis/samples/simple_embedding/sample_vmvx_sync.elf
-          build-cmsis/samples/simple_embedding/sample_embedded_sync.elf
-          build-cmsis/samples/static_library/sample_static_library.elf
-          build-cmsis/samples/static_library/sample_static_library_c.elf
-          build-cmsis/samples/vision_inference/mnist_static_library.elf
-          build-cmsis/samples/vision_inference/mnist_static_library_c.elf
+          build-cmsis-stm32f4xx/samples/simple_embedding/sample_vmvx_sync.elf
+          build-cmsis-stm32f4xx/samples/simple_embedding/sample_embedded_sync.elf
+          build-cmsis-stm32f4xx/samples/static_library/sample_static_library.elf
+          build-cmsis-stm32f4xx/samples/static_library/sample_static_library_c.elf
+          build-cmsis-stm32f4xx/samples/vision_inference/mnist_static_library.elf
+          build-cmsis-stm32f4xx/samples/vision_inference/mnist_static_library_c.elf
 
     - name: Build with libopencm3 for STM32F4xx
       run: |
         source ${{ env.VENV_IREE }}/bin/activate
-        mkdir build-libopencm3
-        cd build-libopencm3
+        mkdir build-libopencm3-stm32f4xx
+        cd build-libopencm3-stm32f4xx
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
         ../build_tools/configure_build.sh libopencm3 stm32f4xx
         cmake --build . --target \
@@ -206,12 +206,12 @@ jobs:
       with:
         name: libopencm3-stm32f4xx-build-artifact
         path: |
-          build-libopencm3/samples/simple_embedding/sample_vmvx_sync.elf
-          build-libopencm3/samples/simple_embedding/sample_embedded_sync.elf
-          build-libopencm3/samples/static_library/sample_static_library.elf
-          build-libopencm3/samples/static_library/sample_static_library_c.elf
-          build-libopencm3/samples/vision_inference/mnist_static_library.elf
-          build-libopencm3/samples/vision_inference/mnist_static_library_c.elf
+          build-libopencm3-stm32f4xx/samples/simple_embedding/sample_vmvx_sync.elf
+          build-libopencm3-stm32f4xx/samples/simple_embedding/sample_embedded_sync.elf
+          build-libopencm3-stm32f4xx/samples/static_library/sample_static_library.elf
+          build-libopencm3-stm32f4xx/samples/static_library/sample_static_library_c.elf
+          build-libopencm3-stm32f4xx/samples/vision_inference/mnist_static_library.elf
+          build-libopencm3-stm32f4xx/samples/vision_inference/mnist_static_library_c.elf
 
   test-stm32f4:
     name: Test Samples (STM32F4xx)
@@ -237,13 +237,13 @@ jobs:
       uses: actions/download-artifact@master
       with:
         name: cmsis-stm32f4xx-build-artifact
-        path: build-cmsis/samples
+        path: build-cmsis-stm32f4xx/samples
 
     - name: Download libopencm3 build artifact for STM32F4xx
       uses: actions/download-artifact@master
       with:
         name: libopencm3-stm32f4xx-build-artifact
-        path: build-libopencm3/samples
+        path: build-libopencm3-stm32f4xx/samples
 
     - name: Run Renode tests
       run: |
