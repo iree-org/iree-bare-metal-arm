@@ -3,7 +3,7 @@ Suite Setup         Setup
 Suite Teardown      Teardown
 Test Setup          Reset Emulation
 Resource            ${RENODEKEYWORDS}
-Resource            stm32f4xx.resource
+Resource            ${TARGET}.resource
 
 *** Variables ***
 ${EXECUTABLE}       static_library/sample_static_library_c.elf

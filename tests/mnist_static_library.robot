@@ -3,7 +3,7 @@ Suite Setup         Setup
 Suite Teardown      Teardown
 Test Setup          Reset Emulation
 Resource            ${RENODEKEYWORDS}
-Resource            stm32f4xx.resource
+Resource            ${TARGET}.resource
 
 *** Variables ***
 ${EXECUTABLE}       vision_inference/mnist_static_library.elf
