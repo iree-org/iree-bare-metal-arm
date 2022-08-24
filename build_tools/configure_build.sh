@@ -22,7 +22,7 @@ fi
 
 # Set the path to the GNU Arm Embedded Toolchain
 if [ -z ${PATH_TO_ARM_TOOLCHAIN+x} ]; then
-  export PATH_TO_ARM_TOOLCHAIN="/usr/local/gcc-arm-11.2-2022.02-x86_64-arm-none-eabi"
+  export PATH_TO_ARM_TOOLCHAIN="/usr/local/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi"
 fi
 
 # Set linker flags
