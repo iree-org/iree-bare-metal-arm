@@ -9,8 +9,8 @@ on:
       - main
 
 env:
-  TOOLCHAIN: gcc-arm-none-eabi
-  TOOLCHAIN_VERSION: 11.2-2022.02
+  TOOLCHAIN: arm-none-eabi
+  TOOLCHAIN_VERSION: 11.3.rel1
   RENODE: renode
   RENODE_VERSION: 1.13.1
   VENV_IREE: venv-iree
@@ -28,14 +28,14 @@ jobs:
       uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
       with:
         path: ${{ env.TOOLCHAIN }}
-        key: ${{ runner.os }}-gcc-arm-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
+        key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
 
     - name: Install GNU Arm Embedded Toolchain
       if: steps.cache-toolchain.outputs.cache-hit != 'true'
       run: |
-        wget -q https://developer.arm.com/-/media/Files/downloads/gnu/${{ env.TOOLCHAIN_VERSION }}/binrel/gcc-arm-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz
-        tar xfJ gcc-arm-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz
-        mv gcc-arm-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi ${{ env.TOOLCHAIN }}
+        wget -q https://developer.arm.com/-/media/Files/downloads/gnu/${{ env.TOOLCHAIN_VERSION }}/binrel/arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz
+        tar xfJ arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz
+        mv arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi ${{ env.TOOLCHAIN }}
 
   install-renode:
     name: Install Renode
@@ -148,7 +148,7 @@ jobs:
       uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
       with:
         path: ${{ env.TOOLCHAIN }}
-        key: ${{ runner.os }}-gcc-arm-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
+        key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
 
     - name: Cache IREE Snapshot
       id: cache-snapshot
