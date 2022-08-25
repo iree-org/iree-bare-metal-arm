@@ -103,6 +103,12 @@ case $2 in
     export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32f746xg-cmsis.ld"
     ;;
   
+  stm32l4r5)
+    echo "Building for STM32L4R5"
+    export ARM_CPU="cortex-m4"
+    export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/build_tools/stm32l4r5xi-cmsis.ld"
+    ;;
+
   stm32l476)
     echo "Building for STM32L476"
     export ARM_CPU="cortex-m4"
@@ -125,6 +131,7 @@ case $2 in
     echo "  'stm32f446'"
     echo "  'stm32f4xx'"
     echo "  'stm32f746'"
+    echo "  'stm32l4r5'"
     echo "  'stm32l476'"
     echo "  'corstone-300'"
     exit 1
