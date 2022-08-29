@@ -226,6 +226,15 @@ jobs:
           build-libopencm3-stm32f4xx/samples/vision_inference/mnist_static_library.elf
           build-libopencm3-stm32f4xx/samples/vision_inference/mnist_static_library_c.elf
 
+    - name: Build with CMSIS for STM32L4R5
+      run: |
+        source ${{ env.VENV_IREE }}/bin/activate
+        mkdir build-cmsis-stm32l4r5
+        cd build-cmsis-stm32l4r5
+        export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
+        ../build_tools/configure_build.sh cmsis stm32l4r5
+        cmake --build . --target all
+
   test-nrf52840:
     name: Test Samples (nRF52840)
     needs: [install-renode, build]
