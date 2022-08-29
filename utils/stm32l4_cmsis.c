@@ -13,7 +13,9 @@
 #include "stm32l4xx.h"
 #include "system_stm32l4xx.h"
 
-#if defined(STM32L476xx)
+#if defined(STM32L4R5xx)
+#include "stm32l4r5xx_cmsis.h"
+#elif defined(STM32L476xx)
 #include "stm32l476xx_cmsis.h"
 #endif
 
