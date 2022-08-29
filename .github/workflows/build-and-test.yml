@@ -170,13 +170,7 @@ jobs:
         cd build-cmsis-nrf52840
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
         ../build_tools/configure_build.sh cmsis nrf52840
-        cmake --build . --target \
-          sample_vmvx_sync \
-          sample_embedded_sync \
-          sample_static_library \
-          sample_static_library_c \
-          mnist_static_library \
-          mnist_static_library_c
+        cmake --build . --target all
 
     - name: Upload CMSIS build artifact for nRF52840
       uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
@@ -197,13 +191,7 @@ jobs:
         cd build-cmsis-stm32f4xx
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
         ../build_tools/configure_build.sh cmsis stm32f4xx
-        cmake --build . --target \
-          sample_vmvx_sync \
-          sample_embedded_sync \
-          sample_static_library \
-          sample_static_library_c \
-          mnist_static_library \
-          mnist_static_library_c
+        cmake --build . --target all
 
     - name: Upload CMSIS build artifact for STM32F4xx
       uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
@@ -224,13 +212,7 @@ jobs:
         cd build-libopencm3-stm32f4xx
         export PATH_TO_ARM_TOOLCHAIN="$GITHUB_WORKSPACE/${TOOLCHAIN}"
         ../build_tools/configure_build.sh libopencm3 stm32f4xx
-        cmake --build . --target \
-          sample_vmvx_sync \
-          sample_embedded_sync \
-          sample_static_library \
-          sample_static_library_c \
-          mnist_static_library \
-          mnist_static_library_c
+        cmake --build . --target all
 
     - name: Upload libopencm3 build artifact for STM32F4xx
       uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
