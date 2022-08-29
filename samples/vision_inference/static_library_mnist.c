@@ -177,6 +177,10 @@ iree_status_t Run() {
     }
   }
 
+  // Print statistics (no-op if statistics are not enabled).
+  iree_hal_allocator_statistics_fprint(stdout,
+                                       iree_hal_device_allocator(device));
+
   // Cleanup call and buffers.
   iree_hal_buffer_view_release(ret_buffer_view);
   iree_runtime_call_deinitialize(&call);
