@@ -145,6 +145,10 @@ iree_status_t Run() {
     }
   }
 
+  // Print statistics (no-op if statistics are not enabled).
+  iree_hal_allocator_statistics_fprint(stdout,
+                                       iree_hal_device_allocator(device));
+
   iree_vm_list_release(inputs);
   iree_vm_list_release(outputs);
   iree_hal_device_release(device);

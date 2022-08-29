@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 env:
   TOOLCHAIN: arm-none-eabi
   TOOLCHAIN_VERSION: 11.3.rel1
