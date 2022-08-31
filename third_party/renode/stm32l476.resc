@@ -1,0 +1,11 @@
+:name: STM32L476
+:description: This script runs the STM32L476.
+
+using sysbus
+$name?="STM32L476"
+mach create $name
+machine LoadPlatformDescription $ORIGIN/stm32l476.repl
+
+cpu PerformanceInMips 125
+
+showAnalyzer sysbus.usart2
