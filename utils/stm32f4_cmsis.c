@@ -36,6 +36,9 @@ void clock_setup(void) {
   // Wait for system clock to be ready
   while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI)
     ;
+
+  // Enable power interface clock
+  RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 #elif defined(USE_HSE_CLOCK)
   // Enable HSE clock
   // We do not explicitly set bypass mode to use the external oscillator from
@@ -53,6 +56,9 @@ void clock_setup(void) {
   // Wait for system clock to be ready
   while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSE)
     ;
+
+  // Enable power interface clock
+  RCC->APB1ENR |= RCC_APB1ENR_PWREN;
 #elif defined(USE_PLL_HSI_CLOCK) || defined(USE_PLL_HSE_CLOCK)
 #ifdef USE_PLL_HSI_CLOCK
   // Enable HSI clock

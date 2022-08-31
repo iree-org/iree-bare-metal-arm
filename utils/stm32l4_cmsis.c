@@ -34,6 +34,9 @@ void clock_setup(void) {
   // Wait for system clock to be ready
   while ((RCC->CFGR & RCC_CFGR_SWS) != RCC_CFGR_SWS_HSI)
     ;
+
+  // Enable power interface clock
+  RCC->APB1ENR1 |= RCC_APB1ENR1_PWREN;
 #elif defined(USE_PLL_HSI_CLOCK)
   // Enable HSI clock
   RCC->CR |= RCC_CR_HSION;
