@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 
 #include "uart_stdout.h"
