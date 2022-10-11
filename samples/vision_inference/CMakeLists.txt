@@ -123,6 +123,7 @@ list(APPEND _COMPILE_ARGS "--iree-llvm-target-float-abi=${IREE_LLVM_TARGET_FLOAT
 list(APPEND _COMPILE_ARGS "--iree-llvm-link-embedded=false")
 list(APPEND _COMPILE_ARGS "--iree-llvm-link-static")
 list(APPEND _COMPILE_ARGS "--iree-llvm-static-library-output-path=mnist_c_module.o")
+list(APPEND _COMPILE_ARGS "--iree-vm-target-index-bits=32")
 list(APPEND _COMPILE_ARGS "${IREE_SOURCE_DIR}/samples/models/mnist.mlir")
 list(APPEND _COMPILE_ARGS "-o")
 list(APPEND _COMPILE_ARGS "mnist_emitc.h")
