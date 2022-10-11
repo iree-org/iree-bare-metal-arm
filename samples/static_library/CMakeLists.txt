@@ -15,7 +15,7 @@ target_sources(sample_static_library
 )
 
 set(_COMPILE_ARGS)
-list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
+list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
 list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
@@ -93,7 +93,7 @@ add_ihex(sample_static_library)
 add_executable(sample_static_library_c "")
 
 set(_COMPILE_ARGS)
-list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-c-module")
+list(APPEND _COMPILE_ARGS "--output-format=vm-c")
 list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
