@@ -36,15 +36,15 @@ target_link_directories(nrfx_nrf52840 INTERFACE "${nrfx_DIR}/mdk/")
 # nRF UART
 #-------------------------------------------------------------------------------
 
-add_library(nrfx_uart INTERFACE "")
+add_library(nrfx_uart STATIC "")
 
 target_sources(nrfx_uart
-  INTERFACE
+  PRIVATE
     ${nrfx_DIR}/drivers/src/nrfx_uart.c
 )
 
 target_include_directories(nrfx_uart
-  INTERFACE
+  PUBLIC
     ${nrfx_DIR}
     ${nrfx_DIR}/drivers/include/
     ${nrfx_DIR}/hal/
@@ -54,8 +54,15 @@ target_include_directories(nrfx_uart
 
 if(USE_UART0)
   target_compile_definitions(nrfx_uart
-    INTERFACE
+    PUBLIC
       NRFX_UART_ENABLED
       NRFX_UART0_ENABLED
+  )
+endif()
+
+if(ARM_TARGET STREQUAL "NRF52840")
+  target_link_libraries(nrfx_uart
+    PRIVATE
+      nrfx_nrf52840
   )
 endif()
