@@ -19,8 +19,9 @@ elseif(BUILD_WITH_LIBOPENCM3)
 endif()
 
 add_library(utils STATIC "")
-target_sources(utils PRIVATE
-  ${UTILS_SRC}
+target_sources(utils
+  PRIVATE
+    ${UTILS_SRC}
 )
 
 target_link_libraries(utils
