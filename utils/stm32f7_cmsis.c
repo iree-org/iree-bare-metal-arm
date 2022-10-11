@@ -5,7 +5,6 @@
 // See https://llvm.org/LICENSE.txt for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-#include <errno.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <unistd.h>
@@ -54,27 +53,11 @@ void usart_setup(void) {
   USART2->CR1 |= USART_CR1_TE;
 }
 
-void usart2_send_blocking(uint8_t c) {
+void usart_send_blocking(uint8_t c) {
   USART2->TDR = c;
   // while(!(USART2->SR & (1 << 6)));
   while (!(USART2->ISR & USART_ISR_TC))
     ;
-}
-
-int _write(int file, char* ptr, int len) {
-  int i;
-
-  if (file == STDOUT_FILENO || file == STDERR_FILENO) {
-    for (i = 0; i < len; i++) {
-      if (ptr[i] == '\n') {
-        usart2_send_blocking('\r');
-      }
-      usart2_send_blocking(ptr[i]);
-    }
-    return i;
-  }
-  errno = EIO;
-  return -1;
 }
 
 bool wait_until(uint64_t nanos) { return true; }
