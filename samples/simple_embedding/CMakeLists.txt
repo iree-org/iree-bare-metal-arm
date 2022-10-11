@@ -19,7 +19,7 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
 
   set(_COMPILE_ARGS)
   list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
-  list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
+  list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
   list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=vmvx")
   list(APPEND _COMPILE_ARGS "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir")
   list(APPEND _COMPILE_ARGS "-o")
@@ -93,7 +93,7 @@ target_sources(sample_embedded_sync
 
 set(_COMPILE_ARGS)
 list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
-list(APPEND _COMPILE_ARGS "--iree-mlir-to-vm-bytecode-module")
+list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
 list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
 list(APPEND _COMPILE_ARGS "--iree-llvm-target-cpu=${ARM_CPU}")
