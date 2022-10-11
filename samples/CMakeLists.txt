@@ -2,8 +2,6 @@
 # See https://llvm.org/LICENSE.txt for license information.
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
-add_library(firmware INTERFACE "")
-
 if(BUILD_WITH_CMSIS)
   if(ARM_TARGET STREQUAL "NRF52840")
     set(CONDITIONAL_DEP nrfx_nrf52840)
@@ -26,10 +24,7 @@ elseif(BUILD_WITH_LIBOPENCM3)
   set(CONDITIONAL_DEP stm32f4)
 endif()
 
-target_link_libraries(firmware
-  INTERFACE
-    ${CONDITIONAL_DEP}
-)
+add_library(firmware ALIAS ${CONDITIONAL_DEP})
 
 if(EXISTS ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
   # Use `iree-compile` if installed to IREE_HOST_BINARY_ROOT.
