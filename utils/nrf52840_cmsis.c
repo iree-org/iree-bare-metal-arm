@@ -7,7 +7,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <unistd.h>
 
 #include "nrf_gpio.h"
 #include "nrfx_uart.h"

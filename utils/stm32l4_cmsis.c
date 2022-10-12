@@ -7,7 +7,6 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <unistd.h>
 
 #include "stm32l4xx.h"
 #include "system_stm32l4xx.h"
