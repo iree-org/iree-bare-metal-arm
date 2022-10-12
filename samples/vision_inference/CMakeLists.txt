@@ -102,6 +102,7 @@ target_link_libraries(mnist_static_library
     mnist
     firmware
     utils
+    write
 )
 
 add_binary(mnist_static_library)
@@ -177,6 +178,7 @@ target_link_libraries(mnist_static_library_c
     iree::vm::shims_emitc
     firmware
     utils
+    write
 )
 
 add_binary(mnist_static_library_c)

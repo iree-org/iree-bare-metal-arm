@@ -81,6 +81,7 @@ target_link_libraries(sample_static_library
     simple_mul
     firmware
     utils
+    write
 )
 
 add_binary(sample_static_library)
@@ -154,6 +155,7 @@ target_link_libraries(sample_static_library_c
     iree::vm::shims_emitc
     firmware
     utils
+    write
 )
 
 add_binary(sample_static_library_c)

@@ -5,7 +5,7 @@
 if(BUILD_WITH_CMSIS)
   if(ARM_TARGET STREQUAL "NRF52840")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/nrf52840_cmsis.c)
-    set(UTILS_SRC "${UTILS_SRC};${CMAKE_CURRENT_SOURCE_DIR}/nrf_write_cmsis.c")
+    set(WRITE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/write.c)
   elseif(ARM_TARGET MATCHES "^STM32F4")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4_cmsis.c)
   elseif(ARM_TARGET MATCHES "^STM32F7")
@@ -14,12 +14,18 @@ if(BUILD_WITH_CMSIS)
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32l4_cmsis.c)
   elseif(ARM_TARGET STREQUAL "CORSTONE-300")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/corstone-300.c)
+    # `_write` is provided by `ethos_u_core_platform_corstone-300`
+    set(WRITE_SRC "${CMAKE_CURRENT_BINARY_DIR}/write_dummy.c")
+    file(WRITE ${WRITE_SRC} "")
   endif()
   if(ARM_TARGET MATCHES "^STM32")
-    set(UTILS_SRC "${UTILS_SRC};${CMAKE_CURRENT_SOURCE_DIR}/stm32_write_cmsis.c")
+    set(WRITE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/write_usart.c)
   endif()
 elseif(BUILD_WITH_LIBOPENCM3)
   set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4_libopencm3.c)
+  # `_write` is implemented in `tm32f4_libopencm3.c`
+  set(WRITE_SRC "${CMAKE_CURRENT_BINARY_DIR}/write_dummy.c")
+  file(WRITE ${WRITE_SRC} "")
 endif()
 
 add_library(utils STATIC "")
@@ -58,3 +64,9 @@ elseif(CLOCK_SOURCE STREQUAL "PLL_HSI")
 elseif(CLOCK_SOURCE STREQUAL "PLL_HSE")
   target_compile_definitions(utils PRIVATE USE_PLL_HSE_CLOCK)
 endif()
+
+add_library(write STATIC "")
+target_sources(write
+  PRIVATE
+    ${WRITE_SRC}
+)
