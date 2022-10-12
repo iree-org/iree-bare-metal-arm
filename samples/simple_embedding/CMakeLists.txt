@@ -72,6 +72,7 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
       iree::vm::bytecode_module
       firmware
       utils
+      write
   )
 
   add_binary(sample_vmvx_sync)
@@ -150,6 +151,7 @@ target_link_libraries(sample_embedded_sync
     iree::vm::bytecode_module
     firmware
     utils
+    write
 )
 
 add_binary(sample_embedded_sync)
