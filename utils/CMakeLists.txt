@@ -18,33 +18,39 @@ elseif(BUILD_WITH_LIBOPENCM3)
   set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4_libopencm3.c)
 endif()
 
-add_library(utils INTERFACE "")
-target_sources(utils INTERFACE
-  ${UTILS_SRC}
+add_library(utils STATIC "")
+target_sources(utils
+  PRIVATE
+    ${UTILS_SRC}
+)
+
+target_link_libraries(utils
+  PRIVATE
+    firmware
 )
 
 if(ARM_TARGET STREQUAL "NRF52840")
-  target_link_libraries(utils INTERFACE nrfx_uart)
+  target_link_libraries(utils PRIVATE nrfx_uart)
 endif()
 
 if(USE_UART0)
-  target_compile_definitions(utils INTERFACE USE_UART0)
+  target_compile_definitions(utils PRIVATE USE_UART0)
 endif()
 
 if(USE_UART1)
-  target_compile_definitions(utils INTERFACE USE_UART1)
+  target_compile_definitions(utils PRIVATE USE_UART1)
 endif()
 
 if(USE_UART2)
-  target_compile_definitions(utils INTERFACE USE_UART2)
+  target_compile_definitions(utils PRIVATE USE_UART2)
 endif()
 
 if(CLOCK_SOURCE STREQUAL "HSI")
-  target_compile_definitions(utils INTERFACE USE_HSI_CLOCK)
+  target_compile_definitions(utils PRIVATE USE_HSI_CLOCK)
 elseif(CLOCK_SOURCE STREQUAL "HSE")
-  target_compile_definitions(utils INTERFACE USE_HSE_CLOCK)
+  target_compile_definitions(utils PRIVATE USE_HSE_CLOCK)
 elseif(CLOCK_SOURCE STREQUAL "PLL_HSI")
-  target_compile_definitions(utils INTERFACE USE_PLL_HSI_CLOCK)
+  target_compile_definitions(utils PRIVATE USE_PLL_HSI_CLOCK)
 elseif(CLOCK_SOURCE STREQUAL "PLL_HSE")
-  target_compile_definitions(utils INTERFACE USE_PLL_HSE_CLOCK)
+  target_compile_definitions(utils PRIVATE USE_PLL_HSE_CLOCK)
 endif()
