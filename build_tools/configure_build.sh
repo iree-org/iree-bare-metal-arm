@@ -54,7 +54,9 @@ case $2 in
   nrf52840)
     echo "Building for NRF52840"
     export ARM_CPU="cortex-m4"
-    export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/nrfx/mdk/nrf52840_xxaa.ld"
+    if [ -z ${PATH_TO_LINKER_SCRIPT+x} ]; then
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/nrfx/mdk/nrf52840_xxaa.ld"
+    fi
     ;;
 
   stm32f407)
