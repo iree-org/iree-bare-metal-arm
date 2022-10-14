@@ -46,7 +46,7 @@ void clock_setup(void) {
   // Enable power interface clock
   RCC->APB1ENR1 |= RCC_APB1ENR1_PWREN;
 
-  // Configure voltage scaling to scale 3 (higher performance but higher
+  // Configure voltage scaling to range 1 (higher performance but higher
   // consumption)
   PWR->CR1 |= PWR_CR1_VOS;
 
