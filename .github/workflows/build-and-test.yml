@@ -235,6 +235,18 @@ jobs:
         ../build_tools/configure_build.sh cmsis stm32l4r5
         cmake --build . --target all
 
+    - name: Upload CMSIS build artifact for STM32L4R5
+      uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
+      with:
+        name: cmsis-stm32l4r5-build-artifact
+        path: |
+          build-cmsis-stm32l4r5/samples/simple_embedding/sample_vmvx_sync.elf
+          build-cmsis-stm32l4r5/samples/simple_embedding/sample_embedded_sync.elf
+          build-cmsis-stm32l4r5/samples/static_library/sample_static_library.elf
+          build-cmsis-stm32l4r5/samples/static_library/sample_static_library_c.elf
+          build-cmsis-stm32l4r5/samples/vision_inference/mnist_static_library.elf
+          build-cmsis-stm32l4r5/samples/vision_inference/mnist_static_library_c.elf
+
   test-nrf52840:
     name: Test Samples (nRF52840)
     needs: [install-renode, build]
@@ -317,3 +329,39 @@ jobs:
       uses: geekyeggo/delete-artifact@b73cb986740e466292a536d0e32e2666c56fdeb3 # v1.0.0
       with:
         name: libopencm3-stm32f4xx-build-artifact
+
+  test-stm32l4r5:
+    name: Test Samples (STM32L4R5)
+    needs: [install-renode, build]
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      with:
+        path: ${{ env.REPO }}
+
+    - name: Cache Renode
+      id: cache-renode
+      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      with:
+        path: |
+          ${{ env.VENV_RENODE }}
+          ${{ env.RENODE }}
+        key: ${{ runner.os }}-${{ env.RENODE }}-${{ env.RENODE_VERSION }}
+
+    - name: Download CMSIS build artifact for STM32L4R5
+      uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741 # v3.0.0
+      with:
+        name: cmsis-stm32l4r5-build-artifact
+        path: build-cmsis-stm32l4r5/samples
+
+    - name: Run Renode tests
+      run: |
+        source ${{ env.VENV_RENODE }}/bin/activate
+        ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --variable TARGET:stm32l4r5 --exclude NoCI --exclude libopencm3 tests/*.robot
+
+    - name: Delete CMSIS build artifact for STM32L4R5
+      uses: geekyeggo/delete-artifact@b73cb986740e466292a536d0e32e2666c56fdeb3 # v1.0.0
+      with:
+        name: cmsis-stm32l4r5-build-artifact
