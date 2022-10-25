@@ -1,0 +1,11 @@
+:name: STM32L4R5
+:description: This script runs the STM32L4R5.
+
+using sysbus
+$name?="STM32L4R5"
+mach create $name
+machine LoadPlatformDescription $ORIGIN/stm32l4r5.repl
+
+cpu PerformanceInMips 125
+
+showAnalyzer sysbus.usart2
