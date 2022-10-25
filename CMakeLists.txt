@@ -55,6 +55,10 @@ endif()
 if(ARM_TARGET STREQUAL "STM32F407" AND USE_UART1)
   message(FATAL_ERROR "UART1 is not supported for STM32F407")
 endif()
+# We don't support UART1 on STM32L4R5
+if(ARM_TARGET STREQUAL "STM32L4R5" AND USE_UART1)
+  message(FATAL_ERROR "UART1 is not supported for STM32L4R5")
+endif()
 # We don't support UART1 and UART2 on NRF52840
 if(ARM_TARGET STREQUAL "NRF52840" AND (USE_UART1 OR USE_UART2))
   message(FATAL_ERROR "UART1 and UART2 are not supported for NF528400")
