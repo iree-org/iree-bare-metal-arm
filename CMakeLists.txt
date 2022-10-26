@@ -77,9 +77,9 @@ else()
   message(STATUS "Configuring clock source as ${CLOCK_SOURCE}")
 endif()
 
-# We don't support clock sources HSE and PLL_HSE on STM32L476
-if(ARM_TARGET STREQUAL "STM32L476" AND (CLOCK_SOURCE STREQUAL "HSE" OR CLOCK_SOURCE STREQUAL "PLL_HSE"))
-  message(FATAL_ERROR "Clock sources other than HSI and PLL_HSI are not supported on STM32L476")
+# We don't support clock sources HSE and PLL_HSE on STM32L476 and STM32L4R5
+if(ARM_TARGET MATCHES "^STM32L4" AND (CLOCK_SOURCE STREQUAL "HSE" OR CLOCK_SOURCE STREQUAL "PLL_HSE"))
+  message(FATAL_ERROR "Clock sources other than HSI and PLL_HSI are not supported on STM32L476 and STM32L4R5")
 endif()
 
 # Set executable suffix to elf
