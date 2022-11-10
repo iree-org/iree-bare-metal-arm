@@ -124,6 +124,7 @@ At the moment, the samples can be build for the following [STM32 32-bit Arm Cort
  * STM32F446
  * STM32F746
  * STM32L476
+ * STM32L4R5
 
 Best support is provided for boards with the
 [STM32F411RE](https://www.st.com/en/microcontrollers-microprocessors/stm32f411re.html) or
@@ -142,16 +143,18 @@ and need to specify the appropriate linker script via `PATH_TO_LINKER_SCRIPT`.
 
 When using CMSIS and building for STM32411xE or STM32F446, one can select which UART to use.
 UART1 and UART2 can be initialized by setting `USE_UART1` and `USE_UART2` to `ON`.
-For STM32F407 and STM32F746 only UART2 is supported.
+For STM32F407, STM32F746 and STM32L4R5 only UART2 is supported.
 
 
 When using CMSIS and building for one of the supported STM32F4 MCUs, the clock can be configured in four ways.
 The internal clock `HSI` or the external clock `HSE` can either be used with or without using a phase-locked loop (PLL).
 To configure the clock set `CLOCK_SOURCE` to `HSI`, `HSE`, `PLL_HSI` or `PLL_HSE`. The option defaults to `HSI`.
 
-When using CMSIS and building for STM32L476, the clock can be configured in two ways.
+When using CMSIS and building for STM32L476 or the STM32L4R5, the clock can be configured in two ways.
 The internal clock `HSI` can either be used with or without using a phase-locked loop (PLL).
-To configure the clock set `CLOCK_SOURCE` to `HSI` or `PLL_HSI`. The option defaults to `HSI`. The options `HSE` and `PLL_HSE` are not supported since the [NUCLEO-L476RG](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board does not allow to use the clock of the attached ST-LINK as the external clock by default. The STM32L476 also has an internal multi-speed clock `MSI` which is not supported.
+To configure the clock set `CLOCK_SOURCE` to `HSI` or `PLL_HSI`. The option defaults to `HSI`. The options `HSE` and `PLL_HSE` are not supported on the STM32L476 since the [NUCLEO-L476RG](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html) board does not allow to use the clock of the attached ST-LINK as the external clock by default. The STM32L476 and STM32L4R5 also have other clocks which are not supported.
+
+When using an STM32L4R5 board, unusual behaviour might be encountered where the board locks up when resetting immediately after flashing some samples. This relates to the boards default boot configuration and can be fixed by setting the boot bits `nBOOT0` to `1` and `nSWBOOT` to `0` *once* to select the main flash memory as the boot area. This is best done using the [STM32CubeProgrammer](https://www.st.com/en/development-tools/stm32cubeprog.html).
 
 ##### Nordic Targets
 
