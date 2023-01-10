@@ -29,7 +29,7 @@ jobs:
     steps:
     - name: Cache Toolchain
       id: cache-toolchain
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: ${{ env.TOOLCHAIN }}
         key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
@@ -48,7 +48,7 @@ jobs:
     steps:
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -71,13 +71,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       with:
         path: ${{ env.REPO }}
 
     - name: Cache IREE Snapshot
       id: cache-snapshot
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: |
           ${{ env.VENV_IREE }}
@@ -134,7 +134,7 @@ jobs:
         sudo apt install cmake ninja-build
 
     - name: Checkout repository
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       with:
         path: ${{ env.REPO }}
         submodules: 'true'
@@ -149,14 +149,14 @@ jobs:
 
     - name: Cache Toolchain
       id: cache-toolchain
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: ${{ env.TOOLCHAIN }}
         key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
 
     - name: Cache IREE Snapshot
       id: cache-snapshot
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: |
           ${{ env.VENV_IREE }}
@@ -173,7 +173,7 @@ jobs:
         cmake --build . --target all
 
     - name: Upload CMSIS build artifact for nRF52840
-      uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
+      uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
       with:
         name: cmsis-nrf52840-build-artifact
         path: |
@@ -194,7 +194,7 @@ jobs:
         cmake --build . --target all
 
     - name: Upload CMSIS build artifact for STM32F4xx
-      uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
+      uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
       with:
         name: cmsis-stm32f4xx-build-artifact
         path: |
@@ -215,7 +215,7 @@ jobs:
         cmake --build . --target all
 
     - name: Upload libopencm3 build artifact for STM32F4xx
-      uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
+      uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
       with:
         name: libopencm3-stm32f4xx-build-artifact
         path: |
@@ -236,7 +236,7 @@ jobs:
         cmake --build . --target all
 
     - name: Upload CMSIS build artifact for STM32L4R5
-      uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
+      uses: actions/upload-artifact@0b7f8abb1508181956e8e162db84b466c27e18ce # v3.1.2
       with:
         name: cmsis-stm32l4r5-build-artifact
         path: |
@@ -254,13 +254,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       with:
         path: ${{ env.REPO }}
 
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -268,7 +268,7 @@ jobs:
         key: ${{ runner.os }}-${{ env.RENODE }}-${{ env.RENODE_VERSION }}
 
     - name: Download CMSIS build artifact for nRF52840
-      uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741 # v3.0.0
+      uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
       with:
         name: cmsis-nrf52840-build-artifact
         path: build-cmsis-nrf52840/samples
@@ -279,7 +279,7 @@ jobs:
         ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --variable TARGET:nrf52840 --exclude NoCI --exclude libopencm3 tests/*.robot
 
     - name: Delete CMSIS build artifact for nRF52840
-      uses: geekyeggo/delete-artifact@b73cb986740e466292a536d0e32e2666c56fdeb3 # v1.0.0
+      uses: geekyeggo/delete-artifact@54ab544f12cdb7b71613a16a2b5a37a9ade990af # v2.0.0
       with:
         name: cmsis-nrf52840-build-artifact
 
@@ -290,13 +290,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       with:
         path: ${{ env.REPO }}
 
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -304,13 +304,13 @@ jobs:
         key: ${{ runner.os }}-${{ env.RENODE }}-${{ env.RENODE_VERSION }}
 
     - name: Download CMSIS build artifact for STM32F4xx
-      uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741 # v3.0.0
+      uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
       with:
         name: cmsis-stm32f4xx-build-artifact
         path: build-cmsis-stm32f4xx/samples
 
     - name: Download libopencm3 build artifact for STM32F4xx
-      uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741 # v3.0.0
+      uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
       with:
         name: libopencm3-stm32f4xx-build-artifact
         path: build-libopencm3-stm32f4xx/samples
@@ -321,12 +321,12 @@ jobs:
         ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --variable TARGET:stm32f4xx --exclude NoCI tests/*.robot
 
     - name: Delete CMSIS build artifact for STM32F4xx
-      uses: geekyeggo/delete-artifact@b73cb986740e466292a536d0e32e2666c56fdeb3 # v1.0.0
+      uses: geekyeggo/delete-artifact@54ab544f12cdb7b71613a16a2b5a37a9ade990af # v2.0.0
       with:
         name: cmsis-stm32f4xx-build-artifact
 
     - name: Delete libopencm3 build artifact for STM32F4xx
-      uses: geekyeggo/delete-artifact@b73cb986740e466292a536d0e32e2666c56fdeb3 # v1.0.0
+      uses: geekyeggo/delete-artifact@54ab544f12cdb7b71613a16a2b5a37a9ade990af # v2.0.0
       with:
         name: libopencm3-stm32f4xx-build-artifact
 
@@ -337,13 +337,13 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # v3.0.2
+      uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       with:
         path: ${{ env.REPO }}
 
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@fd5de65bc895cf536527842281bea11763fefd77 # v3.0.8
+      uses: actions/cache@58c146cc91c5b9e778e71775dfe9bf1442ad9a12 # v3.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -351,7 +351,7 @@ jobs:
         key: ${{ runner.os }}-${{ env.RENODE }}-${{ env.RENODE_VERSION }}
 
     - name: Download CMSIS build artifact for STM32L4R5
-      uses: actions/download-artifact@fb598a63ae348fa914e94cd0ff38f362e927b741 # v3.0.0
+      uses: actions/download-artifact@9bc31d5ccc31df68ecc42ccf4149144866c47d8a # v3.0.2
       with:
         name: cmsis-stm32l4r5-build-artifact
         path: build-cmsis-stm32l4r5/samples
@@ -362,6 +362,6 @@ jobs:
         ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --variable TARGET:stm32l4r5 --exclude NoCI --exclude libopencm3 tests/*.robot
 
     - name: Delete CMSIS build artifact for STM32L4R5
-      uses: geekyeggo/delete-artifact@b73cb986740e466292a536d0e32e2666c56fdeb3 # v1.0.0
+      uses: geekyeggo/delete-artifact@54ab544f12cdb7b71613a16a2b5a37a9ade990af # v2.0.0
       with:
         name: cmsis-stm32l4r5-build-artifact
