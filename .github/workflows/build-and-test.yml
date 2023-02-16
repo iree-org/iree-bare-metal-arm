@@ -82,42 +82,22 @@ jobs:
         path: |
           ${{ env.VENV_IREE }}
           ${{ env.IREE_HOST_INSTALL }}
-        key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('requirements.txt') }}
+        key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('iree-release-link.txt') }}
 
-    - name: Install IREE Snapshot
+    - name: Install IREE Dependencies
       if: steps.cache-snapshot.outputs.cache-hit != 'true'
       run: |
         python3 -m venv ${{ env.VENV_IREE }}
         source ${{ env.VENV_IREE }}/bin/activate
         pip install -r requirements.txt
 
-    - name: Install Dependencies
-      if: steps.cache-snapshot.outputs.cache-hit != 'true'
-      run: |
-        sudo apt update
-        sudo apt install cmake clang ninja-build
-
     - name: Install IREE Tools
       if: steps.cache-snapshot.outputs.cache-hit != 'true'
       run: |
-        git submodule update --init -- third_party/iree
-        ./build_tools/update_iree_submodules.sh
-        mkdir ${{ env.IREE_HOST_INSTALL }}-build
-        mkdir -p ${{ env.IREE_HOST_INSTALL }}/bin
-        cd ${{ env.IREE_HOST_INSTALL }}-build
-        cmake -GNinja \
-              -DCMAKE_C_COMPILER=clang \
-              -DCMAKE_CXX_COMPILER=clang++ \
-              -DIREE_ERROR_ON_MISSING_SUBMODULES=OFF \
-              -DIREE_ENABLE_THREADING=OFF \
-              -DIREE_HAL_DRIVER_DEFAULTS=OFF \
-              -DIREE_BUILD_COMPILER=OFF \
-              -DIREE_BUILD_SAMPLES=OFF \
-              -DIREE_BUILD_TESTS=OFF \
-              ../third_party/iree/
-        cmake --build . --target generate_embed_data iree-flatcc-cli
-        cp build_tools/embed_data/generate_embed_data ../${{ env.IREE_HOST_INSTALL }}/bin
-        cp build_tools/third_party/flatcc/iree-flatcc-cli ../${{ env.IREE_HOST_INSTALL }}/bin
+        mkdir ${{ env.IREE_HOST_INSTALL }}
+        wget -i iree-release-link.txt -O iree-dist-linux-x86_64.tar.xz
+        tar xvfJ iree-dist-linux-x86_64.tar.xz -C ${{ env.IREE_HOST_INSTALL }}
+        rm iree-dist-linux-x86_64.tar.xz
 
   build:
     name: Build Samples
@@ -161,7 +141,7 @@ jobs:
         path: |
           ${{ env.VENV_IREE }}
           ${{ env.IREE_HOST_INSTALL }}
-        key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('requirements.txt') }}
+        key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('iree-release-link.txt') }}
 
     - name: Build with CMSIS for nRF52840
       run: |
