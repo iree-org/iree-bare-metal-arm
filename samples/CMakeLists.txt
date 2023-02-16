@@ -37,6 +37,7 @@ else()
   endif()
 endif()
 
+add_subdirectory(mobilenet_v1)
 add_subdirectory(simple_embedding)
 add_subdirectory(simple_vec_mul)
 add_subdirectory(static_library)
