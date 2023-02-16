@@ -208,7 +208,7 @@ cd build
 # export PATH_TO_LINKER_SCRIPT="`realpath ../third_party/libopencm3-custom/stm32f407xg.ld`"
 
 
-# export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
+# export PATH_TO_IREE_HOST_BIN_DIR="`realpath ../build-iree-host-install/bin`"
 
 cmake -GNinja \
 #     -DBUILD_WITH_CMSIS=ON \
@@ -221,7 +221,7 @@ cmake -GNinja \
       -DIREE_HAL_DRIVER_LOCAL_SYNC=ON \
       -DIREE_HAL_EXECUTABLE_LOADER_EMBEDDED_ELF=ON \
       -DIREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE=ON \
-      -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
+      -DIREE_HOST_BIN_DIR="${PATH_TO_IREE_HOST_BIN_DIR}" \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
 #     -DUSE_UART1=ON \
