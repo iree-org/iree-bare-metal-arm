@@ -40,6 +40,11 @@ if [[ $# -eq 0 ]] ; then
   IREE_VERSION="`sed -n 's/.*dist-\(.*\)-linux-x86_64.tar.xz/\1/p' ${PATH_TO_REPO}/iree-release-link.txt`"
 else
   IREE_VERSION="`sed -n 2p ${PATH_TO_REPO}/requirements-compiler.txt | sed 's/.*=//'`"
+  if [[ "`echo ${IREE_VERSION} | sed 's/.*[.]//'`" -gt "395" ]] ; then
+    echo "Installation via pip is only supported up to version '20230112.395'."
+    echo "Install IREE via the iree-dist tarball instead."
+    exit 1
+  fi
 fi
 
 echo "Installing IREE host tools candidate-${IREE_VERSION}"

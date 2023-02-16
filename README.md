@@ -59,6 +59,10 @@ rm iree-dist-linux-x86_64.tar.xz
 
 ###### Alternative: Use pip and install additional tools from source
 
+> Note:<br>
+> &nbsp;&nbsp;&nbsp;&nbsp;The installation of iree-compiler via pip is only supported up to version '20230112.395'.
+> &nbsp;&nbsp;&nbsp;&nbsp;To install newer versions, follow the instructions for the iree-dist tarball.
+
 The snapshot can be installed via the following commands:
 
 ```shell
