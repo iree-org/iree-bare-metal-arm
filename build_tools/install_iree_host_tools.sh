@@ -45,7 +45,7 @@ fi
 echo "Installing IREE host tools candidate-${IREE_VERSION}"
 
 
-# Create the IREE_HOST_BINARY_ROOT directory
+# Create the IREE_HOST_BIN_DIR directory
 
 mkdir -p build-iree-host-install-${IREE_VERSION}/bin
 ln -sfn build-iree-host-install-${IREE_VERSION} build-iree-host-install

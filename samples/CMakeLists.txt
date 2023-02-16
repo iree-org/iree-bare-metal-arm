@@ -26,9 +26,9 @@ endif()
 
 add_library(firmware ALIAS ${CONDITIONAL_DEP})
 
-if(EXISTS ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
-  # Use `iree-compile` if installed to IREE_HOST_BINARY_ROOT.
-  set(_COMPILE_TOOL_EXECUTABLE ${IREE_HOST_BINARY_ROOT}/bin/iree-compile)
+if(EXISTS ${IREE_HOST_BIN_DIR}/iree-compile)
+  # Use `iree-compile` if installed to IREE_HOST_BIN_DIR.
+  set(_COMPILE_TOOL_EXECUTABLE ${IREE_HOST_BIN_DIR}/iree-compile)
 else()
   # Use `iree-compile` provided via a snapshot.
   find_program(_COMPILE_TOOL_EXECUTABLE iree-compile)

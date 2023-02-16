@@ -152,7 +152,7 @@ case $2 in
 esac
 
 # Set the path to the IREE host binary
-export PATH_TO_IREE_HOST_BINARY_ROOT="`realpath ../build-iree-host-install`"
+export PATH_TO_IREE_HOST_BIN_DIR="`realpath ../build-iree-host-install/bin`"
 
 # Check paths
 if ! [ -f "$PATH_TO_LINKER_SCRIPT" ]; then
@@ -160,8 +160,8 @@ if ! [ -f "$PATH_TO_LINKER_SCRIPT" ]; then
   exit 1
 fi
 
-if ! [ -d "$PATH_TO_IREE_HOST_BINARY_ROOT/bin/" ]; then
-  echo "Expected the path to IREE host binary to be set correctly (got '$PATH_TO_IREE_HOST_BINARY_ROOT'): can't find bin subdirectory"
+if ! [ -d "$PATH_TO_IREE_HOST_BIN_DIR" ]; then
+  echo "Expected the path to IREE host binary to be set correctly (got '$PATH_TO_IREE_HOST_BIN_DIR'): can't find directory"
   exit 1
 fi
 
@@ -176,7 +176,7 @@ cmake -GNinja \
       -DIREE_HAL_DRIVER_LOCAL_SYNC=ON \
       -DIREE_HAL_EXECUTABLE_LOADER_EMBEDDED_ELF=ON \
       -DIREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE=ON \
-      -DIREE_HOST_BINARY_ROOT="${PATH_TO_IREE_HOST_BINARY_ROOT}" \
+      -DIREE_HOST_BIN_DIR="${PATH_TO_IREE_HOST_BIN_DIR}" \
       -DCUSTOM_ARM_LINKER_FLAGS="${CUSTOM_ARM_LINKER_FLAGS}" \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
       -DUSE_UART${UART}=ON \
