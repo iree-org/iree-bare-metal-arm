@@ -33,7 +33,7 @@ git submodule update --init
 #### Host Build
 
 You will need an installation of IREE on your host machine.
-We recommend to install a snapshot and to only build some additional tools.
+We recommend to install a snapshot and, if using `pip`, to only build some additional tools from source.
 Another option is to build everything on your host machine.
 
 ##### Install a Snapshot
@@ -41,12 +41,31 @@ Another option is to build everything on your host machine.
 > TL;DR:<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;You can use [`build_tools/install_iree_host_tools.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/install_iree_host_tools.sh) to install the host build. Make sure you active the virtual environment afterwards.
 
+
+###### Fetch and unpack the iree-dist tarball
+
+You can create the virtual environment and unpack the snapshot via the following commands:
+
+```shell
+python3 -m venv venv-iree
+source venv-iree/bin/activate
+pip3 install -r requirements.txt
+
+mkdir build-iree-host-tools
+wget -i iree-release-link.txt -O build-iree-host-tools/iree-dist-linux-x86_64.tar.xz
+tar xvfJ iree-dist-linux-x86_64.tar.xz -C build-iree-host-tools
+rm iree-dist-linux-x86_64.tar.xz
+```
+
+###### Alternative: Use pip and install additional tools from source
+
 The snapshot can be installed via the following commands:
 
 ```shell
-python3 -m venv venv-iree-snapshot
-source venv-iree-snapshot/bin/activate
+python3 -m venv venv-iree
+source venv-iree/bin/activate
 pip3 install -r requirements.txt
+pip3 install -r requirements-compiler.txt
 ```
 
 For further information, see the [TensorFlow Integration](https://iree-org.github.io/iree/getting-started/tensorflow/) or [TensorFlow Lite Integration](https://iree-org.github.io/iree/getting-started/tflite/) guide.
