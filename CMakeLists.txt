@@ -96,6 +96,8 @@ list(APPEND CMAKE_MODULE_PATH
 include(add_binary)
 include(add_ihex)
 
+include(vmvx_module)
+
 #-------------------------------------------------------------------------------
 # Third-party dependencies
 #-------------------------------------------------------------------------------
