@@ -5,7 +5,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #include <stdio.h>
 
-#include "simple_mul_emitc.h"
+#include "simple_mul_c_module_emitc.h"
 
 // A function to create the C module.
 iree_status_t create_module(iree_vm_instance_t* instance,

@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 #include "iree/vm/bytecode_module.h"
-#include "simple_mul_c.h"
+#include "simple_mul_module_c.h"
 
 // A function to create the bytecode module.
 iree_status_t create_module(iree_vm_instance_t* instance,
