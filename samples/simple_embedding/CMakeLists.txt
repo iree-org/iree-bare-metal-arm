@@ -17,41 +17,14 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
       device_vmvx_sync.c
   )
 
-  set(_COMPILE_ARGS)
-  list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
-  list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=vmvx")
-  list(APPEND _COMPILE_ARGS "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir")
-  list(APPEND _COMPILE_ARGS "-o")
-  list(APPEND _COMPILE_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
-
-  add_custom_command(
-    OUTPUT "simple_embedding_test_bytecode_module_vmvx.vmfb"
-    COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
+  vmvx_module(
+    NAME
+      simple_embedding_test_bytecode_module_vmvx_c
+    SRC
+      "${IREE_SOURCE_DIR}/samples/simple_embedding/simple_embedding_test.mlir"
+    C_IDENTIFIER
+      "iree_samples_simple_embedding_test_module_vmvx"
   )
-
-  set(_GEN_EMBED_ARGS)
-  list(APPEND _GEN_EMBED_ARGS "--output_header=simple_embedding_test_bytecode_module_vmvx_c.h")
-  list(APPEND _GEN_EMBED_ARGS "--output_impl=simple_embedding_test_bytecode_module_vmvx_c.c")
-  list(APPEND _GEN_EMBED_ARGS "--identifier=iree_samples_simple_embedding_test_module_vmvx")
-  list(APPEND _GEN_EMBED_ARGS "--flatten")
-  list(APPEND _GEN_EMBED_ARGS "simple_embedding_test_bytecode_module_vmvx.vmfb")
-
-  add_custom_command(
-    OUTPUT
-      "simple_embedding_test_bytecode_module_vmvx_c.h"
-      "simple_embedding_test_bytecode_module_vmvx_c.c"
-    COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-    DEPENDS generate_embed_data simple_embedding_test_bytecode_module_vmvx.vmfb
-  )
-
-  add_library(simple_embedding_test_bytecode_module_vmvx STATIC "")
-  target_sources(simple_embedding_test_bytecode_module_vmvx
-    PRIVATE
-      simple_embedding_test_bytecode_module_vmvx_c.c
-      simple_embedding_test_bytecode_module_vmvx_c.h
-  )
-
-  set_target_properties(sample_vmvx_sync PROPERTIES OUTPUT_NAME sample_vmvx_sync)
 
   target_include_directories(sample_vmvx_sync
     PRIVATE
@@ -60,7 +33,7 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
 
   target_link_libraries(sample_vmvx_sync
     PRIVATE
-      simple_embedding_test_bytecode_module_vmvx
+      simple_embedding_test_bytecode_module_vmvx_c
       iree::base
       iree::hal
       iree::hal::drivers::local_sync::sync_driver
