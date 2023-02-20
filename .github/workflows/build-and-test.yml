@@ -159,6 +159,8 @@ jobs:
         path: |
           build-cmsis-nrf52840/samples/simple_embedding/sample_vmvx_sync.elf
           build-cmsis-nrf52840/samples/simple_embedding/sample_embedded_sync.elf
+          build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-nrf52840/samples/static_library/sample_static_library.elf
           build-cmsis-nrf52840/samples/static_library/sample_static_library_c.elf
           build-cmsis-nrf52840/samples/vision_inference/mnist_static_library.elf
@@ -180,6 +182,8 @@ jobs:
         path: |
           build-cmsis-stm32f4xx/samples/simple_embedding/sample_vmvx_sync.elf
           build-cmsis-stm32f4xx/samples/simple_embedding/sample_embedded_sync.elf
+          build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-stm32f4xx/samples/static_library/sample_static_library.elf
           build-cmsis-stm32f4xx/samples/static_library/sample_static_library_c.elf
           build-cmsis-stm32f4xx/samples/vision_inference/mnist_static_library.elf
@@ -201,6 +205,8 @@ jobs:
         path: |
           build-libopencm3-stm32f4xx/samples/simple_embedding/sample_vmvx_sync.elf
           build-libopencm3-stm32f4xx/samples/simple_embedding/sample_embedded_sync.elf
+          build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-libopencm3-stm32f4xx/samples/static_library/sample_static_library.elf
           build-libopencm3-stm32f4xx/samples/static_library/sample_static_library_c.elf
           build-libopencm3-stm32f4xx/samples/vision_inference/mnist_static_library.elf
@@ -222,6 +228,8 @@ jobs:
         path: |
           build-cmsis-stm32l4r5/samples/simple_embedding/sample_vmvx_sync.elf
           build-cmsis-stm32l4r5/samples/simple_embedding/sample_embedded_sync.elf
+          build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-stm32l4r5/samples/static_library/sample_static_library.elf
           build-cmsis-stm32l4r5/samples/static_library/sample_static_library_c.elf
           build-cmsis-stm32l4r5/samples/vision_inference/mnist_static_library.elf

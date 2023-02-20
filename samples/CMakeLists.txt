@@ -38,5 +38,6 @@ else()
 endif()
 
 add_subdirectory(simple_embedding)
+add_subdirectory(simple_vec_mul)
 add_subdirectory(static_library)
 add_subdirectory(vision_inference)
