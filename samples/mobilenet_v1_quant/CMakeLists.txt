@@ -124,6 +124,57 @@ target_link_libraries(mobilenet_v1_bytecode_static
 add_binary(mobilenet_v1_bytecode_static)
 add_ihex(mobilenet_v1_bytecode_static)
 
+# BYTECODE INLINE
+
+add_executable(mobilenet_v1_bytecode_static_inline "")
+
+target_sources(mobilenet_v1_bytecode_static_inline
+  PRIVATE
+    mobilenet_v1.c
+    mobilenet_v1_bytecode.c
+    device_static_sync.c
+)
+
+static_module(
+  NAME
+    mobilenet_v1_bytecode_module_static_inline_c
+  SRC
+    "${CMAKE_CURRENT_SOURCE_DIR}/mobilenet_v1_0.25_224_quantized_1_default_1.mlir"
+  C_IDENTIFIER
+    "mobilenet_v1"
+  FLAGS
+    "--iree-input-type=tosa"
+  INLINE_HAL
+)
+
+target_include_directories(mobilenet_v1_bytecode_static_inline
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+target_link_libraries(mobilenet_v1_bytecode_static_inline
+  PRIVATE
+    mobilenet_v1_bytecode_module_static_inline_c
+    mobilenet_v1_model_input
+    iree::runtime
+    iree::hal::drivers::local_sync::sync_driver
+    iree::hal::local::loaders::static_library_loader
+    iree::modules::hal::inline
+    iree::modules::hal::loader
+    firmware
+    utils
+    write
+)
+
+target_compile_definitions(mobilenet_v1_bytecode_static_inline
+  PRIVATE
+    BUILD_LOADER_HAL
+)
+
+
+add_binary(mobilenet_v1_bytecode_static_inline)
+add_ihex(mobilenet_v1_bytecode_static_inline)
+
 #-------------------------------------------------------------------------------
 # Static library sample, EmitC
 #-------------------------------------------------------------------------------
@@ -168,3 +219,56 @@ target_link_libraries(mobilenet_v1_bytecode_static_c
 
 add_binary(mobilenet_v1_bytecode_static_c)
 add_ihex(mobilenet_v1_bytecode_static_c)
+
+#-------------------------------------------------------------------------------
+# Static library sample, EmitC wiht INLINE_HAL
+#-------------------------------------------------------------------------------
+
+add_executable(mobilenet_v1_bytecode_static_inline_c "")
+
+target_sources(mobilenet_v1_bytecode_static_inline_c
+  PRIVATE
+    mobilenet_v1.c
+    mobilenet_v1_c_module.c
+    device_static_sync.c
+)
+
+static_module(
+  NAME
+    mobilenet_v1_bytecode_module_static_inline_c_module
+  SRC
+  "${CMAKE_CURRENT_SOURCE_DIR}/mobilenet_v1_0.25_224_quantized_1_default_1.mlir"
+  C_IDENTIFIER
+    "mobilenet_v1"
+  FLAGS
+    "--iree-input-type=tosa"
+  EMITC
+  INLINE_HAL
+)
+
+target_include_directories(mobilenet_v1_bytecode_static_inline_c
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+target_link_libraries(mobilenet_v1_bytecode_static_inline_c
+  PRIVATE
+    mobilenet_v1_bytecode_module_static_inline_c_module
+    mobilenet_v1_model_input
+    iree::runtime
+    iree::hal::drivers::local_sync::sync_driver
+    iree::hal::local::loaders::static_library_loader
+    iree::modules::hal::inline
+    iree::modules::hal::loader
+    firmware
+    utils
+    write
+)
+
+target_compile_definitions(mobilenet_v1_bytecode_static_inline_c
+  PRIVATE
+    BUILD_LOADER_HAL
+)
+
+add_binary(mobilenet_v1_bytecode_static_inline_c)
+add_ihex(mobilenet_v1_bytecode_static_inline_c)
