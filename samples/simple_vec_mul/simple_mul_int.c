@@ -18,6 +18,7 @@
 
 #include "iree/base/api.h"
 #include "iree/hal/api.h"
+#include "iree/modules/hal/loader/module.h"
 #include "iree/modules/hal/module.h"
 #include "iree/vm/api.h"
 #include "iree/vm/bytecode_module.h"
@@ -25,8 +26,9 @@
 // A function to create the HAL device from the different backend targets.
 // The HAL device is returned based on the implementation, and it must be
 // released by the caller.
-extern iree_status_t create_sample_device(iree_allocator_t host_allocator,
-                                          iree_hal_device_t** out_device);
+extern iree_status_t create_sample_device(
+    iree_allocator_t host_allocator, iree_hal_device_t** out_device,
+    iree_hal_executable_loader_t** loader);
 
 // A function to create the bytecode or C module.
 extern iree_status_t create_module(iree_vm_instance_t* instance,
@@ -41,8 +43,10 @@ iree_status_t Run() {
   IREE_RETURN_IF_ERROR(iree_hal_module_register_all_types(instance));
 
   iree_hal_device_t* device = NULL;
-  IREE_RETURN_IF_ERROR(create_sample_device(iree_allocator_system(), &device),
-                       "create device");
+  iree_hal_executable_loader_t* loader = NULL;
+  IREE_RETURN_IF_ERROR(
+      create_sample_device(iree_allocator_system(), &device, &loader),
+      "create device");
   iree_vm_module_t* hal_module = NULL;
   IREE_RETURN_IF_ERROR(
       iree_hal_module_create(instance, device, IREE_HAL_MODULE_FLAG_SYNCHRONOUS,
@@ -55,6 +59,9 @@ iree_status_t Run() {
   // Allocate a context that will hold the module state across invocations.
   iree_vm_context_t* context = NULL;
   iree_vm_module_t* modules[] = {hal_module, module};
+
+  iree_hal_executable_loader_release(loader);
+
   IREE_RETURN_IF_ERROR(iree_vm_context_create_with_modules(
       instance, IREE_VM_CONTEXT_FLAG_NONE, IREE_ARRAYSIZE(modules), &modules[0],
       iree_allocator_system(), &context));
