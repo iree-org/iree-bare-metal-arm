@@ -5,9 +5,15 @@
 // Licensed under the Apache License v2.0 with LLVM Exceptions.
 // See https://llvm.org/LICENSE.txt for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+
+
 #include <stdio.h>
 
+#if defined(BUILD_LOADER_HAL)
+#include "mobilenet_v1_bytecode_module_static_inline_c_module_emitc.h"
+#else
 #include "mobilenet_v1_bytecode_module_static_c_module_emitc.h"
+#endif
 
 // A function to create the C module.
 iree_status_t create_module(iree_vm_instance_t* instance,
@@ -16,4 +22,10 @@ iree_status_t create_module(iree_vm_instance_t* instance,
                        out_module);
 }
 
-void print_success() { printf("mobilenet_v1_bytecode_static_c passed\n"); }
+void print_success() {
+#if defined(BUILD_LOADER_HAL)
+  printf("mobilenet_v1_bytecode_static_inline_c passed\n");
+#else
+  printf("mobilenet_v1_bytecode_static_c passed\n");
+#endif
+}

@@ -24,10 +24,6 @@
 #include "iree/vm/api.h"
 #include "iree/vm/bytecode_module.h"
 
-
-// Converted image embedded here:
-#include "model_input.h"
-
 // A function to create the HAL device from the different backend targets.
 // The HAL device is returned based on the implementation, and it must be
 // released by the caller.
@@ -117,39 +113,58 @@ iree_status_t Run() {
   // Lookup the entry point function.
   // Note that we use the synchronous variant which operates on pure type/shape
   // erased buffers.
-  const char kMainFunctionName[] = "module.main";
+  const char kMainFunctionName[] = "module.simple_mul";
   iree_vm_function_t main_function;
   IREE_RETURN_IF_ERROR(iree_vm_context_resolve_function(
       context, iree_make_cstring_view(kMainFunctionName), &main_function));
 
+  // Initial buffer contents.
+  int32_t kInt0[1024];
+  int32_t kInt1[1024];
+  int32_t results[1024];
+  for (int i = 0; i < 1024; ++i) {
+    kInt0[i] = i >> 1;
+    kInt1[i] = i;
+    results[i] = 0;
+  }
+
   // Allocate buffers in device-local memory so that if the device has an
   // independent address space they live on the fast side of the fence.
-  iree_hal_dim_t shape[4] = {1, 224, 224, 3};
-  const int kElementCount = 1 * 224 * 224 * 3;
-  const int kElementSize = sizeof(uint8_t);
-
+  iree_hal_dim_t shape[1] = {IREE_ARRAYSIZE(kInt0)};
   iree_hal_buffer_view_t* arg0_buffer_view = NULL;
+  iree_hal_buffer_view_t* arg1_buffer_view = NULL;
   IREE_RETURN_IF_ERROR(iree_hal_buffer_view_allocate_buffer(
       iree_hal_device_allocator(device), IREE_ARRAYSIZE(shape), shape,
-      IREE_HAL_ELEMENT_TYPE_UINT_8, IREE_HAL_ENCODING_TYPE_DENSE_ROW_MAJOR,
+      IREE_HAL_ELEMENT_TYPE_SINT_32, IREE_HAL_ENCODING_TYPE_DENSE_ROW_MAJOR,
       (iree_hal_buffer_params_t){
           .type = IREE_HAL_MEMORY_TYPE_DEVICE_LOCAL,
           .usage = IREE_HAL_BUFFER_USAGE_DEFAULT,
       },
-      iree_make_const_byte_span(image, kElementSize * kElementCount),
-      &arg0_buffer_view));
+      iree_make_const_byte_span(kInt0, sizeof(kInt0)), &arg0_buffer_view));
+  IREE_RETURN_IF_ERROR(iree_hal_buffer_view_allocate_buffer(
+      iree_hal_device_allocator(device), IREE_ARRAYSIZE(shape), shape,
+      IREE_HAL_ELEMENT_TYPE_SINT_32, IREE_HAL_ENCODING_TYPE_DENSE_ROW_MAJOR,
+      (iree_hal_buffer_params_t){
+          .type = IREE_HAL_MEMORY_TYPE_DEVICE_LOCAL,
+          .usage = IREE_HAL_BUFFER_USAGE_DEFAULT,
+      },
+      iree_make_const_byte_span(kInt1, sizeof(kInt1)), &arg1_buffer_view));
 
   // Setup call inputs with our buffers.
   iree_vm_list_t* inputs = NULL;
   IREE_RETURN_IF_ERROR(iree_vm_list_create(
                            /*element_type=*/NULL,
-                           /*capacity=*/1, iree_allocator_system(), &inputs),
+                           /*capacity=*/2, iree_allocator_system(), &inputs),
                        "can't allocate input vm list");
 
   iree_vm_ref_t arg0_buffer_view_ref =
       iree_hal_buffer_view_move_ref(arg0_buffer_view);
+  iree_vm_ref_t arg1_buffer_view_ref =
+      iree_hal_buffer_view_move_ref(arg1_buffer_view);
   IREE_RETURN_IF_ERROR(
       iree_vm_list_push_ref_move(inputs, &arg0_buffer_view_ref));
+  IREE_RETURN_IF_ERROR(
+      iree_vm_list_push_ref_move(inputs, &arg1_buffer_view_ref));
 
   // Prepare outputs list to accept the results from the invocation.
   // The output vm list is allocated statically.
@@ -173,24 +188,16 @@ iree_status_t Run() {
                             "can't find return buffer view");
   }
 
-  /// Read back the results.
-  uint8_t results[1001] = {0};
+  // Read back the results and ensure we got the right values.
   IREE_RETURN_IF_ERROR(iree_hal_device_transfer_d2h(
       device, iree_hal_buffer_view_buffer(ret_buffer_view), 0, results,
       sizeof(results), IREE_HAL_TRANSFER_BUFFER_FLAG_DEFAULT,
       iree_infinite_timeout()));
-
-  // Print the predicted class id
-  iree_host_size_t res_max_arg = 0;
-  uint8_t res_max = results[0];
   for (iree_host_size_t i = 0; i < IREE_ARRAYSIZE(results); ++i) {
-    uint8_t res = results[i];
-    if (res > res_max) {
-      res_max_arg = i;
-      res_max = res;
+    if (results[i] != (i >> 1) * i) {
+      return iree_make_status(IREE_STATUS_UNKNOWN, "result mismatches");
     }
   }
-  printf("Image prediction result is: id: %d\n", res_max_arg + 1);
 
   // Print statistics (no-op if statistics are not enabled).
   /*
@@ -215,16 +222,17 @@ int main(void) {
   gpio_setup();
   usart_setup();
 
-  printf("Running mobilenet v1...\n");
+  printf("Running simple_mul_int...\n");
 
   const iree_status_t result = Run();
+  int ret = (int)iree_status_code(result);
   if (!iree_status_is_ok(result)) {
     iree_status_fprint(stderr, result);
     iree_status_free(result);
   } else {
     printf("Execution successful!\n");
-    print_success();
   }
+  print_success();
 
   while (1) {
   }

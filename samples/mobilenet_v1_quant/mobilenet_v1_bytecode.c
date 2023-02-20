@@ -8,7 +8,12 @@
 #include <stdio.h>
 
 #include "iree/vm/bytecode_module.h"
+
+#if defined(BUILD_LOADER_HAL)
+#include "mobilenet_v1_bytecode_module_static_inline_c_c.h"
+#else
 #include "mobilenet_v1_bytecode_module_static_c_c.h"
+#endif
 
 // A function to create the bytecode module.
 iree_status_t create_module(iree_vm_instance_t* instance,
@@ -21,4 +26,10 @@ iree_status_t create_module(iree_vm_instance_t* instance,
       iree_vm_instance_allocator(instance), out_module);
 }
 
-void print_success() { printf("mobilenet_v1_bytecode_static passed\n"); }
+void print_success() {
+#if defined(BUILD_LOADER_HAL)
+  printf("mobilenet_v1_bytecode_static_inline passed\n");
+#else
+  printf("mobilenet_v1_bytecode_static passed\n");
+#endif
+}
