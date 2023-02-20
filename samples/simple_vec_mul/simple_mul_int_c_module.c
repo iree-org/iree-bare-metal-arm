@@ -7,7 +7,11 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #include <stdio.h>
 
+#if defined(BUILD_LOADER_HAL)
+#include "simple_mul_int_bytecode_module_static_inline_c_module_emitc.h"
+#else
 #include "simple_mul_int_bytecode_module_static_c_module_emitc.h"
+#endif
 
 // A function to create the C module.
 iree_status_t create_module(iree_vm_instance_t* instance,
@@ -17,5 +21,9 @@ iree_status_t create_module(iree_vm_instance_t* instance,
 }
 
 void print_success() {
+#if defined(BUILD_LOADER_HAL)
+  printf("simple_vec_mul_int_bytecode_static_inline_c passed\n");
+#else
   printf("simple_vec_mul_int_bytecode_static_c passed\n");
+#endif
 }
