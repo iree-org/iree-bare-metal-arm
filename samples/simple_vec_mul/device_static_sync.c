@@ -19,7 +19,8 @@ simple_mul_dispatch_0_library_query(
     const iree_hal_executable_environment_v0_t* environment);
 
 iree_status_t create_sample_device(iree_allocator_t host_allocator,
-                                   iree_hal_device_t** out_device) {
+                                   iree_hal_device_t** out_device,
+                                   iree_hal_executable_loader_t** loader) {
   // Set parameters for the device created in the next step.
   iree_hal_sync_device_params_t params;
   iree_hal_sync_device_params_initialize(&params);
@@ -29,10 +30,9 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
       simple_mul_dispatch_0_library_query,
   };
 
-  iree_hal_executable_loader_t* loader = NULL;
   iree_status_t status = iree_hal_static_library_loader_create(
       IREE_ARRAYSIZE(libraries), libraries,
-      iree_hal_executable_import_provider_null(), host_allocator, &loader);
+      iree_hal_executable_import_provider_null(), host_allocator, loader);
 
   // Use the default host allocator for buffer allocations.
   iree_string_view_t identifier = iree_make_cstring_view("sync");
@@ -45,11 +45,10 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
   if (iree_status_is_ok(status)) {
     // Create the synchronous device.
     status = iree_hal_sync_device_create(
-        identifier, &params, /*loader_count=*/1, &loader, device_allocator,
+        identifier, &params, /*loader_count=*/1, loader, device_allocator,
         host_allocator, out_device);
   }
 
   iree_hal_allocator_release(device_allocator);
-  iree_hal_executable_loader_release(loader);
   return status;
 }

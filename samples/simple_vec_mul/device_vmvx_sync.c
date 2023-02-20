@@ -17,7 +17,8 @@
 #include "iree/hal/local/loaders/vmvx_module_loader.h"
 
 iree_status_t create_sample_device(iree_allocator_t host_allocator,
-                                   iree_hal_device_t** out_device) {
+                                   iree_hal_device_t** out_device,
+                                   iree_hal_executable_loader_t** loader) {
   // Set parameters for the device created in the next step.
   iree_hal_sync_device_params_t params;
   iree_hal_sync_device_params_initialize(&params);
@@ -25,10 +26,9 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
   iree_vm_instance_t* instance = NULL;
   IREE_RETURN_IF_ERROR(iree_vm_instance_create(host_allocator, &instance));
 
-  iree_hal_executable_loader_t* loader = NULL;
   iree_status_t status = iree_hal_vmvx_module_loader_create(
       instance, /*user_module_count=*/0, /*user_modules=*/NULL, host_allocator,
-      &loader);
+      loader);
   iree_vm_instance_release(instance);
 
   // Use the default host allocator for buffer allocations.
@@ -42,11 +42,10 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
   if (iree_status_is_ok(status)) {
     // Create the synchronous device.
     status = iree_hal_sync_device_create(
-        identifier, &params, /*loader_count=*/1, &loader, device_allocator,
+        identifier, &params, /*loader_count=*/1, loader, device_allocator,
         host_allocator, out_device);
   }
 
   iree_hal_allocator_release(device_allocator);
-  iree_hal_executable_loader_release(loader);
   return status;
 }
