@@ -37,7 +37,6 @@ else()
   endif()
 endif()
 
-add_subdirectory(mobilenet_v1)
 add_subdirectory(mobilenet_v1_quant)
 add_subdirectory(simple_embedding)
 add_subdirectory(simple_vec_mul)

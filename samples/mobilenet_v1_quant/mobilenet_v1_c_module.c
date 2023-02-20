@@ -1,5 +1,5 @@
 // Copyright 2021 The IREE Authors
-// Copyright 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten
+// Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten
 //                Forschung e.V.
 //
 // Licensed under the Apache License v2.0 with LLVM Exceptions.
@@ -7,7 +7,7 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 #include <stdio.h>
 
-#include "mobilenet_v1_emitc.h"
+#include "mobilenet_v1_bytecode_module_static_c_module_emitc.h"
 
 // A function to create the C module.
 iree_status_t create_module(iree_vm_instance_t* instance,
@@ -16,4 +16,4 @@ iree_status_t create_module(iree_vm_instance_t* instance,
                        out_module);
 }
 
-void print_success() { printf("mobilenet_v1_static_library_run_c passed\n"); }
+void print_success() { printf("mobilenet_v1_bytecode_static_c passed\n"); }
