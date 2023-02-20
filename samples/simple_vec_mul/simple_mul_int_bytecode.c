@@ -25,4 +25,10 @@ iree_status_t create_module(iree_vm_instance_t* instance,
       iree_vm_instance_allocator(instance), out_module);
 }
 
-void print_success() { printf("simple_vec_mul_int_bytecode_static passed\n"); }
+void print_success() {
+#if defined(BUILD_LOADER_HAL)
+  printf("simple_vec_mul_int_bytecode_static_inline passed\n");
+#else
+  printf("simple_vec_mul_int_bytecode_static passed\n");
+#endif
+}
