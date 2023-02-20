@@ -18,6 +18,7 @@
 
 #include "iree/base/api.h"
 #include "iree/hal/api.h"
+#include "iree/modules/hal/inline/module.h"
 #include "iree/modules/hal/loader/module.h"
 #include "iree/modules/hal/module.h"
 #include "iree/vm/api.h"
@@ -40,32 +41,67 @@ iree_status_t Run() {
   iree_vm_instance_t* instance = NULL;
   IREE_RETURN_IF_ERROR(
       iree_vm_instance_create(iree_allocator_system(), &instance));
+
+#if defined(BUILD_LOADER_HAL)
+  IREE_RETURN_IF_ERROR(iree_hal_module_register_loader_types(instance));
+#else
   IREE_RETURN_IF_ERROR(iree_hal_module_register_all_types(instance));
+#endif
 
   iree_hal_device_t* device = NULL;
   iree_hal_executable_loader_t* loader = NULL;
   IREE_RETURN_IF_ERROR(
       create_sample_device(iree_allocator_system(), &device, &loader),
       "create device");
-  iree_vm_module_t* hal_module = NULL;
-  IREE_RETURN_IF_ERROR(
-      iree_hal_module_create(instance, device, IREE_HAL_MODULE_FLAG_SYNCHRONOUS,
-                             iree_allocator_system(), &hal_module));
 
   // Create module
   iree_vm_module_t* module = NULL;
   IREE_RETURN_IF_ERROR(create_module(instance, &module));
 
+#if defined(BUILD_LOADER_HAL)
+  // Create hal_inline_module
+  iree_vm_module_t* hal_inline_module = NULL;
+  IREE_RETURN_IF_ERROR(iree_hal_inline_module_create(
+      instance, IREE_HAL_INLINE_MODULE_FLAG_NONE,
+      iree_hal_device_allocator(device), iree_allocator_system(),
+      &hal_inline_module));
+
+  // Create hal_loader_module
+  iree_vm_module_t* hal_loader_module = NULL;
+  IREE_RETURN_IF_ERROR(iree_hal_loader_module_create(
+      instance, IREE_HAL_MODULE_FLAG_NONE,
+      /*loader_count=*/1, &loader, iree_allocator_system(),
+      &hal_loader_module));
+  iree_vm_module_t* modules[] = {hal_inline_module, hal_loader_module, module};
+#else
+  // Create hal_module
+  iree_vm_module_t* hal_module = NULL;
+  IREE_RETURN_IF_ERROR(
+      iree_hal_module_create(instance, device, IREE_HAL_MODULE_FLAG_SYNCHRONOUS,
+                             iree_allocator_system(), &hal_module));
+
+  iree_vm_module_t* modules[] = {hal_module, module};
+#endif
+
   // Allocate a context that will hold the module state across invocations.
   iree_vm_context_t* context = NULL;
-  iree_vm_module_t* modules[] = {hal_module, module};
 
   iree_hal_executable_loader_release(loader);
 
   IREE_RETURN_IF_ERROR(iree_vm_context_create_with_modules(
       instance, IREE_VM_CONTEXT_FLAG_NONE, IREE_ARRAYSIZE(modules), &modules[0],
       iree_allocator_system(), &context));
+
+#if defined(BUILD_LOADER_HAL)
+  iree_vm_module_release(hal_inline_module);
+#else
   iree_vm_module_release(hal_module);
+#endif
+
+#if defined(BUILD_LOADER_HAL)
+  iree_vm_module_release(hal_loader_module);
+#endif
+
   iree_vm_module_release(module);
 
   // Lookup the entry point function.
