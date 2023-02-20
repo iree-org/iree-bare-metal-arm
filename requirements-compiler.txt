@@ -1,2 +1,2 @@
 -f https://iree-org.github.io/iree/pip-release-links.html
-iree-compiler==20230215.431
+iree-compiler==20230219.435
