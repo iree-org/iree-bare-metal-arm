@@ -98,3 +98,47 @@ target_link_libraries(simple_vec_mul_int_bytecode_static
 
 add_binary(simple_vec_mul_int_bytecode_static)
 add_ihex(simple_vec_mul_int_bytecode_static)
+
+#-------------------------------------------------------------------------------
+# Static library sample, EmitC
+#-------------------------------------------------------------------------------
+
+add_executable(simple_vec_mul_int_bytecode_static_c "")
+
+target_sources(simple_vec_mul_int_bytecode_static_c
+  PRIVATE
+    simple_mul_int.c
+    simple_mul_int_c_module.c
+    device_static_sync.c
+)
+
+static_module(
+  NAME
+    simple_mul_int_bytecode_module_static_c_module
+  SRC
+    "${CMAKE_CURRENT_SOURCE_DIR}/simple_mul_int.mlir"
+  C_IDENTIFIER
+    "simple_mul_int"
+  FLAGS
+    "--iree-input-type=mhlo"
+  EMITC
+)
+
+target_include_directories(simple_vec_mul_int_bytecode_static_c
+  PRIVATE
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
+
+target_link_libraries(simple_vec_mul_int_bytecode_static_c
+  PRIVATE
+    simple_mul_int_bytecode_module_static_c_module
+    iree::runtime
+    iree::hal::drivers::local_sync::sync_driver
+    iree::hal::local::loaders::static_library_loader
+    firmware
+    utils
+    write
+)
+
+add_binary(simple_vec_mul_int_bytecode_static_c)
+add_ihex(simple_vec_mul_int_bytecode_static_c)

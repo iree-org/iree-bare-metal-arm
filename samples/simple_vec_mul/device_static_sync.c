@@ -12,7 +12,11 @@
 #include "iree/hal/drivers/local_sync/sync_device.h"
 #include "iree/hal/local/executable_loader.h"
 #include "iree/hal/local/loaders/static_library_loader.h"
-#include "simple_mul_int_bytecode_module_static_c.h"
+
+extern const iree_hal_executable_library_header_t**
+simple_mul_dispatch_0_library_query(
+    iree_hal_executable_library_version_t max_version,
+    const iree_hal_executable_environment_v0_t* environment);
 
 iree_status_t create_sample_device(iree_allocator_t host_allocator,
                                    iree_hal_device_t** out_device) {
