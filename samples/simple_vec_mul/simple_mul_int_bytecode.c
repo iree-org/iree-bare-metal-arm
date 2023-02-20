@@ -8,8 +8,12 @@
 #include <stdio.h>
 
 #include "iree/vm/bytecode_module.h"
-#include "simple_mul_int_bytecode_module_static_c_c.h"
 
+#if defined(BUILD_LOADER_HAL)
+#include "simple_mul_int_bytecode_module_static_inline_c_c.h"
+#else
+#include "simple_mul_int_bytecode_module_static_c_c.h"
+#endif
 // A function to create the bytecode module.
 iree_status_t create_module(iree_vm_instance_t* instance,
                             iree_vm_module_t** out_module) {
