@@ -35,12 +35,12 @@ add_custom_command(
   COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
 )
 
-add_library(simple_mul
+add_library(simple_mul_c
   STATIC
     ${CMAKE_CURRENT_BINARY_DIR}/simple_mul.o
 )
 
-set_target_properties(simple_mul
+set_target_properties(simple_mul_c
   PROPERTIES
     LINKER_LANGUAGE C
 )
@@ -60,7 +60,6 @@ add_custom_command(
   DEPENDS generate_embed_data simple_mul.vmfb
 )
 
-add_library(simple_mul_c STATIC "")
 target_sources(simple_mul_c
   PRIVATE
     simple_mul_c.c
@@ -78,7 +77,6 @@ target_link_libraries(sample_static_library
     iree::runtime
     iree::hal::drivers::local_sync::sync_driver
     iree::hal::local::loaders::static_library_loader
-    simple_mul
     firmware
     utils
     write
