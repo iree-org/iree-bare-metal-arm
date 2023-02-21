@@ -162,6 +162,8 @@ jobs:
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
+          build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
+          build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline_c.elf
           build-cmsis-nrf52840/samples/static_library/sample_static_library.elf
           build-cmsis-nrf52840/samples/static_library/sample_static_library_c.elf
           build-cmsis-nrf52840/samples/vision_inference/mnist_static_library.elf
@@ -186,6 +188,8 @@ jobs:
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
+          build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
+          build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline_c.elf
           build-cmsis-stm32f4xx/samples/static_library/sample_static_library.elf
           build-cmsis-stm32f4xx/samples/static_library/sample_static_library_c.elf
           build-cmsis-stm32f4xx/samples/vision_inference/mnist_static_library.elf
@@ -210,6 +214,8 @@ jobs:
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
+          build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
+          build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline_c.elf
           build-libopencm3-stm32f4xx/samples/static_library/sample_static_library.elf
           build-libopencm3-stm32f4xx/samples/static_library/sample_static_library_c.elf
           build-libopencm3-stm32f4xx/samples/vision_inference/mnist_static_library.elf
@@ -234,6 +240,8 @@ jobs:
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
+          build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
+          build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline_c.elf
           build-cmsis-stm32l4r5/samples/static_library/sample_static_library.elf
           build-cmsis-stm32l4r5/samples/static_library/sample_static_library_c.elf
           build-cmsis-stm32l4r5/samples/vision_inference/mnist_static_library.elf
