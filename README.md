@@ -4,9 +4,9 @@
 
 **DISCLAIMER**:
 This project is not intended for everyday use and made available without any support.
-However, we welcome any kind of feedback via the issue tracker or if appropriate via IREE's [communication channels](https://github.com/iree-org/iree#communication-channels), e.g. via the Discord server.
+However, we welcome any kind of feedback via the issue tracker or if appropriate via IREE's [communication channels](https://github.com/openxla/iree#communication-channels), e.g. via the Discord server.
 
-This projects demonstrates how to build [IREE](https://github.com/iree-org/iree) with the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
+This projects demonstrates how to build [IREE](https://github.com/openxla/iree) with the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
 ## Getting Started
 
 ### Prerequisites
@@ -72,7 +72,7 @@ pip3 install -r requirements.txt
 pip3 install -r requirements-compiler.txt
 ```
 
-For further information, see the [TensorFlow Integration](https://iree-org.github.io/iree/getting-started/tensorflow/) or [TensorFlow Lite Integration](https://iree-org.github.io/iree/getting-started/tflite/) guide.
+For further information, see the [TensorFlow Integration](https://openxla.github.io/iree/getting-started/tensorflow/) or [TensorFlow Lite Integration](https://openxla.github.io/iree/getting-started/tflite/) guide.
 The next lines can be used to build the missing tools from the already cloned submodule:
 
 ```shell
@@ -131,7 +131,7 @@ cmake --build . --target install
 cd ..
 ```
 
-For further information, see the [Getting started](https://iree-org.github.io/iree/building-from-source/getting-started/) guide.
+For further information, see the [Getting started](https://openxla.github.io/iree/building-from-source/getting-started/) guide.
 
 #### Target Support
 
