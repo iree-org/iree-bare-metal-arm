@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include "iree/vm/bytecode_module.h"
+#include "iree/vm/bytecode/module.h"
 
 #if defined(BUILD_LOADER_HAL)
 #include "simple_mul_int_bytecode_module_static_inline_c_c.h"
