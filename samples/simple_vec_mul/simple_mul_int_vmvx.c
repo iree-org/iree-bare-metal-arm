@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 
-#include "iree/vm/bytecode_module.h"
+#include "iree/vm/bytecode/module.h"
 #include "simple_mul_int_bytecode_module_vmvx_c.h"
 
 // A function to create a VMVX bytecode module.
