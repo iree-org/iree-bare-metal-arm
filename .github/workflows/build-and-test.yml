@@ -160,6 +160,7 @@ jobs:
           build-cmsis-nrf52840/samples/simple_embedding/sample_vmvx_sync.elf
           build-cmsis-nrf52840/samples/simple_embedding/sample_embedded_sync.elf
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx_inline.elf
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
           build-cmsis-nrf52840/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
@@ -186,6 +187,7 @@ jobs:
           build-cmsis-stm32f4xx/samples/simple_embedding/sample_vmvx_sync.elf
           build-cmsis-stm32f4xx/samples/simple_embedding/sample_embedded_sync.elf
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx_inline.elf
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
           build-cmsis-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
@@ -212,6 +214,7 @@ jobs:
           build-libopencm3-stm32f4xx/samples/simple_embedding/sample_vmvx_sync.elf
           build-libopencm3-stm32f4xx/samples/simple_embedding/sample_embedded_sync.elf
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx_inline.elf
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
           build-libopencm3-stm32f4xx/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
@@ -238,6 +241,7 @@ jobs:
           build-cmsis-stm32l4r5/samples/simple_embedding/sample_vmvx_sync.elf
           build-cmsis-stm32l4r5/samples/simple_embedding/sample_embedded_sync.elf
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx.elf
+          build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_vmvx_inline.elf
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static.elf
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_c.elf
           build-cmsis-stm32l4r5/samples/simple_vec_mul/simple_vec_mul_int_bytecode_static_inline.elf
