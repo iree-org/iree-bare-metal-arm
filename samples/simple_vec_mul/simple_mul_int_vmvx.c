@@ -8,7 +8,12 @@
 #include <stdio.h>
 
 #include "iree/vm/bytecode/module.h"
+
+#if defined(BUILD_INLINE_HAL)
+#include "simple_mul_int_bytecode_module_vmvx_inline_c.h"
+#else
 #include "simple_mul_int_bytecode_module_vmvx_c.h"
+#endif
 
 // A function to create a VMVX bytecode module.
 iree_status_t create_module(iree_vm_instance_t* instance,
@@ -22,4 +27,10 @@ iree_status_t create_module(iree_vm_instance_t* instance,
                                         iree_allocator_system(), out_module);
 }
 
-void print_success() { printf("simple_vec_mul_int_bytecode_vmvx passed\n"); }
+void print_success() {
+#if defined(BUILD_INLINE_HAL)
+  printf("simple_vec_mul_int_bytecode_vmvx_inline passed\n");
+#else
+  printf("simple_vec_mul_int_bytecode_vmvx passed\n");
+#endif
+}

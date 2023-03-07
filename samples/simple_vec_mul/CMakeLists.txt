@@ -57,6 +57,66 @@ endif()
 
 
 #-------------------------------------------------------------------------------
+# VMVX sample, inline HAL
+#-------------------------------------------------------------------------------
+
+if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
+
+  vmvx_module(
+    NAME
+      simple_mul_int_bytecode_module_vmvx_inline_c
+    SRC
+      "${CMAKE_CURRENT_SOURCE_DIR}/simple_mul_int.mlir"
+    C_IDENTIFIER
+      "simple_mul_int_bytecode_module_vmvx"
+    FLAGS
+      "--iree-input-type=mhlo"
+    INLINE_HAL
+  )
+
+  add_executable(simple_vec_mul_int_bytecode_vmvx_inline "")
+  target_sources(simple_vec_mul_int_bytecode_vmvx_inline
+    PRIVATE
+      simple_mul_int.c
+      simple_mul_int_vmvx.c
+      device_vmvx_sync.c
+  )
+
+  set_target_properties(simple_vec_mul_int_bytecode_vmvx_inline PROPERTIES OUTPUT_NAME simple_vec_mul_int_bytecode_vmvx_inline)
+
+  target_include_directories(simple_vec_mul_int_bytecode_vmvx_inline
+    PRIVATE
+      ${CMAKE_CURRENT_BINARY_DIR}
+  )
+
+  target_compile_definitions(simple_vec_mul_int_bytecode_vmvx_inline
+    PRIVATE
+      BUILD_INLINE_HAL
+  )
+
+  target_link_libraries(simple_vec_mul_int_bytecode_vmvx_inline
+    PRIVATE
+      simple_mul_int_bytecode_module_vmvx_inline_c
+      iree::base
+      iree::hal
+      iree::hal::drivers::local_sync::sync_driver
+      iree::hal::local
+      iree::hal::local::loaders::vmvx_module_loader
+      iree::modules::hal::inline
+      iree::vm
+      iree::vm::bytecode::module
+      firmware
+      utils
+      write
+  )
+
+  add_binary(simple_vec_mul_int_bytecode_vmvx_inline)
+  add_ihex(simple_vec_mul_int_bytecode_vmvx_inline)
+
+endif()
+
+
+#-------------------------------------------------------------------------------
 # Static library sample
 #-------------------------------------------------------------------------------
 
