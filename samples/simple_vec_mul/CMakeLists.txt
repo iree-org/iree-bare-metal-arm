@@ -230,8 +230,6 @@ static_module(
     simple_mul_int_bytecode_module_static_c_module
   SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/simple_mul_int.mlir"
-  C_IDENTIFIER
-    "simple_mul_int"
   FLAGS
     "--iree-input-type=mhlo"
   EMITC
@@ -274,8 +272,6 @@ static_module(
     simple_mul_int_bytecode_module_static_inline_c_module
   SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/simple_mul_int.mlir"
-  C_IDENTIFIER
-    "simple_mul_int"
   FLAGS
     "--iree-input-type=mhlo"
   EMITC
