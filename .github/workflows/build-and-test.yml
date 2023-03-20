@@ -16,7 +16,7 @@ env:
   TOOLCHAIN: arm-none-eabi
   TOOLCHAIN_VERSION: 12.2.rel1
   RENODE: renode
-  RENODE_VERSION: 1.13.2
+  RENODE_VERSION: 1.13.3
   VENV_IREE: venv-iree
   VENV_RENODE: venv-renode
   IREE_HOST_INSTALL: build-iree-host-install
