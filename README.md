@@ -237,13 +237,13 @@ cmake --build . --target sample_vmvx_sync
 You can use [Renode](https://renode.io/) to execute the created binary.
 
 ```shell
-wget https://github.com/renode/renode/releases/download/v1.13.2/renode-1.13.2.linux-portable.tar.gz
-tar -xvzf renode-1.13.2.linux-portable.tar.gz
+wget https://github.com/renode/renode/releases/download/v1.13.3/renode-1.13.3.linux-portable.tar.gz
+tar -xvzf renode-1.13.3.linux-portable.tar.gz
 ```
 Execution is done via the interactive Renode shell (for headless execution see [here](https://github.com/renode/renode/issues/138)):
 
 ```shell
-cd renode_1.13.2_portable
+cd renode_1.13.3_portable
 ./renode
 ```
 Inside the shell you need to execute the following statements:
@@ -257,7 +257,7 @@ You should be able to see the output of the executable in the analyzer window fo
 This example also comes with a robot test file:
 
 ```shell
-cd renode_1.13.2_portable
+cd renode_1.13.3_portable
 ./renode-test --variable BASE_DIR:${PATH_TO_REPOSITORY_ROOT} ${PATH_TO_REPOSITORY_ROOT}/tests/vmvx_sample.robot
 ```
 
