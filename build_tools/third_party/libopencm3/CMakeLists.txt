@@ -18,6 +18,7 @@ add_library(stm32f4 STATIC IMPORTED GLOBAL)
 target_sources(stm32f4
   INTERFACE
     ${libopencm3-custom_SOURCE_DIR}/vector.c
+    ${libopencm3-custom_SOURCE_DIR}/fini.c
 )
 add_dependencies(stm32f4 libopencm3_stm32f4)
 set_property(TARGET stm32f4
