@@ -39,8 +39,8 @@ extern void print_success();
 
 iree_status_t Run() {
   iree_vm_instance_t* instance = NULL;
-  IREE_RETURN_IF_ERROR(
-      iree_vm_instance_create(iree_allocator_system(), &instance));
+  IREE_RETURN_IF_ERROR(iree_vm_instance_create(
+      IREE_VM_TYPE_CAPACITY_DEFAULT, iree_allocator_system(), &instance));
 
 #if defined(BUILD_INLINE_HAL)
   IREE_RETURN_IF_ERROR(iree_hal_module_register_inline_types(instance));
@@ -152,10 +152,10 @@ iree_status_t Run() {
 
   // Setup call inputs with our buffers.
   iree_vm_list_t* inputs = NULL;
-  IREE_RETURN_IF_ERROR(iree_vm_list_create(
-                           /*element_type=*/NULL,
-                           /*capacity=*/2, iree_allocator_system(), &inputs),
-                       "can't allocate input vm list");
+  IREE_RETURN_IF_ERROR(
+      iree_vm_list_create(iree_vm_make_undefined_type_def(),
+                          /*capacity=*/2, iree_allocator_system(), &inputs),
+      "can't allocate input vm list");
 
   iree_vm_ref_t arg0_buffer_view_ref =
       iree_hal_buffer_view_move_ref(arg0_buffer_view);
@@ -169,10 +169,10 @@ iree_status_t Run() {
   // Prepare outputs list to accept the results from the invocation.
   // The output vm list is allocated statically.
   iree_vm_list_t* outputs = NULL;
-  IREE_RETURN_IF_ERROR(iree_vm_list_create(
-                           /*element_type=*/NULL,
-                           /*capacity=*/1, iree_allocator_system(), &outputs),
-                       "can't allocate output vm list");
+  IREE_RETURN_IF_ERROR(
+      iree_vm_list_create(iree_vm_make_undefined_type_def(),
+                          /*capacity=*/1, iree_allocator_system(), &outputs),
+      "can't allocate output vm list");
 
   // Synchronously invoke the function.
   IREE_RETURN_IF_ERROR(iree_vm_invoke(
@@ -181,8 +181,7 @@ iree_status_t Run() {
 
   // Get the result buffers from the invocation.
   iree_hal_buffer_view_t* ret_buffer_view =
-      (iree_hal_buffer_view_t*)iree_vm_list_get_ref_deref(
-          outputs, 0, &iree_hal_buffer_view_descriptor);
+      iree_vm_list_get_buffer_view_assign(outputs, 0);
   if (ret_buffer_view == NULL) {
     return iree_make_status(IREE_STATUS_NOT_FOUND,
                             "can't find return buffer view");
