@@ -34,7 +34,7 @@ target_sources(mnist_static_library
 )
 
 set(_COMPILE_ARGS)
-list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
+list(APPEND _COMPILE_ARGS "--iree-input-type=stablehlo")
 list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
 list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
 list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
@@ -115,7 +115,7 @@ add_ihex(mnist_static_library)
 add_executable(mnist_static_library_c "")
 
 set(_COMPILE_ARGS)
-list(APPEND _COMPILE_ARGS "--iree-input-type=mhlo")
+list(APPEND _COMPILE_ARGS "--iree-input-type=stablehlo")
 list(APPEND _COMPILE_ARGS "--output-format=vm-c")
 list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
 list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-triple=${IREE_LLVM_TARGET_TRIPLE}")

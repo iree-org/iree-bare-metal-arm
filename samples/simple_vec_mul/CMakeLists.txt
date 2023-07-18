@@ -16,7 +16,7 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
     C_IDENTIFIER
       "simple_mul_int_bytecode_module_vmvx"
     FLAGS
-      "--iree-input-type=mhlo"
+      "--iree-input-type=stablehlo"
   )
 
   add_executable(simple_vec_mul_int_bytecode_vmvx "")
@@ -70,7 +70,7 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
     C_IDENTIFIER
       "simple_mul_int_bytecode_module_vmvx"
     FLAGS
-      "--iree-input-type=mhlo"
+      "--iree-input-type=stablehlo"
     INLINE_HAL
   )
 
@@ -137,7 +137,7 @@ static_module(
   C_IDENTIFIER
     "simple_mul_int"
   FLAGS
-    "--iree-input-type=mhlo"
+    "--iree-input-type=stablehlo"
 )
 
 target_include_directories(simple_vec_mul_int_bytecode_static
@@ -181,7 +181,7 @@ static_module(
   C_IDENTIFIER
     "simple_mul_int"
   FLAGS
-    "--iree-input-type=mhlo"
+    "--iree-input-type=stablehlo"
   INLINE_HAL
 )
 
@@ -231,7 +231,7 @@ static_module(
   SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/simple_mul_int.mlir"
   FLAGS
-    "--iree-input-type=mhlo"
+    "--iree-input-type=stablehlo"
   EMITC
 )
 
@@ -273,7 +273,7 @@ static_module(
   SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/simple_mul_int.mlir"
   FLAGS
-    "--iree-input-type=mhlo"
+    "--iree-input-type=stablehlo"
   EMITC
   INLINE_HAL
 )
