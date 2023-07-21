@@ -2,6 +2,7 @@ Explicitly copy .got and .got.plt section.
 
 Authored-by: Marius Brehler <marius.brehler@iml.fraunhofer.de>
 
+SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 SPDX-License-Identifier: Apache-2.0
 --- a/platform_parsed.ld
 +++ b/platform_parsed.ld
