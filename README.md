@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+-->
 # IREE Bare-Metal Arm Sample
 
 [![Build and Test](https://github.com/iml130/iree-bare-metal-arm/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/iml130/iree-bare-metal-arm/actions/workflows/build-and-test.yml)
