@@ -16,6 +16,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
  */
 
 /* Linker script for ST NUCLEO-F446RE (STM32F446xE, 512K flash, 128K RAM). */

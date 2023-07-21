@@ -16,6 +16,8 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this library.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * SPDX-License-Identifier: LGPL-3.0-or-later
  */
 
 /* Linker script for ST STM32F4DISCOVERY (STM32F407VG, 1024K flash, 128K RAM). */
