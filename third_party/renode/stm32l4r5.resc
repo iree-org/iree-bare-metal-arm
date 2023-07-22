@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+// SPDX-License-Identifier: MIT
+
 :name: STM32L4R5
 :description: This script runs the STM32L4R5.
 

@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+SPDX-License-Identifier: MIT
+-->
 # Renode
 
 This folder contains a subset of files imported from [renode/renode](https://github.com/renode/renode/), adjusted to the needs of iree-bare-metal-arm.

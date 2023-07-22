@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+// SPDX-License-Identifier: MIT
+
 using "platforms/boards/stm32f7_discovery-bb.repl"
 
 // According to https://www.st.com/resource/en/datasheet/stm32f746ng.pdf,
