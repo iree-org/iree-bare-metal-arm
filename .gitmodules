@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+# SPDX-License-Identifier: CC0-1.0
+
 [submodule "third_party/iree"]
 	path = third_party/iree
 	url = https://github.com/openxla/iree.git
