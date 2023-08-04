@@ -1,1 +1,1 @@
-https://github.com/openxla/iree/releases/download/candidate-20230721.589/iree-dist-20230721.589-linux-x86_64.tar.xz
+https://github.com/openxla/iree/releases/download/candidate-20230803.602/iree-dist-20230803.602-linux-x86_64.tar.xz
