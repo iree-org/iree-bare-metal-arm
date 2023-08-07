@@ -1,3 +1,7 @@
+<!--
+SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
 # LibOpenCM3
 
 This folder contains a subset of files imported from
