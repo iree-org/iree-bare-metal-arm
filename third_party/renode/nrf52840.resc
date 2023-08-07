@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+// SPDX-License-Identifier: MIT
+
 :name: nRF52840
 :description: This script runs the nRF52840.
 

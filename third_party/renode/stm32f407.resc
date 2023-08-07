@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: Antmicro <www.antmicro.com>
+// SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+// SPDX-License-Identifier: MIT
+
 :name: STM32F407
 :description: This script runs the STM32F407.
 
