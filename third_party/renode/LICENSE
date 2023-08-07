@@ -4,16 +4,12 @@ the end of this document.
 The Renode software was created by Antmicro, who is the copyright holders for
 all files, unless stated otherwise.
 
-The copyright of files not imported from the Renode software is held by the
-respective copyright holders.
-
 The libraries used by Renode are distributed under their own licenses, available
 in their respective directories.
 
 The MIT License (MIT)
 
 Copyright (c) Antmicro <www.antmicro.com>
-Copyright Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
