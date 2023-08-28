@@ -1,5 +1,5 @@
-// SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
-// SPDX-License-Identifier: MIT
+# SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+# SPDX-License-Identifier: MIT
 
 :name: STM32F4XX
 :description: This script runs the STM32F4XX with high memory.
