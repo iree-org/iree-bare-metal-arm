@@ -20,3 +20,10 @@ and for the Arm [Corstone-300](https://developer.arm.com/Processors/Corstone-300
 ## Getting Started
 
 See the [Getting Started](docs/getting_started.md) guide for instructions on how to build this project.
+
+## Licensing
+
+The samples are licensed under the terms of the Apache 2.0 License with LLVM Exceptions.
+
+The repository contains further files that are licensed under other terms.
+Licensing information for each file is specified via SPDX-License-Identifier tags.
