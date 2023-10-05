@@ -87,6 +87,14 @@ endif()
 # Set executable suffix to elf
 set(CMAKE_EXECUTABLE_SUFFIX ".elf")
 
+# IREE_DEFAULT_COPTS sets `-Wall` in combination with `-Werror` which
+# currently breaks the build with GCC. This disables specific warnings.
+# TODO: Re-enable these warning.
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-char-subscripts")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-implicit-function-declaration")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-variable")
+
 #-------------------------------------------------------------------------------
 # Utility definitions
 #-------------------------------------------------------------------------------
