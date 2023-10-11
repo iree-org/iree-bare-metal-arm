@@ -4,6 +4,7 @@
  * Support: https://support.codesourcery.com/GNUToolchain/
  *
  * Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
+ * SPDX-License-Identifier: LicenseRef-nrf_common
  *
  * The authors hereby grant permission to use, copy, modify, distribute,
  * and license this software and its documentation for any purpose, provided
