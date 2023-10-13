@@ -4,6 +4,7 @@
  * Support: https://support.codesourcery.com/GNUToolchain/
  *
  * Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
+ * Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  * SPDX-License-Identifier: LicenseRef-nrf_common
  *
  * The authors hereby grant permission to use, copy, modify, distribute,
@@ -47,6 +48,10 @@ OUTPUT_FORMAT ("elf32-littlearm", "elf32-bigarm", "elf32-littlearm")
  *   __sdata_end
  *   __fast_start
  *   __fast_end
+ *   __got_start
+ *   __got_end
+ *   __got_plt_start
+ *   __got_plt_end
  *   __edata
  *   _edata
  *   edata
@@ -212,6 +217,14 @@ SECTIONS
         LONG (__fast_start)
         LONG ((__fast_end - __fast_start) / 4)
 
+        LONG (__got_load_start)
+        LONG (__got_start)
+        LONG ((__got_end - __got_start) / 4)
+
+        LONG (__got_plt_load_start)
+        LONG (__got_plt_start)
+        LONG ((__got_plt_end - __got_plt_start) / 4)
+
         /* Add aditional regions here as needed. */
         
         __copy_table_end__ = .;
@@ -313,6 +326,35 @@ SECTIONS
     ASSERT(__fast_load_start == __fast_load_end || (__fast_load_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .fast is too large to fit in FLASH memory segment")
     ASSERT(__fast_start == __fast_end || (__fast_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .fast is too large to fit in RAM memory segment")
 
+    
+    /* .got section */    
+    . = ALIGN(4);
+    __got_load_start = ALIGN(__fast_load_end, 4);
+    .got . : AT(__got_load_start){
+        . = ALIGN(4);
+        __got_start = .;
+        *(.got)
+    } > RAM
+    __got_size       = SIZEOF(.got);
+    __got_end        = __got_start + __got_size;
+    __got_load_end   = __got_load_start + __got_size;
+    ASSERT(__got_load_start == __got_load_end || (__got_load_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .got is too large to fit in FLASH memory segment")
+    ASSERT(__got_start == __got_end || (__got_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .got is too large to fit in RAM memory segment")
+
+    /* .got.plt section */    
+    . = ALIGN(4);
+    __got_plt_load_start = ALIGN(__got_load_end, 4);
+    .got.plt . : AT(__got_plt_load_start){
+        . = ALIGN(4);
+        __got_plt_start = .;
+        *(.got.plt)
+    } > RAM
+    __got_plt_size       = SIZEOF(.got.plt);
+    __got_plt_end        = __got_plt_start + __got_plt_size;
+    __got_plt_load_end   = __got_plt_load_start + __got_plt_size;
+    ASSERT(__got_plt_load_start == __got_plt_load_end || (__got_plt_load_end - ORIGIN(FLASH)) <= LENGTH(FLASH) , "error: .got.plt is too large to fit in FLASH memory segment")
+    ASSERT(__got_plt_start == __got_plt_end || (__got_plt_end - ORIGIN(RAM)) <= LENGTH(RAM) , "error: .got.plt is too large to fit in RAM memory segment")
+    
     /* end of data in RAM */
     . = ALIGN(4);
     _edata = .; PROVIDE (edata = .); PROVIDE (__edata = .);
