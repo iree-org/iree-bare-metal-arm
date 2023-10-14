@@ -1,6 +1,7 @@
 /*
  
 Copyright (c) 2009-2023 ARM Limited. All rights reserved.
+Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 
     SPDX-License-Identifier: Apache-2.0
 
@@ -249,6 +250,18 @@ Reset_Handler:
     ldr r1, =__fast_start
     ldr r2, =__fast_end
     ldr r3, =__fast_load_start
+    bl copy_region
+
+/* Load .got */
+    ldr r1, =__got_start
+    ldr r2, =__got_end
+    ldr r3, =__got_load_start
+    bl copy_region
+
+/* Load .got.plt */
+    ldr r1, =__got_plt_start
+    ldr r2, =__got_plt_end
+    ldr r3, =__got_plt_load_start
     bl copy_region
 
     b copy_etext_done
