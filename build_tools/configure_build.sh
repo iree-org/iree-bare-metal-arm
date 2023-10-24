@@ -55,7 +55,7 @@ case $2 in
     echo "Building for NRF52840"
     export ARM_CPU="cortex-m4"
     if [ -z ${PATH_TO_LINKER_SCRIPT+x} ]; then
-      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/nrfx/mdk/nrf52840_xxaa.ld"
+      export PATH_TO_LINKER_SCRIPT="${PATH_TO_REPO}/third_party/nrfx-custom/nrf52840_xxaa.ld"
     fi
     ;;
 
