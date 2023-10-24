@@ -5,6 +5,7 @@
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 set(nrfx_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/nrfx/")
+set(nrfx_custom_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/nrfx-custom/")
 set(CMSIS_5_SOURCE_DIR "${iree-bare-metal-arm_SOURCE_DIR}/third_party/CMSIS_5/")
 
 #-------------------------------------------------------------------------------
@@ -16,7 +17,7 @@ add_library(nrfx_nrf52840 STATIC "")
 target_sources(nrfx_nrf52840
   PRIVATE
     ${nrfx_DIR}/mdk/system_nrf52840.c
-    ${nrfx_DIR}/mdk/gcc_startup_nrf52840.S
+    ${nrfx_custom_DIR}/gcc_startup_nrf52840.S
 )
 
 target_include_directories(nrfx_nrf52840
@@ -32,7 +33,7 @@ target_compile_definitions(nrfx_nrf52840
 )
 
 # Allow ld to find generic linker script
-target_link_directories(nrfx_nrf52840 INTERFACE "${nrfx_DIR}/mdk/")
+target_link_directories(nrfx_nrf52840 INTERFACE "${nrfx_custom_DIR}")
 
 #-------------------------------------------------------------------------------
 # nRF UART
