@@ -85,74 +85,78 @@ endif()
 # DYLIB sample, int32
 #-------------------------------------------------------------------------------
 
-add_executable(sample_embedded_sync "")
+if(IREE_HAL_EXECUTABLE_LOADER_EMBEDDED_ELF)
 
-target_sources(sample_embedded_sync
-  PRIVATE
-    simple_embedding_int.c
-    device_embedded_sync.c
-)
+  add_executable(sample_embedded_sync "")
 
-set(_COMPILE_ARGS)
-list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
-list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
-list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
-list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-cpu=${ARM_CPU}")
-list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-float-abi=${IREE_LLVM_TARGET_FLOAT_ABI}")
-list(APPEND _COMPILE_ARGS "--iree-llvmcpu-debug-symbols=false")
-list(APPEND _COMPILE_ARGS "--iree-vm-bytecode-module-strip-source-map=true")
-list(APPEND _COMPILE_ARGS "--iree-vm-emit-polyglot-zip=false")
-list(APPEND _COMPILE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/simple_embedding_int_test.mlir")
-list(APPEND _COMPILE_ARGS "-o")
-list(APPEND _COMPILE_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
+  target_sources(sample_embedded_sync
+    PRIVATE
+      simple_embedding_int.c
+      device_embedded_sync.c
+  )
 
-add_custom_command(
-  OUTPUT "simple_embedding_test_module_dylib_arm_32.vmfb"
-  COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
-)
+  set(_COMPILE_ARGS)
+  list(APPEND _COMPILE_ARGS "--output-format=vm-bytecode")
+  list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
+  list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
+  list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-cpu=${ARM_CPU}")
+  list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-float-abi=${IREE_LLVM_TARGET_FLOAT_ABI}")
+  list(APPEND _COMPILE_ARGS "--iree-llvmcpu-debug-symbols=false")
+  list(APPEND _COMPILE_ARGS "--iree-vm-bytecode-module-strip-source-map=true")
+  list(APPEND _COMPILE_ARGS "--iree-vm-emit-polyglot-zip=false")
+  list(APPEND _COMPILE_ARGS "${CMAKE_CURRENT_SOURCE_DIR}/simple_embedding_int_test.mlir")
+  list(APPEND _COMPILE_ARGS "-o")
+  list(APPEND _COMPILE_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
 
-set(_GEN_EMBED_ARGS)
-list(APPEND _GEN_EMBED_ARGS "--output_header=simple_embedding_test_module_dylib_arm_32.h")
-list(APPEND _GEN_EMBED_ARGS "--output_impl=simple_embedding_test_module_dylib_arm_32.c")
-list(APPEND _GEN_EMBED_ARGS "--identifier=iree_samples_simple_embedding_test_module_dylib_arm_32")
-list(APPEND _GEN_EMBED_ARGS "--flatten")
-list(APPEND _GEN_EMBED_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
+  add_custom_command(
+    OUTPUT "simple_embedding_test_module_dylib_arm_32.vmfb"
+    COMMAND ${_COMPILE_TOOL_EXECUTABLE} ${_COMPILE_ARGS}
+  )
 
-add_custom_command(
-  OUTPUT
-    "simple_embedding_test_module_dylib_arm_32.h"
-    "simple_embedding_test_module_dylib_arm_32.c"
-  COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-  DEPENDS generate_embed_data simple_embedding_test_module_dylib_arm_32.vmfb
-)
+  set(_GEN_EMBED_ARGS)
+  list(APPEND _GEN_EMBED_ARGS "--output_header=simple_embedding_test_module_dylib_arm_32.h")
+  list(APPEND _GEN_EMBED_ARGS "--output_impl=simple_embedding_test_module_dylib_arm_32.c")
+  list(APPEND _GEN_EMBED_ARGS "--identifier=iree_samples_simple_embedding_test_module_dylib_arm_32")
+  list(APPEND _GEN_EMBED_ARGS "--flatten")
+  list(APPEND _GEN_EMBED_ARGS "simple_embedding_test_module_dylib_arm_32.vmfb")
 
-add_library(simple_embedding_test_bytecode_module_dylib STATIC "")
-target_sources(simple_embedding_test_bytecode_module_dylib
-  PRIVATE
-    simple_embedding_test_module_dylib_arm_32.c
-    simple_embedding_test_module_dylib_arm_32.h
-)
+  add_custom_command(
+    OUTPUT
+      "simple_embedding_test_module_dylib_arm_32.h"
+      "simple_embedding_test_module_dylib_arm_32.c"
+    COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
+    DEPENDS generate_embed_data simple_embedding_test_module_dylib_arm_32.vmfb
+  )
 
-target_include_directories(sample_embedded_sync
-  PRIVATE
-    ${CMAKE_CURRENT_BINARY_DIR}
-)
+  add_library(simple_embedding_test_bytecode_module_dylib STATIC "")
+  target_sources(simple_embedding_test_bytecode_module_dylib
+    PRIVATE
+      simple_embedding_test_module_dylib_arm_32.c
+      simple_embedding_test_module_dylib_arm_32.h
+  )
 
-target_link_libraries(sample_embedded_sync
-  PRIVATE
-    simple_embedding_test_bytecode_module_dylib
-    iree::base
-    iree::hal
-    iree::hal::drivers::local_sync::sync_driver
-    iree::hal::local
-    iree::hal::local::loaders::embedded_elf_loader
-    iree::modules::hal
-    iree::vm
-    iree::vm::bytecode::module
-    firmware
-    utils
-    write
-)
+  target_include_directories(sample_embedded_sync
+    PRIVATE
+      ${CMAKE_CURRENT_BINARY_DIR}
+  )
 
-add_binary(sample_embedded_sync)
-add_ihex(sample_embedded_sync)
+  target_link_libraries(sample_embedded_sync
+    PRIVATE
+      simple_embedding_test_bytecode_module_dylib
+      iree::base
+      iree::hal
+      iree::hal::drivers::local_sync::sync_driver
+      iree::hal::local
+      iree::hal::local::loaders::embedded_elf_loader
+      iree::modules::hal
+      iree::vm
+      iree::vm::bytecode::module
+      firmware
+      utils
+      write
+  )
+
+  add_binary(sample_embedded_sync)
+  add_ihex(sample_embedded_sync)
+
+endif()
