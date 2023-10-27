@@ -21,6 +21,12 @@ and for the Arm [Corstone-300](https://developer.arm.com/Processors/Corstone-300
 
 See the [Getting Started](docs/getting_started.md) guide for instructions on how to build this project.
 
+## Further Resources
+
+* [Running on a bare-metal platform](https://iree.dev/guides/deployment-configurations/bare-metal/); IREE.dev Guide.
+* [TinyIREE: An ML Execution Environment for Embedded Systems From Compilation to Deployment](https://doi.ieeecomputersociety.org/10.1109/MM.2022.3178068); H.-I. C. Liu, M. Brehler, M. Ravishankar, N. Vasilache, B. Vanik and S. Laurenzo; *IEEE Micro*, vol. 42, no. 5, pp. 9-16, Sept.-Oct. 2022.
+* [(Tiny)IREE on bare-metal Arm Platforms (slides)](https://drive.google.com/file/d/1fQHG8-r27dBrbQLSjXw9C1VgMAv9BFQg/view); M. Brehler, L. Camphausen and S. Camphausen; OpenXLA Fall Dev Summit, October 19, 2023.
+
 ## Licensing
 
 The samples are licensed under the terms of the Apache 2.0 License with LLVM Exceptions.
