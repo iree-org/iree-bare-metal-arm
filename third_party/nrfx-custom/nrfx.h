@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2017 - 2023, Nordic Semiconductor ASA
+ * Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -37,6 +38,10 @@
 #include <nrfx_config.h>
 #include <drivers/nrfx_common.h>
 #include <nrfx_glue.h>
+#undef NRFX_ATOMIC_FETCH_OR
+#undef NRFX_ATOMIC_FETCH_AND
+#undef nrfx_atomic_t
+#include <nrfx_glue_nrf5340.h>
 #include <hal/nrf_common.h>
 #include <haly/nrfy_common.h>
 #include <drivers/nrfx_errors.h>
