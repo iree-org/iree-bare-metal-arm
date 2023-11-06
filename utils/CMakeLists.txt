@@ -8,6 +8,9 @@ if(BUILD_WITH_CMSIS)
   if(ARM_TARGET STREQUAL "NRF52840")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/nrf52840_cmsis.c)
     set(WRITE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/write.c)
+  elseif(ARM_TARGET STREQUAL "NRF5340")
+    set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/nrf5340_cmsis.c)
+    set(WRITE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/write.c)
   elseif(ARM_TARGET MATCHES "^STM32F4")
     set(UTILS_SRC ${CMAKE_CURRENT_SOURCE_DIR}/stm32f4_cmsis.c)
   elseif(ARM_TARGET MATCHES "^STM32F7")
@@ -43,6 +46,10 @@ target_link_libraries(utils
 
 if(ARM_TARGET STREQUAL "NRF52840")
   target_link_libraries(utils PRIVATE nrfx_uart)
+endif()
+
+if(ARM_TARGET STREQUAL "NRF5340")
+  target_link_libraries(utils PRIVATE nrfx_uarte)
 endif()
 
 if(USE_UART0)
