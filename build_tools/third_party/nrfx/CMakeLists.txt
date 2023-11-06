@@ -108,15 +108,18 @@ add_library(nrfx_uarte STATIC "")
 target_sources(nrfx_uarte
   PRIVATE
     ${nrfx_DIR}/drivers/src/nrfx_uarte.c
+    ${nrfx_DIR}/soc/nrfx_atomic.c
 )
 
 target_include_directories(nrfx_uarte
   PUBLIC
+    ${nrfx_custom_DIR}
     ${nrfx_DIR}
     ${nrfx_DIR}/drivers/include/
     ${nrfx_DIR}/hal/
     ${nrfx_DIR}/templates/
     ${nrfx_DIR}/mdk/
+    ${nrfx_DIR}/soc/
 )
 
 if(USE_UART0)
