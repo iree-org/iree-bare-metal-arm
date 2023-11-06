@@ -36,6 +36,35 @@ target_compile_definitions(nrfx_nrf52840
 target_link_directories(nrfx_nrf52840 INTERFACE "${nrfx_custom_DIR}")
 
 #-------------------------------------------------------------------------------
+# nRF5340
+#-------------------------------------------------------------------------------
+
+add_library(nrfx_nrf5340 STATIC "")
+
+target_sources(nrfx_nrf5340
+  PRIVATE
+    ${nrfx_DIR}/mdk/system_nrf5340_application.c
+    ${nrfx_custom_DIR}/gcc_startup_nrf5340_application.S
+)
+
+target_include_directories(nrfx_nrf5340
+  PUBLIC
+    ${CMSIS_5_SOURCE_DIR}/CMSIS/Core/Include/
+  PRIVATE
+    ${nrfx_DIR}/mdk/
+)
+
+target_compile_definitions(nrfx_nrf5340
+  PUBLIC
+    NRF5340_XXAA
+    NRF5340_XXAA_APPLICATION
+    NRF_APPLICATION
+)
+
+# Allow ld to find generic linker script
+target_link_directories(nrfx_nrf5340 INTERFACE "${nrfx_custom_DIR}")
+
+#-------------------------------------------------------------------------------
 # nRF UART
 #-------------------------------------------------------------------------------
 
