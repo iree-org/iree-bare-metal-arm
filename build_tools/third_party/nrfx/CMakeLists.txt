@@ -98,3 +98,38 @@ if(ARM_TARGET STREQUAL "NRF52840")
       nrfx_nrf52840
   )
 endif()
+
+#-------------------------------------------------------------------------------
+# nRF UARTE
+#-------------------------------------------------------------------------------
+
+add_library(nrfx_uarte STATIC "")
+
+target_sources(nrfx_uarte
+  PRIVATE
+    ${nrfx_DIR}/drivers/src/nrfx_uarte.c
+)
+
+target_include_directories(nrfx_uarte
+  PUBLIC
+    ${nrfx_DIR}
+    ${nrfx_DIR}/drivers/include/
+    ${nrfx_DIR}/hal/
+    ${nrfx_DIR}/templates/
+    ${nrfx_DIR}/mdk/
+)
+
+if(USE_UART0)
+  target_compile_definitions(nrfx_uarte
+    PUBLIC
+      NRFX_UARTE_ENABLED
+      NRFX_UARTE0_ENABLED
+  )
+endif()
+
+if(ARM_TARGET STREQUAL "NRF5340")
+  target_link_libraries(nrfx_uarte
+  PRIVATE
+    nrfx_nrf5340
+)
+endif()
