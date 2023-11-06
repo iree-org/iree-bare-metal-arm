@@ -49,7 +49,7 @@ set(CMAKE_EXE_LINKER_FLAGS "-specs=nosys.specs" CACHE INTERNAL "")
 
 # Define ARM_CPU property
 set(ARM_CPU cortex-m4 CACHE STRING "CPU for which to compile")
-set(ARM_CPU_VALUES "cortex-m4;cortex-m7;cortex-m55" CACHE INTERNAL "List of possible CPUs")
+set(ARM_CPU_VALUES "cortex-m4;cortex-m7;cortex-m33;cortex-m55" CACHE INTERNAL "List of possible CPUs")
 set_property(CACHE ARM_CPU PROPERTY STRINGS ${ARM_CPU_VALUES})
 string(TOLOWER "${ARM_CPU}" ARM_CPU)
 
