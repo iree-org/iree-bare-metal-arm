@@ -1,3 +1,6 @@
+/* SPDX-FileCopyrightText: Nordic Semiconductor ASA
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
 /* Linker script to configure memory regions. */
 
 SEARCH_DIR(.)
