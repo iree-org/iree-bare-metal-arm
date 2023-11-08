@@ -122,7 +122,7 @@ jobs:
         path: ${{ env.REPO }}
         submodules: 'true'
 
-    - name: Initalize submodules
+    - name: Initalize IREE submodules
       run : |
         cd third_party/iree
         git submodule update --init -- third_party/googletest
