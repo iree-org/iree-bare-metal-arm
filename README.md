@@ -14,7 +14,9 @@ This projects demonstrates how to build [IREE](https://github.com/openxla/iree) 
 
 ## Target Support
 
-The samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html), for the [Nordic nRF52840 SoC](https://www.nordicsemi.com/products/nrf52840)
+The samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html),
+for the [Nordic nRF52840 SoC](https://www.nordicsemi.com/products/nrf52840),
+for the application core of the [Nordic nRF5340 SoC](https://www.nordicsemi.com/products/nrf5340)
 and for the Arm [Corstone-300](https://developer.arm.com/Processors/Corstone-300).
 
 ## Getting Started
