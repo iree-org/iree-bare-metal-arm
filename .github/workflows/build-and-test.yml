@@ -120,7 +120,17 @@ jobs:
       uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       with:
         path: ${{ env.REPO }}
-        submodules: 'true'
+        submodules: 'false'
+
+    - name: Initalize submodules
+      run : |
+        git submodule update --init third_party/CMSIS_5
+        git submodule update --init third_party/cmsis_device_f4
+        git submodule update --init third_party/cmsis_device_l4
+        git submodule update --init third_party/iree
+        git submodule update --init third_party/libopencm3
+        git submodule update --init third_party/nrfx
+        git submodule update --init third_party/renode
 
     - name: Initalize IREE submodules
       run : |
