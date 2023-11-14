@@ -130,7 +130,6 @@ jobs:
         git submodule update --init third_party/iree
         git submodule update --init third_party/libopencm3
         git submodule update --init third_party/nrfx
-        git submodule update --init third_party/renode
 
     - name: Initalize IREE submodules
       run : |
