@@ -18,22 +18,22 @@ cpu: CPU.CortexM @ sysbus
     nvic: nvic
 
 usart1: UART.STM32_UART @ sysbus <0x40011000, +0x400>
-    -> nvic@37
+    IRQ -> nvic@37
 
 usart2: UART.STM32_UART @ sysbus <0x40004400, +0x400>
-    -> nvic@38
+    IRQ -> nvic@38
 
 usart3: UART.STM32_UART @ sysbus <0x40004800, +0x400>
-    -> nvic@39
+    IRQ -> nvic@39
 
 uart4: UART.STM32_UART @ sysbus <0x40004C00, +0x400>
-    -> nvic@52
+    IRQ -> nvic@52
 
 uart5: UART.STM32_UART @ sysbus <0x40005000, +0x400>
-    -> nvic@53
+    IRQ -> nvic@53
 
 usart6: UART.STM32_UART @ sysbus <0x40011400, +0x400>
-    -> nvic@71
+    IRQ -> nvic@71
 
 can1: CAN.STMCAN @ sysbus <0x40006400, +0x400>
     [0-3] -> nvic@[19-22]
@@ -43,8 +43,9 @@ can1: CAN.STMCAN @ sysbus <0x40006400, +0x400>
 //    [0-3] -> nvic@[63-66]
 //    master: can1
 
-exti: IRQControllers.EXTI @ sysbus 0x40013C00
+exti: IRQControllers.STM32F4_EXTI @ sysbus 0x40013C00
     [0-6] -> nvic@[6-10, 23, 40]
+    numberOfOutputLines: 23
 
 gpioPortA: GPIOPort.STM32_GPIOPort @ sysbus <0x40020000, +0x400>
     modeResetValue: 0xA8000000
@@ -79,16 +80,16 @@ rom: Memory.MappedMemory @ sysbus 0x1FFF0000
     size: 0x10000
 
 spi1: SPI.STM32SPI @ sysbus 0x40013000
-    -> nvic@35
+    IRQ -> nvic@35
 
 spi2: SPI.STM32SPI @ sysbus 0x40003800
-    -> nvic@36
+    IRQ -> nvic@36
 
 spi3: SPI.STM32SPI @ sysbus 0x40003C00
-    -> nvic@51
+    IRQ -> nvic@51
 
 spi4: SPI.STM32SPI @ sysbus 0x40013400
-    -> nvic@84
+    IRQ -> nvic@84
 
 dma1: DMA.STM32DMA @ sysbus 0x40026000
     [0-7] -> nvic@[11-17,47]
