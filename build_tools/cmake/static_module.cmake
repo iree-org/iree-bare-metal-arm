@@ -36,7 +36,6 @@ function(static_module)
   
   list(APPEND _COMPILE_ARGS "--iree-hal-target-backends=llvm-cpu")
   list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-triple=${IREE_LLVM_TARGET_TRIPLE}")
-  list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-cpu=${ARM_CPU}")
   list(APPEND _COMPILE_ARGS "--iree-llvmcpu-target-float-abi=${IREE_LLVM_TARGET_FLOAT_ABI}")
   list(APPEND _COMPILE_ARGS "--iree-llvmcpu-link-embedded=false")
   list(APPEND _COMPILE_ARGS "--iree-llvmcpu-link-static")

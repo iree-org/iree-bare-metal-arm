@@ -81,9 +81,9 @@ iree_status_t Run() {
 #else
   // Create hal_module
   iree_vm_module_t* hal_module = NULL;
-  IREE_RETURN_IF_ERROR(
-      iree_hal_module_create(instance, device, IREE_HAL_MODULE_FLAG_SYNCHRONOUS,
-                             iree_allocator_system(), &hal_module));
+  IREE_RETURN_IF_ERROR(iree_hal_module_create(
+      instance, /*device_count=*/1, &device, IREE_HAL_MODULE_FLAG_SYNCHRONOUS,
+      iree_allocator_system(), &hal_module));
 
   iree_vm_module_t* modules[] = {hal_module, module};
 #endif
