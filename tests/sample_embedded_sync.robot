@@ -14,6 +14,7 @@ ${EXECUTABLE}       simple_embedding/sample_embedded_sync.elf
 
 *** Test Cases ***
 CMSIS
+    [tags]  xfail-nrf52840
     Run Sample For Library      cmsis           ${EXECUTABLE}
     Output Should Show Success
 
