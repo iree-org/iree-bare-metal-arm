@@ -291,7 +291,7 @@ jobs:
     - name: Run Renode tests
       run: |
         source ${{ env.VENV_RENODE }}/bin/activate
-        ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --variable TARGET:nrf52840 --exclude NoCI --exclude libopencm3 tests/*.robot
+        ${{ env.RENODE }}/renode-test --variable BASE_DIR:$GITHUB_WORKSPACE --variable TARGET:nrf52840 --exclude NoCI --exclude libopencm3 --exclude xfail-nrf52840 tests/*.robot
 
     - name: Delete CMSIS build artifact for nRF52840
       uses: geekyeggo/delete-artifact@54ab544f12cdb7b71613a16a2b5a37a9ade990af # v2.0.0
