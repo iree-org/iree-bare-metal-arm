@@ -1,4 +1,4 @@
 # SPDX-FileCopyrightText: 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 # SPDX-License-Identifier: CC0-1.0
 -f https://openxla.github.io/iree/pip-release-links.html
-iree-compiler==20231004.665
+iree-compiler==20231016.677
