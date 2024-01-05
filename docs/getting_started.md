@@ -192,7 +192,7 @@ mkdir build
 cd build
 
 # Set the path to the GNU Arm Embedded Toolchain, e.g.
-# export PATH_TO_ARM_TOOLCHAIN="/usr/local/arm-gnu-toolchain-12.3.rel1-x86_64-arm-none-eabi"
+# export PATH_TO_ARM_TOOLCHAIN="/usr/local/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi"
 
 # To build with CMSIS
 # export CUSTOM_ARM_LINKER_FLAGS=""
