@@ -17,7 +17,7 @@ concurrency:
 
 env:
   TOOLCHAIN: arm-none-eabi
-  TOOLCHAIN_VERSION: 12.3.rel1
+  TOOLCHAIN_VERSION: 13.2.rel1
   RENODE: renode
   RENODE_VERSION: 1.14.0
   VENV_IREE: venv-iree
@@ -41,8 +41,8 @@ jobs:
       if: steps.cache-toolchain.outputs.cache-hit != 'true'
       run: |
         wget -q https://developer.arm.com/-/media/Files/downloads/gnu/${{ env.TOOLCHAIN_VERSION }}/binrel/arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz
-        tar xfJ arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz
-        mv arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi ${{ env.TOOLCHAIN }}
+        mkdir ${{ env.TOOLCHAIN }}
+        tar xfJ arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi.tar.xz -C ${{ env.TOOLCHAIN }} --strip-components=1
 
   install-renode:
     name: Install Renode
