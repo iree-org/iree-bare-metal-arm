@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2019 - 2023, Nordic Semiconductor ASA
+ * Copyright 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -35,30 +36,12 @@
 #define NRFX_CONFIG_H__
 
 #include <nrfx_config_common.h>
-#if defined(NRF51)
-    #include <nrfx_config_nrf51.h>
-#elif defined(NRF52805_XXAA)
-    #include <nrfx_config_nrf52805.h>
-#elif defined(NRF52810_XXAA)
-    #include <nrfx_config_nrf52810.h>
-#elif defined(NRF52811_XXAA)
-    #include <nrfx_config_nrf52811.h>
-#elif defined(NRF52820_XXAA)
-    #include <nrfx_config_nrf52820.h>
-#elif defined(NRF52832_XXAA) || defined (NRF52832_XXAB)
-    #include <nrfx_config_nrf52832.h>
-#elif defined(NRF52833_XXAA)
-    #include <nrfx_config_nrf52833.h>
-#elif defined(NRF52840_XXAA)
-    #include <nrfx_config_nrf52840.h>
+#if defined(NRF52840_XXAA)
+#include <nrfx_config_nrf52840.h>
 #elif defined(NRF5340_XXAA_APPLICATION)
-    #include <nrfx_config_nrf5340_application.h>
-#elif defined(NRF5340_XXAA_NETWORK)
-    #include <nrfx_config_nrf5340_network.h>
-#elif defined(NRF9120_XXAA) || defined(NRF9160_XXAA)
-    #include <nrfx_config_nrf91.h>
+#include <nrfx_config_nrf5340_application.h>
 #else
-    #include "nrfx_config_ext.h"
+#error "No config for device."
 #endif
 
 #endif // NRFX_CONFIG_H__
