@@ -117,7 +117,6 @@ target_include_directories(nrfx_uarte
     ${nrfx_DIR}
     ${nrfx_DIR}/drivers/include/
     ${nrfx_DIR}/hal/
-    ${nrfx_DIR}/templates/
     ${nrfx_DIR}/mdk/
     ${nrfx_DIR}/soc/
 )

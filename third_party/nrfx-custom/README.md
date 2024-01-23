@@ -10,8 +10,6 @@ This folder contains a subset of files imported from [NordicSemiconductor/nrfx](
 
 - The [`nrf5340_xxaa_application.ld`](https://github.com/NordicSemiconductor/nrfx/blob/7ef620bedd3fd41828e0f81523a1d08a986b8a0e/mdk/nrf5340_xxaa_application.ld) linker script was imported at state NordicSemiconductor/nrfx@7ef620b.
 
-- The file [`nrfx.h`](https://github.com/NordicSemiconductor/nrfx/blob/1c721175f22dbb1bf125a570a427b53f810881bb/nrfx.h) was imported at state NordicSemiconductor/nrfx@1c72117.
-
 - The file [`nrf_common.ld`](https://github.com/NordicSemiconductor/nrfx/blob/7ef620bedd3fd41828e0f81523a1d08a986b8a0e/mdk/nrf_common.ld) was imported at state NordicSemiconductor/nrfx@7ef620b.
 
 - The file [`gcc_startup_nrf52840.S`](https://github.com/NordicSemiconductor/nrfx/blob/7ef620bedd3fd41828e0f81523a1d08a986b8a0e/mdk/gcc_startup_nrf52840.S) was imported at state NordicSemiconductor/nrfx@7ef620b.
