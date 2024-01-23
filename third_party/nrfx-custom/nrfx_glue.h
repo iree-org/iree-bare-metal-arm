@@ -1,5 +1,6 @@
 /*
  * Copyright (c) 2017 - 2023, Nordic Semiconductor ASA
+ * Copyright 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
@@ -52,6 +53,8 @@ extern "C" {
  * @brief This file contains macros that should be implemented according to
  *        the needs of the host environment into which @em nrfx is integrated.
  */
+
+#include <nrfx_atomic.h>
 
 // Uncomment this line to use the standard MDK way of binding IRQ handlers
 // at linking time.
@@ -155,7 +158,7 @@ extern "C" {
 //------------------------------------------------------------------------------
 
 /** @brief Atomic 32-bit unsigned type. */
-#define nrfx_atomic_t
+#define nrfx_atomic_t nrfx_atomic_u32_t
 
 /**
  * @brief Macro for storing a value to an atomic object and returning its previous value.
@@ -175,7 +178,8 @@ extern "C" {
  *
  * @return Previous value of the atomic object.
  */
-#define NRFX_ATOMIC_FETCH_OR(p_data, value)
+#define NRFX_ATOMIC_FETCH_OR(p_data, value)                                    \
+  nrfx_atomic_u32_fetch_or(p_data, value)
 
 /**
  * @brief Macro for running a bitwise AND operation on an atomic object
@@ -186,7 +190,8 @@ extern "C" {
  *
  * @return Previous value of the atomic object.
  */
-#define NRFX_ATOMIC_FETCH_AND(p_data, value)
+#define NRFX_ATOMIC_FETCH_AND(p_data, value)                                   \
+  nrfx_atomic_u32_fetch_and(p_data, value)
 
 /**
  * @brief Macro for running a bitwise XOR operation on an atomic object
