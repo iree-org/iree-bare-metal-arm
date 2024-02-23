@@ -21,7 +21,6 @@ fi
 cd ${PATH_TO_IREE}
 git submodule update --init -- third_party/googletest
 git submodule update --init -- third_party/flatcc
-git submodule update --init -- third_party/libyaml
 cd ${ORIGINAL_PATH}
 
 echo "Updated the required IREE submodules."

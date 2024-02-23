@@ -139,7 +139,6 @@ jobs:
         cd third_party/iree
         git submodule update --init -- third_party/googletest
         git submodule update --init -- third_party/flatcc
-        git submodule update --init -- third_party/libyaml
 
     - name: Cache Toolchain
       id: cache-toolchain
