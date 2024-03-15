@@ -5,7 +5,7 @@
  *
  * Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
  * Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
- * SPDX-License-Identifier: LicenseRef-nrf_common
+ * SPDX-License-Identifier: LicenseRef-nrf-common
  *
  * The authors hereby grant permission to use, copy, modify, distribute,
  * and license this software and its documentation for any purpose, provided
