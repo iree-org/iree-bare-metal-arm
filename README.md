@@ -5,6 +5,7 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 # IREE Bare-Metal Arm Sample
 
 [![Build and Test](https://github.com/iml130/iree-bare-metal-arm/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/iml130/iree-bare-metal-arm/actions/workflows/build-and-test.yml)
+[![REUSE status](https://api.reuse.software/badge/github.com/iml130/iree-bare-metal-arm)](https://api.reuse.software/info/github.com/iml130/iree-bare-metal-arm)
 
 **DISCLAIMER**:
 This project is not intended for everyday use and made available without any support.
