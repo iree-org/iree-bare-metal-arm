@@ -39,6 +39,7 @@ jobs:
       with:
         path: ${{ env.TOOLCHAIN }}
         key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
+        lookup-only: 'true'
 
     - name: Install GNU Arm Embedded Toolchain
       if: steps.cache-toolchain.outputs.cache-hit != 'true'
@@ -60,6 +61,7 @@ jobs:
           ${{ env.VENV_RENODE }}
           ${{ env.RENODE }}
         key: ${{ runner.os }}-${{ env.RENODE }}-${{ env.RENODE_VERSION }}
+        lookup-only: 'true'
 
     - name: Install Renode
       if: steps.cache-renode.outputs.cache-hit != 'true'
@@ -89,6 +91,7 @@ jobs:
           ${{ env.VENV_IREE }}
           ${{ env.IREE_HOST_INSTALL }}
         key: ${{ runner.os }}-iree-snapshot-${{ hashFiles('iree-release-link.txt') }}
+        lookup-only: 'true'
 
     - name: Install IREE Dependencies
       if: steps.cache-snapshot.outputs.cache-hit != 'true'
