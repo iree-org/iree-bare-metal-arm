@@ -67,7 +67,7 @@ pip3 install -r requirements.txt
 pip3 install -r requirements-compiler.txt
 ```
 
-For further information, see the [TensorFlow Integration](https://openxla.github.io/iree/getting-started/tensorflow/) or [TensorFlow Lite Integration](https://openxla.github.io/iree/getting-started/tflite/) guide.
+For further information, see the [TensorFlow Integration](https://iree.dev/guides/ml-frameworks/tensorflow/) or [TensorFlow Lite Integration](https://iree.dev/guides/ml-frameworks/tflite/) guide.
 The next lines can be used to build the missing tools from the already cloned submodule:
 
 ```shell
@@ -126,7 +126,7 @@ cmake --build . --target install
 cd ..
 ```
 
-For further information, see the [Getting started](https://openxla.github.io/iree/building-from-source/getting-started/) guide.
+For further information, see the [Getting started](https://iree.dev/building-from-source/getting-started/) guide.
 
 #### Target Support
 
