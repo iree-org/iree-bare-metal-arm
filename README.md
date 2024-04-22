@@ -9,9 +9,9 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 **DISCLAIMER**:
 This project is not intended for everyday use and made available without any support.
-However, we welcome any kind of feedback via the issue tracker or if appropriate via IREE's [communication channels](https://github.com/openxla/iree#communication-channels), e.g. via the Discord server.
+However, we welcome any kind of feedback via the issue tracker or if appropriate via IREE's [communication channels](https://github.com/iree-org/iree#communication-channels), e.g. via the Discord server.
 
-This projects demonstrates how to build [IREE](https://github.com/openxla/iree) with the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
+This projects demonstrates how to build [IREE](https://github.com/iree-org/iree) with the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
 
 ## Target Support
 

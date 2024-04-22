@@ -3,7 +3,7 @@
 
 [submodule "third_party/iree"]
 	path = third_party/iree
-	url = https://github.com/openxla/iree.git
+	url = https://github.com/iree-org/iree.git
 [submodule "third_party/libopencm3"]
 	path = third_party/libopencm3
 	url = https://github.com/libopencm3/libopencm3.git
