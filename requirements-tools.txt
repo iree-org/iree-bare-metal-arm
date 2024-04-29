@@ -1,5 +1,5 @@
 # SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 # SPDX-License-Identifier: CC0-1.0
 -f https://iree.dev/pip-release-links.html
-iree-tools-tf==20240404.852
-iree-tools-tflite==20240404.852
+iree-tools-tf==20240429.878
+iree-tools-tflite==20240429.878
