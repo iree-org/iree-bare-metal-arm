@@ -42,8 +42,8 @@ if(IREE_HAL_EXECUTABLE_LOADER_VMVX_MODULE)
     OUTPUT
       "simple_embedding_test_bytecode_module_vmvx_c.h"
       "simple_embedding_test_bytecode_module_vmvx_c.c"
-    COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-    DEPENDS generate_embed_data simple_embedding_test_bytecode_module_vmvx.vmfb
+    COMMAND iree-c-embed-data ${_GEN_EMBED_ARGS}
+    DEPENDS iree-c-embed-data simple_embedding_test_bytecode_module_vmvx.vmfb
   )
 
   add_library(simple_embedding_test_bytecode_module_vmvx STATIC "")
@@ -124,8 +124,8 @@ if(IREE_HAL_EXECUTABLE_LOADER_EMBEDDED_ELF)
     OUTPUT
       "simple_embedding_test_module_dylib_arm_32.h"
       "simple_embedding_test_module_dylib_arm_32.c"
-    COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-    DEPENDS generate_embed_data simple_embedding_test_module_dylib_arm_32.vmfb
+    COMMAND iree-c-embed-data ${_GEN_EMBED_ARGS}
+    DEPENDS iree-c-embed-data simple_embedding_test_module_dylib_arm_32.vmfb
   )
 
   add_library(simple_embedding_test_bytecode_module_dylib STATIC "")

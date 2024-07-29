@@ -46,8 +46,8 @@ add_custom_command(
   OUTPUT
     ${_RULE_NAME}.h
     ${_RULE_NAME}.c
-  COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-  DEPENDS generate_embed_data ${_RULE_NAME}.vmfb
+  COMMAND iree-c-embed-data ${_GEN_EMBED_ARGS}
+  DEPENDS iree-c-embed-data ${_RULE_NAME}.vmfb
 )
 
 add_library(${_RULE_NAME} STATIC "")

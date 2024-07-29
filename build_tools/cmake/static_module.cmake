@@ -91,8 +91,8 @@ function(static_module)
       OUTPUT
         ${_GEN_H_FILE_NAME}
         ${_GEN_C_FILE_NAME}
-      COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-      DEPENDS generate_embed_data ${_MODULE_NAME}
+      COMMAND iree-c-embed-data ${_GEN_EMBED_ARGS}
+      DEPENDS iree-c-embed-data ${_MODULE_NAME}
     )
 
     list(APPEND _SRC_FILES "${_GEN_H_FILE_NAME}" "${_GEN_C_FILE_NAME}")

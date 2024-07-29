@@ -79,7 +79,7 @@ if [[ $# -eq 0 ]] ; then
 fi
 
 
-# Use pip + install `generate_embed_data` and `iree-flatcc-cli` from source
+# Use pip + install `iree-c-embed-data` and `iree-flatcc-cli` from source
 
 pip3 install -r ${PATH_TO_REPO}/requirements-compiler.txt
 
@@ -99,9 +99,9 @@ cmake -GNinja \
       -DIREE_BUILD_TESTS=OFF \
       -DCMAKE_INSTALL_PREFIX=../build-iree-host-install \
       ${PATH_TO_REPO}/third_party/iree/
-cmake --build . --target generate_embed_data iree-flatcc-cli
+cmake --build . --target iree-c-embed-data iree-flatcc-cli
 
-cp build_tools/embed_data/generate_embed_data ../build-iree-host-install/bin
+cp build_tools/embed_data/iree-c-embed-data ../build-iree-host-install/bin
 cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
 cd ..
 
