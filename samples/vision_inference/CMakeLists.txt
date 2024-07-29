@@ -78,8 +78,8 @@ add_custom_command(
   OUTPUT
     "mnist_c.h"
     "mnist_c.c"
-  COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-  DEPENDS generate_embed_data mnist.vmfb
+  COMMAND iree-c-embed-data ${_GEN_EMBED_ARGS}
+  DEPENDS iree-c-embed-data mnist.vmfb
 )
 
 add_library(mnist_c STATIC "")

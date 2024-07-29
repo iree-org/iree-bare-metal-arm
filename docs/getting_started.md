@@ -86,9 +86,9 @@ cmake -GNinja \
       -DIREE_BUILD_TESTS=OFF \
       -DCMAKE_INSTALL_PREFIX=../build-iree-host-install \
       ../third_party/iree/
-cmake --build . --target generate_embed_data iree-flatcc-cli
+cmake --build . --target iree-c-embed-data iree-flatcc-cli
 
-cp build_tools/embed_data/generate_embed_data ../build-iree-host-install/bin
+cp build_tools/embed_data/iree-c-embed-data ../build-iree-host-install/bin
 cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
 cd ..
 ```

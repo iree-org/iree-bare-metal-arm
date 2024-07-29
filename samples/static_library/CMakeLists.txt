@@ -58,8 +58,8 @@ add_custom_command(
   OUTPUT
     "simple_mul_c.h"
     "simple_mul_c.c"
-  COMMAND generate_embed_data ${_GEN_EMBED_ARGS}
-  DEPENDS generate_embed_data simple_mul.vmfb
+  COMMAND iree-c-embed-data ${_GEN_EMBED_ARGS}
+  DEPENDS iree-c-embed-data simple_mul.vmfb
 )
 
 target_sources(simple_mul_c
