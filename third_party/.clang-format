@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+# SPDX-FileCopyrightText: 2024 The IREE bare-metal Arm Authors
 # SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 # Disable formatting any code in the `third_party` subdirectory.

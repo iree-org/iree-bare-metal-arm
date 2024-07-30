@@ -1,7 +1,7 @@
 /*
  * This file is intended to be used with the libopencm3 project.
  *
- * Copyright 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright 2021 The IREE bare-metal Arm Authors
  *
  * This library is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by

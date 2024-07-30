@@ -1,4 +1,4 @@
-# Copyright 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+# Copyright 2021 The IREE bare-metal Arm Authors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.

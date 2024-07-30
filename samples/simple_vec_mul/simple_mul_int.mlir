@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+// SPDX-FileCopyrightText: 2023 The IREE bare-metal Arm Authors
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 func.func @simple_mul(%arg0: tensor<1024xi32>, %arg1: tensor<1024xi32>) -> tensor<1024xi32>

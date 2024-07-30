@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: Antmicro <www.antmicro.com>
-// SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+// SPDX-FileCopyrightText: 2021 The IREE bare-metal Arm Authors
 // SPDX-License-Identifier: MIT
 
 using "platforms/boards/stm32f4_discovery.repl"

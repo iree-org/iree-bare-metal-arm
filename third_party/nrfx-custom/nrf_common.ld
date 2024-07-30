@@ -4,7 +4,7 @@
  * Support: https://support.codesourcery.com/GNUToolchain/
  *
  * Copyright (c) 2007, 2008, 2009, 2010 CodeSourcery, Inc.
- * Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright 2023 The IREE bare-metal Arm Authors
  * SPDX-License-Identifier: LicenseRef-nrf-common
  *
  * The authors hereby grant permission to use, copy, modify, distribute,

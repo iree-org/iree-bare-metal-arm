@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: 2021 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+# SPDX-FileCopyrightText: 2021 The IREE bare-metal Arm Authors
 # SPDX-License-Identifier: CC0-1.0
 numpy
 Pillow
