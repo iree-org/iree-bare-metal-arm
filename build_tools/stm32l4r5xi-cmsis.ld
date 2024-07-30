@@ -4,8 +4,7 @@
  ******************************************************************************/
 /*
  * Copyright (c) 2009-2021 Arm Limited. All rights reserved.
- * Copyright     2022      Fraunhofer-Gesellschaft zur Förderung der
- *                         angewandten Forschung e.V.
+ * Copyright     2022      The IREE bare-metal Arm Authors
  *
  * SPDX-License-Identifier: Apache-2.0
  *

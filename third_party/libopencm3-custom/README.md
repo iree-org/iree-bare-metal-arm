@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2022 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+SPDX-FileCopyrightText: 2022 The IREE bare-metal Arm Authors
 SPDX-License-Identifier: LGPL-3.0-or-later
 -->
 # LibOpenCM3

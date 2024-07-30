@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: 2024 The IREE bare-metal Arm Authors
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+
+# This is the list of IREE bare-metal Arm project's significant contributors.
+#
+# This does not necessarily list everyone who has contributed code.
+# To see the full list of contributors, see the revision history in source
+# control.
+#
+# Please only add individuals if they are not contributing on behalf of a
+# company (who should be listed instead). Add new entries at the bottom of the
+# file.
+
+Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V. for its Fraunhofer Institute for Material Flow and Logistics (IML)

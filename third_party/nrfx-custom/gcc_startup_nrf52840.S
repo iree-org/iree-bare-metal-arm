@@ -1,7 +1,7 @@
 /*
  
 Copyright (c) 2009-2023 ARM Limited. All rights reserved.
-Copyright 2023 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+Copyright 2023 The IREE bare-metal Arm Authors
 
     SPDX-License-Identifier: Apache-2.0
 

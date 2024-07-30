@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2017 - 2023, Nordic Semiconductor ASA
- * Copyright 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright 2024 The IREE bare-metal Arm Authors
  * All rights reserved.
  *
  * SPDX-License-Identifier: BSD-3-Clause
