@@ -13,6 +13,8 @@ However, we welcome any kind of feedback via the issue tracker or if appropriate
 
 This projects demonstrates how to build [IREE](https://github.com/iree-org/iree) with the [Arm GNU Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain) for bare-metal Arm targets using either the open-source firmware library [libopencm3](https://github.com/libopencm3/libopencm3) or [CMSIS](https://github.com/ARM-software/CMSIS_5).
 
+The project was originally initiated at Fraunhofer IML.
+
 ## Target Support
 
 The samples can be build for several [STM32 32-bit Arm Cortex MCUs](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html),
