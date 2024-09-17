@@ -28,7 +28,7 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
       /*plugin_manager=*/NULL, host_allocator, &loader));
 
   // Use the default host allocator for buffer allocations.
-  iree_string_view_t identifier = iree_make_cstring_view("dylib");
+  iree_string_view_t identifier = iree_make_cstring_view("local-sync");
   iree_hal_allocator_t* device_allocator = NULL;
   iree_status_t status = iree_hal_allocator_create_heap(
       identifier, host_allocator, host_allocator, &device_allocator);
