@@ -88,8 +88,8 @@ cmake -GNinja \
       ../third_party/iree/
 cmake --build . --target iree-c-embed-data iree-flatcc-cli
 
-cp build_tools/embed_data/iree-c-embed-data ../build-iree-host-install/bin
-cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
+cp tools/iree-c-embed-data ../build-iree-host-install/bin
+cp tools/iree-flatcc-cli ../build-iree-host-install/bin/
 cd ..
 ```
 
