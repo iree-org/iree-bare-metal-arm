@@ -34,7 +34,7 @@ iree_status_t create_sample_device(iree_allocator_t host_allocator,
       iree_hal_executable_import_provider_null(), host_allocator, loader);
 
   // Use the default host allocator for buffer allocations.
-  iree_string_view_t identifier = iree_make_cstring_view("sync");
+  iree_string_view_t identifier = iree_make_cstring_view("local-sync");
   iree_hal_allocator_t* device_allocator = NULL;
   if (iree_status_is_ok(status)) {
     status = iree_hal_allocator_create_heap(identifier, host_allocator,
