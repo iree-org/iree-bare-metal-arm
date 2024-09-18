@@ -39,12 +39,7 @@ PATH_TO_REPO="`realpath ${PATH_TO_SCRIPT}/../`"
 if [[ $# -eq 0 ]] ; then
   IREE_VERSION="`sed -n 's/.*dist-\(.*\)-linux-x86_64.tar.xz/\1/p' ${PATH_TO_REPO}/iree-release-link.txt`"
 else
-  IREE_VERSION="`sed -n 2p ${PATH_TO_REPO}/requirements-compiler.txt | sed 's/.*=//'`"
-  if [[ "`echo ${IREE_VERSION} | sed 's/.*[.]//'`" -gt "395" ]] ; then
-    echo "Installation via pip is only supported up to version '20230112.395'."
-    echo "Install IREE via the iree-dist tarball instead."
-    exit 1
-  fi
+  IREE_VERSION="`sed -n 4p ${PATH_TO_REPO}/requirements-compiler.txt | sed 's/.*=//'`"
 fi
 
 echo "Installing IREE host tools candidate-${IREE_VERSION}"
@@ -101,8 +96,8 @@ cmake -GNinja \
       ${PATH_TO_REPO}/third_party/iree/
 cmake --build . --target iree-c-embed-data iree-flatcc-cli
 
-cp build_tools/embed_data/iree-c-embed-data ../build-iree-host-install/bin
-cp build_tools/third_party/flatcc/iree-flatcc-cli ../build-iree-host-install/bin/
+cp tools/iree-c-embed-data ../build-iree-host-install/bin
+cp tools/iree-flatcc-cli ../build-iree-host-install/bin/
 cd ..
 
 echo ""
