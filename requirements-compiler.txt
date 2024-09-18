@@ -1,4 +1,4 @@
 # SPDX-FileCopyrightText: 2023 The IREE bare-metal Arm Authors
 # SPDX-License-Identifier: CC0-1.0
 -f https://iree.dev/pip-release-links.html
-iree-compiler==20240730.970
+iree-compiler==20240917.1019
