@@ -12,7 +12,7 @@ You need CMake and the [Arm GNU Toolchain](https://developer.arm.com/tools-and-s
 #### Clone
 
 ```shell
-git clone https://github.com/iml130/iree-bare-metal-arm.git
+git clone https://github.com/iree-org/iree-bare-metal-arm.git
 cd iree-bare-metal-arm
 git submodule update --init
 ./build_tools/update_iree_submodules.sh
@@ -23,7 +23,7 @@ git submodule update --init
 > Note:<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;It may happen that IREE submodules need to be updated.<br>
 > &nbsp;&nbsp;&nbsp;&nbsp;Thus it might not be sufficient to only pull the latest main branch.<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;You can (re)run [`build_tools/update_iree_submodules.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/update_iree_submodules.sh) to update IREE's submodules.
+> &nbsp;&nbsp;&nbsp;&nbsp;You can (re)run [`build_tools/update_iree_submodules.sh`](https://github.com/iree-org/iree-bare-metal-arm/blob/main/build_tools/update_iree_submodules.sh) to update IREE's submodules.
 
 #### Host Build
 
@@ -34,7 +34,7 @@ Another option is to build everything on your host machine.
 ##### Install a Snapshot
 
 > TL;DR:<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;You can use [`build_tools/install_iree_host_tools.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/install_iree_host_tools.sh) to install the host build. Make sure you active the virtual environment afterwards.
+> &nbsp;&nbsp;&nbsp;&nbsp;You can use [`build_tools/install_iree_host_tools.sh`](https://github.com/iree-org/iree-bare-metal-arm/blob/main/build_tools/install_iree_host_tools.sh) to install the host build. Make sure you active the virtual environment afterwards.
 
 
 ###### Fetch and unpack the iree-dist tarball
@@ -225,7 +225,7 @@ cmake -GNinja \
 cmake --build . --target sample_vmvx_sync
 ```
 > Note:<br>
-> &nbsp;&nbsp;&nbsp;&nbsp;You can use the [`build_tools/configure_build.sh`](https://github.com/iml130/iree-bare-metal-arm/blob/main/build_tools/configure_build.sh) shell script to configure the build.
+> &nbsp;&nbsp;&nbsp;&nbsp;You can use the [`build_tools/configure_build.sh`](https://github.com/iree-org/iree-bare-metal-arm/blob/main/build_tools/configure_build.sh) shell script to configure the build.
 
 ### Test with Renode
 
