@@ -1,1 +1,1 @@
-https://github.com/iree-org/iree/releases/download/candidate-20240917.1019/iree-dist-20240917.1019-linux-x86_64.tar.xz
+https://github.com/iree-org/iree/releases/download/iree-3.2.0rc20250110/iree-dist-3.2.0rc20250110-linux-x86_64.tar.xz

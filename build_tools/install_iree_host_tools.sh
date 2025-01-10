@@ -42,7 +42,7 @@ else
   IREE_VERSION="`sed -n 4p ${PATH_TO_REPO}/requirements-compiler.txt | sed 's/.*=//'`"
 fi
 
-echo "Installing IREE host tools candidate-${IREE_VERSION}"
+echo "Installing IREE host tools version ${IREE_VERSION}"
 
 
 # Create the IREE_HOST_BIN_DIR directory

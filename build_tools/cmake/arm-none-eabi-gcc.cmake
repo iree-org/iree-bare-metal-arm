@@ -92,7 +92,7 @@ elseif(ARM_CPU STREQUAL "cortex-m33")
   set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -mthumb -march=armv8-m.main -mfloat-abi=hard -mfpu=fpv5-sp-d16")
 endif()
 
-set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until")
+set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -DIREE_FILE_IO_ENABLE=0 -DIREE_TIME_NOW_FN=\"\{ return 0; \}\" -DIREE_WAIT_UNTIL_FN=wait_until")
 set(ARM_COMPILER_FLAGS "${ARM_COMPILER_FLAGS} -Wl,--gc-sections -ffunction-sections -fdata-sections")
 
 if(ARM_CPU STREQUAL "cortex-m55")

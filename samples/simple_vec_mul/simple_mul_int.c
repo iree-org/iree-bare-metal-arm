@@ -64,6 +64,7 @@ iree_status_t Run() {
   iree_vm_module_t* hal_inline_module = NULL;
   IREE_RETURN_IF_ERROR(iree_hal_inline_module_create(
       instance, IREE_HAL_INLINE_MODULE_FLAG_NONE,
+      iree_hal_module_debug_sink_stdio(stderr),
       iree_hal_device_allocator(device), iree_allocator_system(),
       &hal_inline_module));
 #endif
@@ -83,7 +84,8 @@ iree_status_t Run() {
   iree_vm_module_t* hal_module = NULL;
   IREE_RETURN_IF_ERROR(iree_hal_module_create(
       instance, /*device_count=*/1, &device, IREE_HAL_MODULE_FLAG_SYNCHRONOUS,
-      iree_allocator_system(), &hal_module));
+      iree_hal_module_debug_sink_stdio(stderr), iree_allocator_system(),
+      &hal_module));
 
   iree_vm_module_t* modules[] = {hal_module, module};
 #endif
