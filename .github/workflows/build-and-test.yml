@@ -30,7 +30,7 @@ env:
 jobs:
   install-toolchain:
     name: Install Arm GNU Toolchain
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Cache Toolchain
@@ -50,7 +50,7 @@ jobs:
 
   install-renode:
     name: Install Renode
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Cache Renode
@@ -75,7 +75,7 @@ jobs:
 
   install-snapshot:
     name: Install IREE snaphot
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
@@ -111,7 +111,7 @@ jobs:
   build:
     name: Build Samples
     needs: [install-toolchain, install-snapshot]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Configure environment
@@ -274,7 +274,7 @@ jobs:
   test-nrf52840:
     name: Test Samples (nRF52840)
     needs: [install-renode, build]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
@@ -305,7 +305,7 @@ jobs:
   test-stm32f4:
     name: Test Samples (STM32F4xx)
     needs: [install-renode, build]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
@@ -342,7 +342,7 @@ jobs:
   test-stm32l4r5:
     name: Test Samples (STM32L4R5)
     needs: [install-renode, build]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
