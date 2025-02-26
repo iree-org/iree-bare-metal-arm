@@ -165,7 +165,7 @@ case $2 in
 esac
 
 # Set the path to the IREE host binary
-export PATH_TO_IREE_HOST_BIN_DIR="`realpath ../build-iree-host-install/bin`"
+export PATH_TO_IREE_HOST_BIN_DIR="${PATH_TO_REPO}/build-iree-host-install/bin"
 
 # Check paths
 if ! [ -f "$PATH_TO_LINKER_SCRIPT" ]; then
@@ -194,4 +194,4 @@ cmake -GNinja \
       -DLINKER_SCRIPT="${PATH_TO_LINKER_SCRIPT}" \
       -DUSE_UART${UART}=ON \
       -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
-      ..
+      "${PATH_TO_REPO}"
