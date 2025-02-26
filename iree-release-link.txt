@@ -1,1 +1,1 @@
-https://github.com/iree-org/iree/releases/download/iree-3.2.0rc20250110/iree-dist-3.2.0rc20250110-linux-x86_64.tar.xz
+https://github.com/iree-org/iree/releases/download/iree-3.3.0rc20250226/iree-dist-3.3.0rc20250226-linux-x86_64.tar.xz
