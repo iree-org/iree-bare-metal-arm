@@ -35,7 +35,7 @@ jobs:
     steps:
     - name: Cache Toolchain
       id: cache-toolchain
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: ${{ env.TOOLCHAIN }}
         key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
@@ -55,7 +55,7 @@ jobs:
     steps:
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -85,7 +85,7 @@ jobs:
 
     - name: Cache IREE Snapshot
       id: cache-snapshot
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: |
           ${{ env.VENV_IREE }}
@@ -145,14 +145,14 @@ jobs:
 
     - name: Cache Toolchain
       id: cache-toolchain
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: ${{ env.TOOLCHAIN }}
         key: ${{ runner.os }}-arm-gnu-toolchain-${{ env.TOOLCHAIN_VERSION }}-x86_64-arm-none-eabi
 
     - name: Cache IREE Snapshot
       id: cache-snapshot
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: |
           ${{ env.VENV_IREE }}
@@ -284,7 +284,7 @@ jobs:
 
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -315,7 +315,7 @@ jobs:
 
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
@@ -352,7 +352,7 @@ jobs:
 
     - name: Cache Renode
       id: cache-renode
-      uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
+      uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
       with:
         path: |
           ${{ env.VENV_RENODE }}
