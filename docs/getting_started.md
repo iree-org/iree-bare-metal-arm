@@ -48,8 +48,8 @@ pip3 install -r requirements.txt
 
 mkdir build-iree-host-tools
 wget -i iree-release-link.txt -O build-iree-host-tools/iree-dist-linux-x86_64.tar.xz
-tar xvfJ iree-dist-linux-x86_64.tar.xz -C build-iree-host-tools
-rm iree-dist-linux-x86_64.tar.xz
+tar xvfJ build-iree-host-tools/iree-dist-linux-x86_64.tar.xz -C build-iree-host-tools
+rm build-iree-host-tools/iree-dist-linux-x86_64.tar.xz
 ```
 
 ###### Alternative: Use pip and install additional tools from source
